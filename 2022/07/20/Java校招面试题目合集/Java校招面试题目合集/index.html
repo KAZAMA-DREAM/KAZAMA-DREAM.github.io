@@ -1,0 +1,1015 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>KAZAMA的个人博客 | KAZAMA的个人博客</title><meta name="author" content="KAZAMA,wyy1778789301@163.com"><meta name="copyright" content="KAZAMA"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="Java校招面试题目合集1、什么是Java虚拟机？为什么Java被称为是“平台无关的编程语言”？ Java虚拟机是一个可以执行Java字节码的虚拟机线程，Java源文件被编译成能被Java虚拟机执行的字节码文件。 Java被设计成允许应用程序运行在任意的平台，而不需要程序员为每个平台单独重写或重新编译。Java虚拟机让这个变为可能，因为它知道底层硬件平台的指令长度和其他特性。      2、JDK">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KAZAMA的个人博客">
+<meta property="og:url" content="http://njuni.online/2022/07/20/Java%E6%A0%A1%E6%8B%9B%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E5%90%88%E9%9B%86/Java%E6%A0%A1%E6%8B%9B%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E5%90%88%E9%9B%86/index.html">
+<meta property="og:site_name" content="KAZAMA的个人博客">
+<meta property="og:description" content="Java校招面试题目合集1、什么是Java虚拟机？为什么Java被称为是“平台无关的编程语言”？ Java虚拟机是一个可以执行Java字节码的虚拟机线程，Java源文件被编译成能被Java虚拟机执行的字节码文件。 Java被设计成允许应用程序运行在任意的平台，而不需要程序员为每个平台单独重写或重新编译。Java虚拟机让这个变为可能，因为它知道底层硬件平台的指令长度和其他特性。      2、JDK">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2022-07-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-02-04T07:29:40.880Z">
+<meta property="article:author" content="KAZAMA">
+<meta property="article:tag" content="技术分享 学习备忘">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://njuni.online/2022/07/20/Java%E6%A0%A1%E6%8B%9B%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E5%90%88%E9%9B%86/Java%E6%A0%A1%E6%8B%9B%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E5%90%88%E9%9B%86/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'KAZAMA的个人博客',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-02-04 15:29:40'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">179</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="KAZAMA的个人博客"><span class="site-name">KAZAMA的个人博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-07-19T16:00:00.000Z" title="发表于 2022-07-20 00:00:00">2022-07-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-04T07:29:40.880Z" title="更新于 2023-02-04 15:29:40">2023-02-04</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Java校招面试题目合集"><a href="#Java校招面试题目合集" class="headerlink" title="Java校招面试题目合集"></a>Java校招面试题目合集</h1><h3 id="1、什么是Java虚拟机？为什么Java被称为是“平台无关的编程语言”？"><a href="#1、什么是Java虚拟机？为什么Java被称为是“平台无关的编程语言”？" class="headerlink" title="1、什么是Java虚拟机？为什么Java被称为是“平台无关的编程语言”？"></a>1、什么是Java虚拟机？为什么Java被称为是“平台无关的编程语言”？</h3><blockquote>
+<p><strong>Java虚拟机是一个可以执行Java字节码的虚拟机线程，Java源文件被编译成能被Java虚拟机执行的字节码文件。</strong></p>
+<p><strong>Java被设计成允许应用程序运行在任意的平台，而不需要程序员为每个平台单独重写或重新编译。Java虚拟机让这个变为可能，因为它知道底层硬件平台的指令长度和其他特性。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="2、JDK和JRE的区别是什么？"><a href="#2、JDK和JRE的区别是什么？" class="headerlink" title="2、JDK和JRE的区别是什么？"></a>2、JDK和JRE的区别是什么？</h3><blockquote>
+<p><strong>JRE：<code>Java Runtime Environment</code></strong></p>
+<p><strong>JDK：<code>Java Development Kit</code></strong></p>
+<p><strong>JRE顾名思义就是Java运行时环境，包含了Java虚拟机，Java基础类库。是使用Java语言编写的程序运行所需要的软件环境，是提供给想运行Java程序的用户使用的。</strong></p>
+<p><strong>JDK顾名思义就是Java开发工具包，是程序员使用Java语言编写Java程序所需要的开发工具包，是提供给程序员使用的。JDK包含了JRE，同时还包含了编译Java源码的编译器javac，还包含了很多Java程序调试和分析的工具：jconsole，jvisualvm等工具软件，还包含了java程序编写所需的文档和demo例子程序。</strong></p>
+<p><strong>如果你需要运行Java程序，只需要安装JRE就可以了。如果你需要编写Java程序，需要安装JDK。</strong></p>
+<p><strong>JRE根据不同操作系统（如：windows，linux等）和不同JRE提供商（IBM，ORACLE等）有很多版本</strong></p>
+<p><strong>再说说Java的跨平台吧：</strong></p>
+<p>​        <strong>Java源程序先经过javac编译器编译成二进制的<code>.class</code>字节码文件（Java的跨平台指的是<code>.class</code>字节码的跨平台，<code>.class</code>字节码文件是与平台无关的），<code>.class</code>文件再运行在jvm上，java解释器（jvm的一部分）会将其解释成对应平台的机器码执行，所以java所谓的跨平台就是在不同平台上安装了不同的jvm，而在不同平台上生成的<code>.class</code>文件都是一样的，而<code>.class</code>文件再由对应平台的jvm解释成对应平台的机器码执行</strong></p>
+<p><strong>最后解释下机器码和字节码的区别：</strong></p>
+<p>​        <strong>1⃣️机器码，完全依附硬件而存在～并且不同硬件由于内嵌指令集不同，即使相同的<code>0 1</code>代码意思也可能是不同的～换句话说，根本不存在跨平台性～比如不同型号的CPU，你给他个指令<code>10001101</code>，他们可能会解析为不同的结果～</strong></p>
+<p>​        <strong>2⃣️我们知道Java是跨平台的，为什么呢？因为他有一个jvm，不论哪种硬件，只要你装有jvm，那么他就认识这个Java字节码～～～～至于底层的机器码，咱不用管，有jvm搞定，他会把字节码再翻译成所在机器认识的机器码～～～</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="3、“static”关键字是什么意思？Java中是否可以重写（override）一个private或者是static的方法？"><a href="#3、“static”关键字是什么意思？Java中是否可以重写（override）一个private或者是static的方法？" class="headerlink" title="3、“static”关键字是什么意思？Java中是否可以重写（override）一个private或者是static的方法？"></a>3、“static”关键字是什么意思？Java中是否可以重写（override）一个private或者是static的方法？</h3><blockquote>
+<p><strong>“static”关键字表明一个<code>成员变量</code>或者<code>成员方法</code>可以在没有所属类的<code>对象</code>的情况下被访问。</strong></p>
+<p><strong>Java中的static方法不能被重写，因为方法重写是基于运行时动态绑定的，而static方法是编译时静态绑定的。static方法跟类的任何实例都不相关，所以概念上不适用。</strong></p>
+<p><strong>Java中也不可以覆盖private的方法，因为private修饰的变量和方法只能在当前类中使用，如果是其他的类继承当前类是不能访问到private变量或方法的，当然也不能覆盖。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="4、是否可以在static环境中访问非static变量？"><a href="#4、是否可以在static环境中访问非static变量？" class="headerlink" title="4、是否可以在static环境中访问非static变量？"></a>4、是否可以在static环境中访问非static变量？</h3><blockquote>
+<p><strong>static变量在Java中是属于类的，它在所有的实例中的值是一样的。当类被Java虚拟机载入的时候，会对static变量进行初始化。如果你的代码尝试不用实例来访问非static的变量，编译器会报错，因为这些变量还没有被创建出来，还没有跟任何实例关联上。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="5、Java中，什么是构造方法？什么是构造方法重载？什么是复制构造方法？"><a href="#5、Java中，什么是构造方法？什么是构造方法重载？什么是复制构造方法？" class="headerlink" title="5、Java中，什么是构造方法？什么是构造方法重载？什么是复制构造方法？"></a>5、Java中，什么是构造方法？什么是构造方法重载？什么是复制构造方法？</h3><blockquote>
+<p><strong>当新对象被创建的时候，构造方法会被调用。每一个类都有构造方法。在程序员没有给类提供构造方法的情况下，Java编译器会为这个类创建一个默认的构造方法。</strong></p>
+<p><strong>Java中构造方法重载和方法重载很相似。可以为一个类创建多个构造方法。每一个构造方法必须有它自己唯一的参数列表。</strong></p>
+<p><strong>Java不支持像C++中那样的复制构造方法，这个不同点是因为如果你不自己写构造方法的情况下，Java不会创建默认的复制构造方法。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="6、Java支持多继承吗？"><a href="#6、Java支持多继承吗？" class="headerlink" title="6、Java支持多继承吗？"></a>6、Java支持多继承吗？</h3><blockquote>
+<p><strong>java中不支持多继承，只支持单继承（即一个类只有一个父类）。但是Java中的接口支持多继承，即一个子接口可以有多个父接口。（接口的作用是用来扩展对象的功能，一个子接口继承多个父接口，说明子接口扩展了多个功能，当类实现接口时，类就扩展了相应的功能）。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="7、接口和抽象类的区别是什么？"><a href="#7、接口和抽象类的区别是什么？" class="headerlink" title="7、接口和抽象类的区别是什么？"></a>7、接口和抽象类的区别是什么？</h3><blockquote>
+<p><strong>Java提供和支持创建抽象类和接口。它们的实现有共同点，不同点在于：</strong></p>
+<p><strong>接口中所有的方法隐含的都是抽象的。而抽象类则可以包含抽象和非抽象的方法。</strong></p>
+<p><strong>类可以实现多个接口，但是只能继承一个抽象类</strong></p>
+<p><strong>类可以不实现抽象类和接口声明的所有方法，当然，在这种情况下，类也必须得声明成是抽象的。</strong></p>
+<p><strong>抽象类可以在不提供接口方法实现的情况下实现接口。</strong></p>
+<p><strong>Java接口中声明的变量默认都是final的。抽象类可以包含非final的变量。</strong></p>
+<p><strong>Java接口中的成员函数默认是public的。抽象类的成员函数可以是private，protected或者是public。</strong></p>
+<p><strong>接口是绝对抽象的，不可以被实例化，抽象类也不可以被实例化。</strong></p>
+<p><strong>也可以参考JDK8中抽象类和接口的区别</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="8、在Java中为什么很多人说有值传递和引用传递？引用传递的本质是什么？"><a href="#8、在Java中为什么很多人说有值传递和引用传递？引用传递的本质是什么？" class="headerlink" title="8、在Java中为什么很多人说有值传递和引用传递？引用传递的本质是什么？"></a>8、在Java中为什么很多人说有值传递和引用传递？引用传递的本质是什么？</h3><blockquote>
+<p>Java中的值传递的意思就是变量中的值拷贝一份复制到另外一个变量中去，引用传递的意思就相当于将堆内存的引用地址复制一份给另外一个变量。说到底Java中的引用传递其实就是值传递，只不过这个值是堆内存中对象的引用地址</p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="9、进程和线程的区别是什么？"><a href="#9、进程和线程的区别是什么？" class="headerlink" title="9、进程和线程的区别是什么？"></a>9、进程和线程的区别是什么？</h3><blockquote>
+<p><strong>进程是执行着的应用程序，而线程是进程内部的一个执行序列。一个进程可以有多个线程。线程又叫做轻量级进程。</strong></p>
+<p><strong>线程与进程的区别归纳：</strong></p>
+<p><strong>a. 地址空间和其他资源：进程间相互独立，同一进程的各线程间共享。某进程内的线程在其他进程中不可见</strong></p>
+<p><strong>b. 通信：进程间通信IPC，线程间可以直接读写进程数据段（如全局变量）来进行通信—需要进程同步和互斥手段的辅助，以保证数据的一致性。</strong></p>
+<p><strong>c. 调度和切换：线程上下文切换比进程上下文切换要快得多。</strong></p>
+<p><strong>d. 在多线程OS中，进程不是一个可执行的实体。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="10、创建线程的几种不同的方式？你喜欢哪一种？为什么？"><a href="#10、创建线程的几种不同的方式？你喜欢哪一种？为什么？" class="headerlink" title="10、创建线程的几种不同的方式？你喜欢哪一种？为什么？"></a>10、创建线程的几种不同的方式？你喜欢哪一种？为什么？</h3><blockquote>
+<p><strong>有4种方式可以用来创建线程：</strong></p>
+<p><strong>继承Thread类</strong></p>
+<p><strong>实现Runnable接口</strong></p>
+<p><strong>应用程序可以使用Executor框架来创建线程池</strong></p>
+<p><strong>实现Runnable接口这种方式更受欢迎，因为这不需要继承Thread类。在应用设计中已经继承了别的对象的情况下，这需要多继承（而Java不支持多继承），只能实现接口。同时，线程池也是非常高效的，很容易实现和使用。</strong></p>
+<p><strong>还有一种方式是实现Callable接口</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="11、概括的解释下线程的几种可用状态？"><a href="#11、概括的解释下线程的几种可用状态？" class="headerlink" title="11、概括的解释下线程的几种可用状态？"></a>11、概括的解释下线程的几种可用状态？</h3><blockquote>
+<p><strong>1⃣️ 新建（<code>new</code>）：新创建了一个线程对象。</strong></p>
+<p><strong>2⃣️ 可运行（<code>runnable</code>）：线程对象创建后，其他线程（比如<code>main</code>线程）调用了该对象的<code>start()</code>方法。该状态的线程位于可运行线程池中，等待被线程调度选中，获取<code>cpu</code>的使用权。</strong></p>
+<p><strong>3⃣️ 运行（<code>running</code>）：可运行状态（<code>runnable</code>）的线程获得了<code>cpu</code>时间片（<code>timeslice</code>），执行程序代码。</strong></p>
+<p><strong>4⃣️ 阻塞（<code>block</code>）：阻塞状态是指线程因为某种原因放弃了<code>cpu</code>使用权，也即让出了<code>cpu timeslice</code>，暂时停止运行。直到线程进入可运行（<code>runnable</code>）状态，才有机会再次获得<code>cpu timeslice</code>转到运行（<code>running</code>）状态。阻塞的情况分为三种：</strong></p>
+<p><strong>（一）等待阻塞：运行（<code>running</code>）的线程执行了<code>o.wait()</code>方法，JVM会把该线程放入等待队列（<code>waitting queue</code>）中。</strong></p>
+<p><strong>（二）同步阻塞：运行（<code>running</code>）的线程在获取对象的同步锁时，若该同步锁被别的线程占用，则JVM会把该线程放入锁池（<code>lock pool</code>）中。</strong></p>
+<p><strong>（三）其他阻塞：运行（<code>running</code>）的线程执行<code>Thread.sleep(long ms)</code>或<code>t.join()</code>方法，或者发出了<code>I/O</code>请求时，JVM会把该线程置为阻塞状态。当<code>sleep()</code>状态超时、<code>join()</code>等待线程终止或者超时、或者<code>I/O</code>处理完毕时，线程重新转入可运行（<code>runnable</code>）状态。</strong></p>
+<p><strong>5⃣️ 死亡（<code>dead</code>）：线程<code>run()</code>、<code>main()</code>方法执行结束，或者因异常退出了<code>run()</code>方法，则该线程结束生命周期。死亡的线程不可再次复生。</strong></p>
+<p><img src="http://uploadfiles.nowcoder.com/images/20151217/149974_1450349079825_4697A22AC611680A692472687DEC1CFD" alt="img"></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="12、同步方法和同步代码块的区别是什么？"><a href="#12、同步方法和同步代码块的区别是什么？" class="headerlink" title="12、同步方法和同步代码块的区别是什么？"></a>12、同步方法和同步代码块的区别是什么？</h3><blockquote>
+<p><strong>区别：</strong></p>
+<p><strong>同步方法默认用this或者当前类class对象作为锁；</strong></p>
+<p><strong>同步代码块可以选择以什么来加锁，比同步方法要更细颗粒度，我们可以选择只同步会发生同步问题的部分代码而不是整个方法；</strong></p>
+<p><strong>同步方法使用关键字synchronized修饰方法，而同步代码块主要是修饰需要进行同步的代码，用synchronized（object）{代码内容}进行修饰；</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="13、在监视器（Monitor）内部，是如何做线程同步的？程序应该做哪种级别的同步？"><a href="#13、在监视器（Monitor）内部，是如何做线程同步的？程序应该做哪种级别的同步？" class="headerlink" title="13、在监视器（Monitor）内部，是如何做线程同步的？程序应该做哪种级别的同步？"></a>13、在监视器（Monitor）内部，是如何做线程同步的？程序应该做哪种级别的同步？</h3><blockquote>
+<p><strong>监视器和锁在Java虚拟机中是一块使用的。监视器监视一块同步代码块，确保一次只有一个线程执行同步代码块。每一个监视器都和一个对象引用相关联。线程在获取锁之前不允许执行同步代码块。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="14、什么是死锁（deadlock）？"><a href="#14、什么是死锁（deadlock）？" class="headerlink" title="14、什么是死锁（deadlock）？"></a>14、什么是死锁（deadlock）？</h3><blockquote>
+<p><strong>所谓死锁是指多个进程因竞争资源而造成一种僵局（互相等待），若无外力作用，这些进程都将无法向前推进。死锁产生的4个必要条件：</strong></p>
+<p><strong>互斥条件：进程要求对所分配对资源（如打印机）进行排他性控制，即在一段时间内某资源仅为一个进程所占有。此时若有其他进程请求该资源，则请求进程只能等待。</strong></p>
+<p><strong>不剥夺条件：进程所获的对资源在未使用完毕之前，不能被其他进程强行夺走，即只能由获得该资源的进程自己来释放（只能是主动释放）。</strong></p>
+<p><strong>请求和保持条件：进程已经保持了至少一个资源，但又提出了新的请求，而该资源已被其他进程占有，此时请求进程被阻塞，但对自己已获得的资源保持不放。</strong></p>
+<p><strong>循环等待条件：存在一种进程资源的循环等待链，链中每一个进程已获得的资源同时被链中下一个进程所请求。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="15、如何确保N个线程可以访问N个资源同时又不导致死锁？"><a href="#15、如何确保N个线程可以访问N个资源同时又不导致死锁？" class="headerlink" title="15、如何确保N个线程可以访问N个资源同时又不导致死锁？"></a>15、如何确保N个线程可以访问N个资源同时又不导致死锁？</h3><blockquote>
+<p><strong>使用多线程的时候，一种非常简单的避免死锁的方式就是：指定获取锁的顺序，并强制线程按照指定的顺序获取锁。因此，如果所有的线程都是以同样的顺序加锁和释放锁，就不会出现死锁了。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="16、Java集合类框架的基本接口有哪些？"><a href="#16、Java集合类框架的基本接口有哪些？" class="headerlink" title="16、Java集合类框架的基本接口有哪些？"></a>16、Java集合类框架的基本接口有哪些？</h3><blockquote>
+<p><strong>集合类接口指定了一组叫做元素的对象。集合类接口的每一种具体的实现类都可以选择以它自己的方式对元素进行保存和排序。有的集合类允许重复的键，有的不允许。</strong></p>
+<p><strong>Java集合类提供了一套设计良好的支持对一组对象进行操作的接口和类。Java集合类里面最基本的接口有：</strong></p>
+<p><strong>Collection：代表一组对象，每一个对象都是它的子元素。</strong></p>
+<p><strong>Set：不包含重复元素的Collection</strong></p>
+<p><strong>List：有顺序的collection，并且可以包含重复元素。</strong></p>
+<p><strong>Map：可以把键（key）映射到值（value）的对象，键不能重复。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="17、为什么集合类没有实现Cloneable和Serializable接口？"><a href="#17、为什么集合类没有实现Cloneable和Serializable接口？" class="headerlink" title="17、为什么集合类没有实现Cloneable和Serializable接口？"></a>17、为什么集合类没有实现Cloneable和Serializable接口？</h3><blockquote>
+<p><strong>克隆（cloning）或者是序列化（serialization）的语义和含义是跟具体的实现相关的。因此，应该由集合类的具体实现来决定如何被克隆或者是序列化。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="18、什么是迭代器（Iterator）"><a href="#18、什么是迭代器（Iterator）" class="headerlink" title="18、什么是迭代器（Iterator）"></a>18、什么是迭代器（Iterator）</h3><blockquote>
+<p><strong>Iterator接口提供了很多对集合元素进行迭代的方法。每一个集合类都包含了可以返回迭代器实例的迭代方法。迭代器可以在迭代的过程中删除底层集合的元素，但是不可以直接调用集合的remove(Object Obj)删除，可以通过迭代器的remove()方法删除。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="19、Iterator和ListIterator的区别是什么？"><a href="#19、Iterator和ListIterator的区别是什么？" class="headerlink" title="19、Iterator和ListIterator的区别是什么？"></a>19、Iterator和ListIterator的区别是什么？</h3><blockquote>
+<p><strong>下面列出了它们的区别：</strong></p>
+<p><strong>Iterator可以用来遍历Set和List集合，但是ListIterator只能用来遍历List。</strong></p>
+<p><strong>Iterator对集合只能是向后遍历，ListIterator既可以向前又可以向后遍历。</strong></p>
+<p><strong>ListIterator实现了Iterator接口，并包含其他的功能，比如：增加元素，替换元素，获取前一个和后一个元素的索引，等等。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="20、快速失败（fail-fast）和安全失败（fail-safe）的区别是什么？"><a href="#20、快速失败（fail-fast）和安全失败（fail-safe）的区别是什么？" class="headerlink" title="20、快速失败（fail-fast）和安全失败（fail-safe）的区别是什么？"></a>20、快速失败（fail-fast）和安全失败（fail-safe）的区别是什么？</h3><blockquote>
+<p><strong>一、快速失败（fail-fast）</strong></p>
+<p>​        <strong>在用迭代器遍历一个集合对象时，如果遍历过程中对结合对象的结构进行了修改（增加、删除），则会抛出Concurrent Modification Exception。</strong></p>
+<p>​        <strong>原理：迭代器在遍历时直接访问集合中的内容，并且在遍历过程中使用一个modCount变量。集合在被遍历期间如果结构发生了变化，就会改变modCount的值。每当迭代器使用next()遍历下一个元素之前，都会检测modCount变量是否为expectmodCount值，是的话就返回遍历；否则抛出异常，终止遍历。</strong></p>
+<p>​        <strong>注意：这里异常的抛出条件是检测到modCount != expectedmodCount这个条件。如果集合发生变化时修改modCount值刚好又设置为了expectedmodCount值，则异常不会抛出。因此，不能依赖于这个异常是否抛出而进行并发操作的编程，这个异常只建议用于检测并发修改的bug。</strong></p>
+<p>​        <strong>场景：java.util包下的集合类都是快速失败的，不能在多线程下发生并发修改（迭代过程中被修改）。</strong></p>
+<p><strong>二、安全失败（fail-safe）</strong></p>
+<p>​        <strong>采用安全失败机制的集合容器，在遍历时不是直接在集合内容上访问的，而是先复制原有集合内容，在拷贝的集合上进行遍历。</strong></p>
+<p>​        <strong>原理：由于迭代时是对原集合的拷贝进行遍历，所以在遍历过程中对原集合所作的修改并不能被迭代器检测到，所以不会触发Concurrent Modification Exception。</strong></p>
+<p>​        <strong>缺点：基于拷贝内容的优点是避免了Concurrent Modification Exception，但同样地，迭代器并不能访问到修改后的内容，即：迭代器遍历的是开始遍历那一刻拿到的集合拷贝，在遍历期间原集合发生的修改迭代器是不知道的。</strong></p>
+<p>​        <strong>场景：java.util.concurrent包下的容器都是安全失败的，可以在多线程下并发使用，并发修改。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="21、Java中的HashMap的工作原理是什么？"><a href="#21、Java中的HashMap的工作原理是什么？" class="headerlink" title="21、Java中的HashMap的工作原理是什么？"></a>21、Java中的HashMap的工作原理是什么？</h3><blockquote>
+<p><strong>Java中的HashMap是以键值对（key-value）的形式存储元素的。HashMap需要一个hash函数，它使用hashCode()和equals()方法来向集合/从集合添加检索元素。当调用put()方法的时候，HashMap会计算key的hash值，然后把键值对存储在集合中合适的索引上。如果key已经存在了，value会被更新成新值。HashMap的一些重要的特性是它的容量（capacity），负载因子（load factor）和扩容极限（threshold resizing）</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="22、hashCode-和equals-方法的重要性体现在什么地方？"><a href="#22、hashCode-和equals-方法的重要性体现在什么地方？" class="headerlink" title="22、hashCode()和equals()方法的重要性体现在什么地方？"></a>22、hashCode()和equals()方法的重要性体现在什么地方？</h3><blockquote>
+<p><strong>Java中的HashMap使用hashCode()和equals()方法来确定键值对的索引，当根据键获取值当时候也会用到这两个方法。如果没有正确的实现这两个方法，两个不同的键可能会有相同的hash值，因此，可能被集合认为是相等的。而且，这两个方法也用来发现重复元素。所以这两个方法的实现对HashMap的精确性和正确性是至关重要的。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="23、HashMap和Hashtable有什么区别？"><a href="#23、HashMap和Hashtable有什么区别？" class="headerlink" title="23、HashMap和Hashtable有什么区别？"></a>23、HashMap和Hashtable有什么区别？</h3><blockquote>
+<p><strong>HashMap和Hashtable都实现了Map接口，因此很多特性非常相似。但是，他们有以下不同点：</strong></p>
+<p><strong>HashMap允许键和值是null，而Hashtable不允许键或者值是null。</strong></p>
+<p><strong>Hashtable是同步的，而HashMap不是。因此，HashMap更适合于单线程环境，而Hashtable适合于多线程环境。</strong></p>
+<p><strong>HashMap提供了可供应用迭代的键的集合，因此，HashMap是快速失败的。另一方面，Hashtable提供了对键的列举(Enumeration)。</strong></p>
+<p><strong>一般认为Hashtable是一个遗留的类。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="24、数组-Array-和列表-ArrayList-有什么区别？什么时候应该使用Array而不是ArrayList？"><a href="#24、数组-Array-和列表-ArrayList-有什么区别？什么时候应该使用Array而不是ArrayList？" class="headerlink" title="24、数组(Array)和列表(ArrayList)有什么区别？什么时候应该使用Array而不是ArrayList？"></a>24、数组(Array)和列表(ArrayList)有什么区别？什么时候应该使用Array而不是ArrayList？</h3><blockquote>
+<p><strong>下面列出了Array和ArrayList的不同点：</strong></p>
+<p><strong>Array可以包含基本类型和对象类型，ArrayList只能包含对象类型。</strong></p>
+<p><strong>Array大小是固定的，ArrayList的大小是动态变化的。</strong></p>
+<p><strong>ArrayList提供了更多的方法和特性，比如：addAll()，removeAll()，iterator()等等。</strong></p>
+<p><strong>对于基本类型数据，集合使用自动装箱来减少编码工作量。但是，当处理固定大小的基本数据类型的时候，这种方式相对比较慢。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="25、ArrayList和LinkedList有什么区别？"><a href="#25、ArrayList和LinkedList有什么区别？" class="headerlink" title="25、ArrayList和LinkedList有什么区别？"></a>25、ArrayList和LinkedList有什么区别？</h3><blockquote>
+<p><strong>ArrayList和LinkedList都实现了List接口，他们有以下的不同点：</strong></p>
+<p><strong>ArrayList是基于索引的数据接口，它的底层是数组。它可以以O(1)时间复杂度对元素进行随机访问。与此对应，LinkedList是以元素列表的形式存储它的数据，每一个元素都和它的前一个和后一个元素链接在一起，在这种情况下，查找某个元素的时间复杂度是O(n)。</strong></p>
+<p><strong>相对于ArrayList，LinkedList的插入，添加，删除操作速度更快，因为当元素被添加到集合任意位置的时候，不需要像数组那样重新计算大小或者是更新索引。</strong></p>
+<p><strong>LinkedList比ArrayList更占内存，因为LinkedList为每一个节点存储了两个引用，一个指向前一个元素，一个指向下一个元素。</strong></p>
+<p><strong>也可以参考ArrayList vs. LinkedList。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="26、Comparable和Comparator接口是干什么的？列出它们的区别。"><a href="#26、Comparable和Comparator接口是干什么的？列出它们的区别。" class="headerlink" title="26、Comparable和Comparator接口是干什么的？列出它们的区别。"></a>26、Comparable和Comparator接口是干什么的？列出它们的区别。</h3><blockquote>
+<p><strong>Java提供了只包含一个compareTo()方法的Comparable接口。这个方法可以个给两个对象排序。具体来说，它返回负数，0，正数来表明已经存在的对象小于，等于，大于输入对象。</strong></p>
+<p><strong>Java提供了包含compare()和equals()两个方法的Comparator接口。compare()方法用来给两个输入参数排序，返回负数，0，正数表明第一个参数是小于，等于，大于第二个参数。equals()方法需要一个对象作为参数，它用来决定输入参数是否和comparator相等。只有当输入参数也是一个comparator并且输入参数和当前comparator的排序结果是相同的时候，这个方法才返回true。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="27、什么是Java优先级队列-Priority-Queue-？"><a href="#27、什么是Java优先级队列-Priority-Queue-？" class="headerlink" title="27、什么是Java优先级队列(Priority Queue)？"></a>27、什么是Java优先级队列(Priority Queue)？</h3><blockquote>
+<p><strong>PriorityQueue是一个基于优先级堆的无界队列，它的元素是按照自然顺序(natural order)排序的。在创建的时候，我们可以给它提供一个负责给元素排序的比较器。PriorityQueue不允许null值，因为他们没有自然顺序，或者说他们没有任何的相关联的比较器。最后，PriorityQueue不是线程安全的，入队和出队的时间复杂度是O(log(n))。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="28、你了解大O符号-big-O-notation-么？你能给出不同数据结构的例子么？"><a href="#28、你了解大O符号-big-O-notation-么？你能给出不同数据结构的例子么？" class="headerlink" title="28、你了解大O符号(big-O notation)么？你能给出不同数据结构的例子么？"></a>28、你了解大O符号(big-O notation)么？你能给出不同数据结构的例子么？</h3><blockquote>
+<p><strong>大O符号描述了当数据结构里面的元素增加的时候，算法的规模或者是一个渐进上界 。</strong></p>
+<p><strong>大O符号也可用来描述其他的行为，比如：内存消耗。因为集合类实际上是数据结构，我们一般使用大O符号基于时间，内存和性能来选择最好的实现。大O符号可以对大量数据的性能给出一个很好的说明。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="29、如何权衡是使用无序的数组还是有序的数组？"><a href="#29、如何权衡是使用无序的数组还是有序的数组？" class="headerlink" title="29、如何权衡是使用无序的数组还是有序的数组？"></a>29、如何权衡是使用无序的数组还是有序的数组？</h3><blockquote>
+<p><strong>有序数组最大的好处在于查找的时间复杂度是O(log n)，而无序数组是O(n)。有序数组的缺点是插入操作的时间复杂度是O(n)，因为值大的元素需要往后移动来给新元素腾位置。相反，无序数组的插入时间复杂度是常量O(1)。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="30、Java集合类框架的最佳实践有哪些？"><a href="#30、Java集合类框架的最佳实践有哪些？" class="headerlink" title="30、Java集合类框架的最佳实践有哪些？"></a>30、Java集合类框架的最佳实践有哪些？</h3><blockquote>
+<p><strong>根据应用的需要正确选择要使用的集合的类型对性能非常重要，比如：假如元素的数量是固定的，而且能事先知道，我们就应该用Array而不是ArrayList。</strong></p>
+<p><strong>有些集合类允许指定初始容量。因此，如果我们能估计出存储的元素的数目，我们可以设置初始容量来避免重新计算hash值或者是扩容。</strong></p>
+<p><strong>为了类型安全，可读性和健壮性的原因总是要使用泛型。同时，使用泛型还可以避免运行时的ClassCastException。</strong></p>
+<p><strong>使用JDK提供的不变类(immutable class)作为Map的键可以避免为我们自己的类实现hashCode()和equals()方法。</strong></p>
+<p><strong>编程的时候接口优于实现。</strong></p>
+<p><strong>底层的集合实际上是空的情况下，返回长度是0的集合或者是数组，不要返回null。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="31、Enumeration接口和Iterator接口的区别有哪些？"><a href="#31、Enumeration接口和Iterator接口的区别有哪些？" class="headerlink" title="31、Enumeration接口和Iterator接口的区别有哪些？"></a>31、Enumeration接口和Iterator接口的区别有哪些？</h3><blockquote>
+<p><strong>Enumeration速度是Iterator的2倍，同时占用更少的内存。但是，Iterator远远比Enumeration安全，因为其他线程不能够修改正在被iterator遍历的集合里面的对象。同时，Iterator允许调用者删除底层集合里面的元素，这对Enumeration来说是不可能的。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="32、HashSet和TreeSet有什么区别？"><a href="#32、HashSet和TreeSet有什么区别？" class="headerlink" title="32、HashSet和TreeSet有什么区别？"></a>32、HashSet和TreeSet有什么区别？</h3><blockquote>
+<p><strong>HashSet是由一个hash表来实现的，因此，它的元素是无序的。add()，remove()，contains()方法的时间复杂度是O(1)。</strong></p>
+<p><strong>另一方面，TreeSet是由一个树形的结构来实现的，它里面的元素是有序的。因此，add()，remove()，contains()方法的时间复杂度是O(logn)。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="33、Java中垃圾回收有什么目的？什么时候进行垃圾回收？"><a href="#33、Java中垃圾回收有什么目的？什么时候进行垃圾回收？" class="headerlink" title="33、Java中垃圾回收有什么目的？什么时候进行垃圾回收？"></a>33、Java中垃圾回收有什么目的？什么时候进行垃圾回收？</h3><blockquote>
+<p><strong>垃圾回收是在内存中存在没有引用的对象或超过作用域的对象时进行</strong>。</p>
+<p><strong>垃圾回收的目的是识别并且丢弃应用不再使用的对象来释放和重用资源</strong>。</p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="34、System-gc-和Runtime-gc-会做什么事情？"><a href="#34、System-gc-和Runtime-gc-会做什么事情？" class="headerlink" title="34、System.gc()和Runtime.gc()会做什么事情？"></a>34、System.gc()和Runtime.gc()会做什么事情？</h3><blockquote>
+<p><strong>这两个方法用来提示JVM要进行垃圾回收。但是，立即开始还是延迟进行垃圾回收是取决于JVM的。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="35、finalize-方法什么时候被调用？析构函数-finalization-的目的是什么？"><a href="#35、finalize-方法什么时候被调用？析构函数-finalization-的目的是什么？" class="headerlink" title="35、finalize()方法什么时候被调用？析构函数(finalization)的目的是什么？"></a>35、finalize()方法什么时候被调用？析构函数(finalization)的目的是什么？</h3><blockquote>
+<p><strong>垃圾回收器(garbage collector)决定回收某对象时，就会运行该对象的finalize()方法 但是在Java中很不幸，如果内存总是充足的，那么垃圾回收可能永远不会进行，也就是说filalize()可能永远不被执行，显然指望它做收尾工作是靠不住的。 那么finalize()究竟是做什么的呢？它最主要的用途是回收特殊渠道申请的内存。Java程序有垃圾回收器，所以一般情况下内存问题不用程序员操心。但有一种JNI(Java Native Interface)调用non-Java程序（C或C++），finalize()的工作就是回收这部分的内存。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="36、如果对象的引用被置为null，垃圾收集器是否会立即释放对象占用的内存？"><a href="#36、如果对象的引用被置为null，垃圾收集器是否会立即释放对象占用的内存？" class="headerlink" title="36、如果对象的引用被置为null，垃圾收集器是否会立即释放对象占用的内存？"></a>36、如果对象的引用被置为null，垃圾收集器是否会立即释放对象占用的内存？</h3><blockquote>
+<p><strong>不会，在下一个垃圾回收周期中，这个对象将是可被回收的。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="37、Java堆的结构是什么样子的？什么是堆中的永久代-Perm-Gen-space"><a href="#37、Java堆的结构是什么样子的？什么是堆中的永久代-Perm-Gen-space" class="headerlink" title="37、Java堆的结构是什么样子的？什么是堆中的永久代(Perm Gen space)?"></a>37、Java堆的结构是什么样子的？什么是堆中的永久代(Perm Gen space)?</h3><blockquote>
+<p><strong>JVM的堆是运行时数据区，所有类的实例和数组都是在堆上分配内存。它在JVM启动的时候被创建。对象所占的堆内存是由自动内存管理系统也就是垃圾收集器回收。</strong></p>
+<p><strong>堆内存是由存活和死亡的对象组成的。存活的对象是应用可以访问的，不会被垃圾回收。死亡的对象是应用不可访问尚且还没有被垃圾收集器回收掉的对象。一直到垃圾收集器把这些对象回收掉之前，他们会一直占据堆内存空间。</strong></p>
+<p><strong>永久代是用于存放静态文件，如Java类、方法等。持久代对垃圾回收没有显著影响，但是有些应用可能动态生成或者调用一些class，例如Hibernate 等，在这种时候需要设置一个比较大的持久代空间来存放这些运行过程中新增的类，永久代中一般包含：</strong></p>
+<ul>
+<li><strong>类的方法(字节码…)</strong></li>
+<li><strong>类名(Sring对象)</strong></li>
+<li><strong>.class文件读到的常量信息</strong></li>
+<li><strong>class对象相关的对象列表和类型列表 (e.g., 方法对象的array).</strong></li>
+<li><strong>JVM创建的内部对象</strong></li>
+<li><strong>JIT编译器优化用的信息</strong></li>
+</ul>
+</blockquote>
+<br/>
+
+
+
+<h3 id="38、串行-serial-收集器和吞吐量-throughput-收集器的区别是什么？"><a href="#38、串行-serial-收集器和吞吐量-throughput-收集器的区别是什么？" class="headerlink" title="38、串行(serial)收集器和吞吐量(throughput)收集器的区别是什么？"></a>38、串行(serial)收集器和吞吐量(throughput)收集器的区别是什么？</h3><blockquote>
+<p><strong>吞吐量收集器使用并行版本的新生代垃圾收集器，它用于中等规模和大规模数据的应用程序。而串行收集器对大多数的小应用(在现代处理器上需要大概100M左右的内存)就足够了。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="39、在Java中，对象什么时候可以被垃圾回收？"><a href="#39、在Java中，对象什么时候可以被垃圾回收？" class="headerlink" title="39、在Java中，对象什么时候可以被垃圾回收？"></a>39、在Java中，对象什么时候可以被垃圾回收？</h3><blockquote>
+<p><strong>当对象对当前使用这个对象的应用程序变得不可触及的时候，这个对象就可以被回收了。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="40、JVM的永久代中会发生垃圾回收么？"><a href="#40、JVM的永久代中会发生垃圾回收么？" class="headerlink" title="40、JVM的永久代中会发生垃圾回收么？"></a>40、JVM的永久代中会发生垃圾回收么？</h3><blockquote>
+<p><strong>会，如果永久代满了或者是超过了临界值，会触发完全垃圾回收(Full GC)。如果你仔细查看垃圾收集器的输出信息，就会发现永久代也是被回收的。这就是为什么正确的永久代大小对避免Full GC是非常重要的原因。</strong></p>
+<p><strong>请参考下Java8：从永久代到元数据区</strong><br><strong>(注：Java8中已经移除了永久代，新加了一个叫做元数据区的native内存区)</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="41、Java中的两种异常类型是什么？他们有什么区别？"><a href="#41、Java中的两种异常类型是什么？他们有什么区别？" class="headerlink" title="41、Java中的两种异常类型是什么？他们有什么区别？"></a>41、Java中的两种异常类型是什么？他们有什么区别？</h3><blockquote>
+<p><strong>Java中有两种异常：受检查的(checked)异常和不受检查的(unchecked)异常。不受检查的异常不需要在方法或者是构造函数上声明，就算方法或者是构造函数的执行可能会抛出这样的异常，并且不受检查的异常可以传播到方法或者是构造函数的外面。相反，受检查的异常必须要用throws语句在方法或者是构造函数上声明。这里有Java异常处理的一些小建议。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="42、Java中Exception和Error有什么区别？"><a href="#42、Java中Exception和Error有什么区别？" class="headerlink" title="42、Java中Exception和Error有什么区别？"></a>42、Java中Exception和Error有什么区别？</h3><blockquote>
+<p><strong>Exception和Error都是Throwable的子类。Exception用于用户程序可以捕获的异常情况。Error定义了不期望被用户程序捕获的异常。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="43、throw和throws有什么区别？"><a href="#43、throw和throws有什么区别？" class="headerlink" title="43、throw和throws有什么区别？"></a>43、throw和throws有什么区别？</h3><blockquote>
+<p><strong>1、Throw用于方法内部，Throws用于方法声明上</strong></p>
+<p><strong>2、Throw后跟异常对象，Throws后跟异常类型</strong></p>
+<p><strong>3、Throw后只能跟一个异常对象，Throws后可以一次声明多种异常类型</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="44、异常处理完成以后，Exception对象会发生什么变化？"><a href="#44、异常处理完成以后，Exception对象会发生什么变化？" class="headerlink" title="44、异常处理完成以后，Exception对象会发生什么变化？"></a>44、异常处理完成以后，Exception对象会发生什么变化？</h3><blockquote>
+<p><strong>Exception对象会在下一个垃圾回收过程中被回收掉。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="45、finally代码块和finalize-方法有什么区别？"><a href="#45、finally代码块和finalize-方法有什么区别？" class="headerlink" title="45、finally代码块和finalize()方法有什么区别？"></a>45、finally代码块和finalize()方法有什么区别？</h3><blockquote>
+<p><strong>无论是否抛出异常，finally代码块都会执行，它主要是用来释放应用占用的资源。finalize()方法是Object类的一个protected方法，它是在对象被垃圾回收之前由Java虚拟机来调用的。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="46、什么是JDBC？"><a href="#46、什么是JDBC？" class="headerlink" title="46、什么是JDBC？"></a>46、什么是JDBC？</h3><blockquote>
+<p><strong>JDBC是允许用户在不同数据库之间做选择的一个抽象层。JDBC允许开发者用JAVA写数据库应用程序，而不需要关心底层特定数据库的细节。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="47、解释下驱动-Driver-在JDBC中的角色。"><a href="#47、解释下驱动-Driver-在JDBC中的角色。" class="headerlink" title="47、解释下驱动(Driver)在JDBC中的角色。"></a>47、解释下驱动(Driver)在JDBC中的角色。</h3><blockquote>
+<p><strong>JDBC驱动提供了特定厂商对JDBC API接口类的实现，驱动必须要提供java.sql包下面这些类的实现：Connection, Statement, PreparedStatement,CallableStatement, ResultSet和Driver。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="48、Class-forName-方法有什么作用？"><a href="#48、Class-forName-方法有什么作用？" class="headerlink" title="48、Class.forName()方法有什么作用？"></a>48、Class.forName()方法有什么作用？</h3><blockquote>
+<p><strong>初始化参数指定的类，并且返回此类对应的Class 对象</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="49、PreparedStatement比Statement有什么优势？"><a href="#49、PreparedStatement比Statement有什么优势？" class="headerlink" title="49、PreparedStatement比Statement有什么优势？"></a>49、PreparedStatement比Statement有什么优势？</h3><blockquote>
+<p><strong>PreparedStatements是预编译的，因此，性能会更好。同时，不同的查询参数值，PreparedStatement可以重用。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="50、什么时候使用CallableStatement？用来准备CallableStatement的方法是什么？"><a href="#50、什么时候使用CallableStatement？用来准备CallableStatement的方法是什么？" class="headerlink" title="50、什么时候使用CallableStatement？用来准备CallableStatement的方法是什么？"></a>50、什么时候使用CallableStatement？用来准备CallableStatement的方法是什么？</h3><blockquote>
+<p><strong>CallableStatement用来执行存储过程。存储过程是由数据库存储和提供的。存储过程可以接受输入参数，也可以有返回结果。非常鼓励使用存储过程，因为它提供了安全性和模块化。准备一个CallableStatement的方法是：</strong></p>
+<p><strong>CallableStatement Connection.prepareCall();</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="51、数据库连接池是什么意思？"><a href="#51、数据库连接池是什么意思？" class="headerlink" title="51、数据库连接池是什么意思？"></a>51、数据库连接池是什么意思？</h3><blockquote>
+<p><strong>像打开关闭数据库连接这种和数据库的交互可能是很费时的，尤其是当客户端数量增加的时候，会消耗大量的资源，成本是非常高的。可以在应用服务器启动的时候建立很多个数据库连接并维护在一个池中。连接请求由池中的连接提供。在连接使用完毕以后，把连接归还到池中，以用于满足将来更多的请求。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="52、什么是RMI？"><a href="#52、什么是RMI？" class="headerlink" title="52、什么是RMI？"></a>52、什么是RMI？</h3><blockquote>
+<p><strong>Java远程方法调用(Java RMI)是Java API对远程过程调用(RPC)提供的面向对象的等价形式，支持直接传输序列化的Java对象和分布式垃圾回收。远程方法调用可以看做是激活远程正在运行的对象上的方法的步骤。RMI对调用者是位置透明的，因为调用者感觉方法是执行在本地运行的对象上的。看下RMI的一些注意事项。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="53、RMI体系结构的基本原则是什么？"><a href="#53、RMI体系结构的基本原则是什么？" class="headerlink" title="53、RMI体系结构的基本原则是什么？"></a>53、RMI体系结构的基本原则是什么？</h3><blockquote>
+<p><strong>RMI体系结构是基于一个非常重要的行为定义和行为实现相分离的原则。RMI允许定义行为的代码和实现行为的代码相分离，并且运行在不同的JVM上。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="54、RMI体系结构分哪几层？"><a href="#54、RMI体系结构分哪几层？" class="headerlink" title="54、RMI体系结构分哪几层？"></a>54、RMI体系结构分哪几层？</h3><blockquote>
+<p><strong>RMI体系结构分以下几层：</strong><br><strong>存根和骨架层(Stub and Skeleton layer)：这一层对程序员是透明的，它主要负责拦截客户端发出的方法调用请求，然后把请求重定向给远程的RMI服务。</strong></p>
+<p><strong>远程引用层(Remote Reference Layer)：RMI体系结构的第二层用来解析客户端对服务端远程对象的引用。这一层解析并管理客户端对服务端远程对象的引用。连接是点到点的。</strong></p>
+<p><strong>传输层(Transport layer)：这一层负责连接参与服务的两个JVM。这一层是建立在网络上机器间的TCP/IP连接之上的。它提供了基本的连接服务，还有一些防火墙穿透策略。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="55、RMI中的远程接口-Remote-Interface-扮演了什么样的角色？"><a href="#55、RMI中的远程接口-Remote-Interface-扮演了什么样的角色？" class="headerlink" title="55、RMI中的远程接口(Remote Interface)扮演了什么样的角色？"></a>55、RMI中的远程接口(Remote Interface)扮演了什么样的角色？</h3><blockquote>
+<p><strong>远程接口用来标识哪些方法是可以被非本地虚拟机调用的接口。远程对象必须要直接或者是间接实现远程接口。实现了远程接口的类应该声明被实现的远程接口，给每一个远程对象定义构造函数，给所有远程接口的方法提供实现。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="56、java-rmi-Naming类扮演了什么样的角色？"><a href="#56、java-rmi-Naming类扮演了什么样的角色？" class="headerlink" title="56、java.rmi.Naming类扮演了什么样的角色？"></a>56、java.rmi.Naming类扮演了什么样的角色？</h3><blockquote>
+<p><strong>java.rmi.Naming类用来存储和获取在远程对象注册表里面的远程对象的引用。Naming类的每一个方法接收一个URL格式的String对象作为它的参数。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="57、RMI的绑定-Binding-是什么意思？"><a href="#57、RMI的绑定-Binding-是什么意思？" class="headerlink" title="57、RMI的绑定(Binding)是什么意思？"></a>57、RMI的绑定(Binding)是什么意思？</h3><blockquote>
+<p><strong>绑定是为了查询找远程对象而给远程对象关联或者是注册以后会用到的名称的过程。远程对象可以使用Naming类的bind()或者rebind()方法跟名称相关联。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="58、Naming类的bind-和rebind-方法有什么区别？"><a href="#58、Naming类的bind-和rebind-方法有什么区别？" class="headerlink" title="58、Naming类的bind()和rebind()方法有什么区别？"></a>58、Naming类的bind()和rebind()方法有什么区别？</h3><blockquote>
+<p><strong>bind()方法负责把指定名称绑定给远程对象，rebind()方法负责把指定名称重新绑定到一个新的远程对象。如果那个名称已经绑定过了，先前的绑定会被替换掉。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="59、让RMI程序能正确运行有哪些步骤？"><a href="#59、让RMI程序能正确运行有哪些步骤？" class="headerlink" title="59、让RMI程序能正确运行有哪些步骤？"></a>59、让RMI程序能正确运行有哪些步骤？</h3><blockquote>
+<p><strong>为了让RMI程序能正确运行必须要包含以下几个步骤：</strong></p>
+<ul>
+<li><strong>编译所有的源文件。</strong></li>
+<li><strong>使用rmic生成stub。</strong></li>
+<li><strong>启动rmiregistry。</strong></li>
+<li><strong>启动RMI服务器。</strong></li>
+<li><strong>运行客户端程序。</strong></li>
+</ul>
+</blockquote>
+<br/>
+
+
+
+<h3 id="60、RMI的stub扮演了什么样的角色？"><a href="#60、RMI的stub扮演了什么样的角色？" class="headerlink" title="60、RMI的stub扮演了什么样的角色？"></a>60、RMI的stub扮演了什么样的角色？</h3><blockquote>
+<p><strong>远程对象的stub扮演了远程对象的代表或者代理的角色。调用者在本地stub上调用方法，它负责在远程对象上执行方法。当stub的方法被调用的时候，会经历以下几个步骤：</strong></p>
+<ul>
+<li><strong>初始化到包含了远程对象的JVM的连接。</strong></li>
+<li><strong>序列化参数到远程的JVM。</strong></li>
+<li><strong>等待方法调用和执行的结果。</strong></li>
+<li><strong>反序列化返回的值或者是方法没有执行成功情况下的异常。</strong></li>
+<li><strong>把值返回给调用者。</strong></li>
+</ul>
+</blockquote>
+<br/>
+
+
+
+<h3 id="61、什么是分布式垃圾回收-DGC-？它是如何工作的？"><a href="#61、什么是分布式垃圾回收-DGC-？它是如何工作的？" class="headerlink" title="61、什么是分布式垃圾回收(DGC)？它是如何工作的？"></a>61、什么是分布式垃圾回收(DGC)？它是如何工作的？</h3><blockquote>
+<p><strong>DGC叫做分布式垃圾回收。RMI使用DGC来做自动垃圾回收。因为RMI包含了跨虚拟机的远程对象的引用，垃圾回收是很困难的。</strong></p>
+<p><strong>DGC使用引用计数算法来给远程对象提供自动内存管理。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="62、RMI中使用RMI安全管理器-RMISecurityManager-的目的是什么？"><a href="#62、RMI中使用RMI安全管理器-RMISecurityManager-的目的是什么？" class="headerlink" title="62、RMI中使用RMI安全管理器(RMISecurityManager)的目的是什么？"></a>62、RMI中使用RMI安全管理器(RMISecurityManager)的目的是什么？</h3><blockquote>
+<p><strong>RMISecurityManager使用下载好的代码提供可被RMI应用程序使用的安全管理器。如果没有设置安全管理器，RMI的类加载器就不会从远程下载任何的类。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="63、解释下Marshalling和demarshalling。"><a href="#63、解释下Marshalling和demarshalling。" class="headerlink" title="63、解释下Marshalling和demarshalling。"></a>63、解释下Marshalling和demarshalling。</h3><blockquote>
+<p><strong>当应用程序希望把内存对象跨网络传递到另一台主机或者是持久化到存储的时候，就必须要把对象在内存里面的表示转化成合适的格式。这个过程就叫做Marshalling，反之就是demarshalling。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="64、解释下Serialization和Deserialization。"><a href="#64、解释下Serialization和Deserialization。" class="headerlink" title="64、解释下Serialization和Deserialization。"></a>64、解释下Serialization和Deserialization。</h3><blockquote>
+<p><strong>Java提供了一种叫做对象序列化的机制，他把对象表示成一连串的字节，里面包含了对象的数据，对象的类型信息，对象内部的数据的类型信息等等。因此，序列化可以看成是为了把对象存储在磁盘上或者是从磁盘上读出来并重建对象而把对象扁平化的一种方式。反序列化是把对象从扁平状态转化成活动对象的相反的步骤。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="65、什么是Servlet？"><a href="#65、什么是Servlet？" class="headerlink" title="65、什么是Servlet？"></a>65、什么是Servlet？</h3><blockquote>
+<p><strong>Servlet是用来处理客户端请求并产生动态网页内容的Java类。Servlet主要是用来处理或者是存储HTML表单提交的数据，产生动态内容，在无状态的HTTP协议下管理状态信息。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="66、说一下Servlet的体系结构。"><a href="#66、说一下Servlet的体系结构。" class="headerlink" title="66、说一下Servlet的体系结构。"></a>66、说一下Servlet的体系结构。</h3><blockquote>
+<p><strong>所有的Servlet都必须要实现的核心的接口是javax.servlet.Servlet。每一个Servlet都必须要直接或者是间接实现这个接口，或者是继承javax.servlet.GenericServlet或者javax.servlet.http.HTTPServlet。最后，Servlet使用多线程可以并行的为多个请求服务。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="67、Applet和Servlet有什么区别？"><a href="#67、Applet和Servlet有什么区别？" class="headerlink" title="67、Applet和Servlet有什么区别？"></a>67、Applet和Servlet有什么区别？</h3><blockquote>
+<p><strong>Applet是运行在客户端主机的浏览器上的客户端Java程序。而Servlet是运行在web服务器上的服务端的组件。applet可以使用用户界面类，而Servlet没有用户界面，相反，Servlet是等待客户端的HTTP请求，然后为请求产生响应。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="68、GenericServlet和HttpServlet有什么区别？"><a href="#68、GenericServlet和HttpServlet有什么区别？" class="headerlink" title="68、GenericServlet和HttpServlet有什么区别？"></a>68、GenericServlet和HttpServlet有什么区别？</h3><blockquote>
+<p><strong>GenericServlet类实现了Servlet和ServletConfig接口。实现了除了service()之外的其他方法，在创建Servlet对象时，可以继承GenericServlet类来简化程序的代码，但需要实现service()方法。</strong></p>
+<p><strong>HttpServlet类继承了GeneriServlet类，为实际开发中大多数用Servlet处理 HTTP请求的应用灵活的方法。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="69、解释下Servlet的生命周期。"><a href="#69、解释下Servlet的生命周期。" class="headerlink" title="69、解释下Servlet的生命周期。"></a>69、解释下Servlet的生命周期。</h3><blockquote>
+<p><strong>对每一个客户端的请求，Servlet引擎载入Servlet，调用它的init()方法，完成Servlet的初始化。然后，Servlet对象通过为每一个请求单独调用service()方法来处理所有随后来自客户端的请求，最后，调用Servlet(译者注：这里应该是Servlet而不是server)的destroy()方法把Servlet删除掉。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="70、doGet-方法和doPost-方法有什么区别？"><a href="#70、doGet-方法和doPost-方法有什么区别？" class="headerlink" title="70、doGet()方法和doPost()方法有什么区别？"></a>70、doGet()方法和doPost()方法有什么区别？</h3><blockquote>
+<p><strong>doGet：GET方法会把名值对追加在请求的URL后面。因为URL对字符数目有限制，进而限制了用在客户端请求的参数值的数目。并且请求中的参数值是可见的，因此，敏感信息不能用这种方式传递。</strong></p>
+<p><strong>doPOST：POST方法通过把请求参数值放在请求体中来克服GET方法的限制，因此，可以发送的参数的数目是没有限制的。最后，通过POST请求传递的敏感信息对外部客户端是不可见的。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="71、什么是Web应用程序？"><a href="#71、什么是Web应用程序？" class="headerlink" title="71、什么是Web应用程序？"></a>71、什么是Web应用程序？</h3><blockquote>
+<p><strong>Web应用程序是对Web或者是应用服务器的动态扩展。有两种类型的Web应用：面向表现的和面向服务的。</strong></p>
+<p><strong>面向表现的Web应用程序会产生包含了很多种标记语言和动态内容的交互的web页面作为对请求的响应。</strong></p>
+<p><strong>而面向服务的Web应用实现了Web服务的端点(endpoint)。</strong></p>
+<p><strong>一般来说，一个Web应用可以看成是一组安装在服务器URL名称空间的特定子集下面的Servlet的集合。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="72、什么是服务端包含-Server-Side-Include-？"><a href="#72、什么是服务端包含-Server-Side-Include-？" class="headerlink" title="72、什么是服务端包含(Server Side Include)？"></a>72、什么是服务端包含(Server Side Include)？</h3><blockquote>
+<p><strong>服务端包含(SSI)是一种简单的解释型服务端脚本语言，大多数时候仅用在Web上，用servlet标签嵌入进来。SSI最常用的场景把一个或多个文件包含到Web服务器的一个Web页面中。当浏览器访问Web页面的时候，Web服务器会用对应的servlet产生的文本来替换Web页面中的servlet标签。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="73、什么是Servlet链-Servlet-Chaining-？"><a href="#73、什么是Servlet链-Servlet-Chaining-？" class="headerlink" title="73、什么是Servlet链(Servlet Chaining)？"></a>73、什么是Servlet链(Servlet Chaining)？</h3><blockquote>
+<p><strong>Servlet链是把一个Servlet的输出发送给另一个Servlet的方法。第二个Servlet的输出可以发送给第三个Servlet，依次类推。链条上最后一个Servlet负责把响应发送给客户端。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="74、如何知道是哪一个客户端的机器正在请求你的Servlet？"><a href="#74、如何知道是哪一个客户端的机器正在请求你的Servlet？" class="headerlink" title="74、如何知道是哪一个客户端的机器正在请求你的Servlet？"></a>74、如何知道是哪一个客户端的机器正在请求你的Servlet？</h3><blockquote>
+<p><strong>ServletRequest类可以找出客户端机器的IP地址或者是主机名。getRemoteAddr()方法获取客户端主机的IP地址，getRemoteHost()可以获取主机名。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="75、HTTP响应的结构是怎么样的？"><a href="#75、HTTP响应的结构是怎么样的？" class="headerlink" title="75、HTTP响应的结构是怎么样的？"></a>75、HTTP响应的结构是怎么样的？</h3><blockquote>
+<p><strong>HTTP响应由三个部分组成：</strong><br><strong>状态码(Status Code)：描述了响应的状态。可以用来检查是否成功的完成了请求。请求失败的情况下，状态码可用来找出失败的原因。如果Servlet没有返回状态码，默认会返回成功的状态码HttpServletResponse.SC_OK。</strong></p>
+<p><strong>HTTP头部(HTTP Header)：它们包含了更多关于响应的信息。比如：头部可以指定认为响应过期的过期日期，或者是指定用来给用户安全的传输实体内容的编码格式。如何在Serlet中检索HTTP的头部看这里。</strong></p>
+<p><strong>主体(Body)：它包含了响应的内容。它可以包含HTML代码，图片，等等。主体是由传输在HTTP消息中紧跟在头部后面的数据字节组成的。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="76、什么是cookie？session和cookie有什么区别？"><a href="#76、什么是cookie？session和cookie有什么区别？" class="headerlink" title="76、什么是cookie？session和cookie有什么区别？"></a>76、什么是cookie？session和cookie有什么区别？</h3><blockquote>
+<p><strong>cookie是Web服务器发送给浏览器的一块信息。浏览器会在本地文件中给每一个Web服务器存储cookie。以后浏览器在给特定的Web服务器发请求的时候，同时会发送所有为该服务器存储的cookie。下面列出了session和cookie的区别：</strong></p>
+<p><strong>无论客户端浏览器做怎么样的设置，session都应该能正常工作。客户端可以选择禁用cookie，但是，session仍然是能够工作的，因为客户端无法禁用服务端的session。</strong></p>
+<p><strong>在存储的数据量方面session和cookies也是不一样的。session能够存储任意的Java对象，cookie只能存储String类型的对象。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="77、浏览器和Servlet通信使用的是什么协议？"><a href="#77、浏览器和Servlet通信使用的是什么协议？" class="headerlink" title="77、浏览器和Servlet通信使用的是什么协议？"></a>77、浏览器和Servlet通信使用的是什么协议？</h3><blockquote>
+<p><strong>浏览器和Servlet通信使用的是HTTP协议。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="78、什么是HTTP隧道？"><a href="#78、什么是HTTP隧道？" class="headerlink" title="78、什么是HTTP隧道？"></a>78、什么是HTTP隧道？</h3><blockquote>
+<p><strong>HTTP隧道是一种利用HTTP或者是HTTPS把多种网络协议封装起来进行通信的技术。因此，HTTP协议扮演了一个打通用于通信的网络协议的管道的包装器的角色。把其他协议的请求掩盖成HTTP的请求就是HTTP隧道。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="79、sendRedirect-和forward-方法有什么区别？"><a href="#79、sendRedirect-和forward-方法有什么区别？" class="headerlink" title="79、sendRedirect()和forward()方法有什么区别？"></a>79、sendRedirect()和forward()方法有什么区别？</h3><blockquote>
+<p><strong>sendRedirect()方法会创建一个新的请求，而forward()方法只是把请求转发到一个新的目标上。重定向(redirect)以后，之前请求作用域范围以内的对象就失效了，因为会产生一个新的请求，而转发(forwarding)以后，之前请求作用域范围以内的对象还是能访问的。一般认为sendRedirect()比forward()要慢。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="80、什么是URL编码和URL解码？"><a href="#80、什么是URL编码和URL解码？" class="headerlink" title="80、什么是URL编码和URL解码？"></a>80、什么是URL编码和URL解码？</h3><blockquote>
+<p><strong>URL编码是负责把URL里面的空格和其他的特殊字符替换成对应的十六进制表示，反之就是解码。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="81、什么是JSP页面？"><a href="#81、什么是JSP页面？" class="headerlink" title="81、什么是JSP页面？"></a>81、什么是JSP页面？</h3><blockquote>
+<p><strong>JSP页面是一种包含了静态数据和JSP元素两种类型的文本的文本文档。静态数据可以用任何基于文本的格式来表示，比如：HTML或者XML。JSP是一种混合了静态内容和动态产生的内容的技术。这里看下JSP的例子。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="82、JSP请求是如何被处理的？"><a href="#82、JSP请求是如何被处理的？" class="headerlink" title="82、JSP请求是如何被处理的？"></a>82、JSP请求是如何被处理的？</h3><blockquote>
+<p><strong>浏览器首先要请求一个以.jsp扩展名结尾的页面，发起JSP请求，然后，Web服务器读取这个请求，使用JSP编译器把JSP页面转化成一个Servlet类。需要注意的是，只有当第一次请求页面或者是JSP文件发生改变的时候JSP文件才会被编译，然后服务器调用servlet类，处理浏览器的请求。一旦请求执行结束，servlet会把响应发送给客户端。这里看下如何在JSP中获取请求参数。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="83、JSP有什么优点？"><a href="#83、JSP有什么优点？" class="headerlink" title="83、JSP有什么优点？"></a>83、JSP有什么优点？</h3><blockquote>
+<p><strong>下面列出了使用JSP的优点：</strong></p>
+<ul>
+<li><strong>JSP页面是被动态编译成Servlet的，因此，开发者可以很容易的更新展现代码。</strong></li>
+<li><strong>JSP页面可以被预编译。</strong></li>
+<li><strong>JSP页面可以很容易的和静态模板结合，包括：HTML或者XML，也可以很容易的和产生动态内容的代码结合起来。</strong></li>
+<li><strong>开发者可以提供让页面设计者以类XML格式来访问的自定义的JSP标签库。</strong></li>
+<li><strong>开发者可以在组件层做逻辑上的改变，而不需要编辑单独使用了应用层逻辑的页面。</strong></li>
+</ul>
+</blockquote>
+<br/>
+
+
+
+<h3 id="84、什么是JSP指令-Directive-？JSP中有哪些不同类型的指令？"><a href="#84、什么是JSP指令-Directive-？JSP中有哪些不同类型的指令？" class="headerlink" title="84、什么是JSP指令(Directive)？JSP中有哪些不同类型的指令？"></a>84、什么是JSP指令(Directive)？JSP中有哪些不同类型的指令？</h3><blockquote>
+<p><strong>Directive是当JSP页面被编译成Servlet的时候，JSP引擎要处理的指令。Directive用来设置页面级别的指令，从外部文件插入数据，指定自定义的标签库。Directive是定义在 &lt;%@ 和 %&gt;之间的。下面列出了不同类型的Directive：</strong></p>
+<ul>
+<li><strong>包含指令(Include directive)：用来包含文件和合并文件内容到当前的页面。</strong></li>
+<li><strong>页面指令(Page directive)：用来定义JSP页面中特定的属性，比如错误页面和缓冲区。</strong></li>
+<li><strong>Taglib指令： 用来声明页面中使用的自定义的标签库。</strong></li>
+</ul>
+</blockquote>
+<br/>
+
+
+
+<h3 id="85、什么是JSP动作-JSP-action-？"><a href="#85、什么是JSP动作-JSP-action-？" class="headerlink" title="85、什么是JSP动作(JSP action)？"></a>85、什么是JSP动作(JSP action)？</h3><blockquote>
+<p><strong>JSP动作以XML语法的结构来控制Servlet引擎的行为。当JSP页面被请求的时候，JSP动作会被执行。它们可以被动态的插入到文件中，重用JavaBean组件，转发用户到其他的页面，或者是给Java插件产生HTML代码。下面列出了可用的动作：</strong></p>
+<ul>
+<li><strong>jsp:include-当JSP页面被请求的时候包含一个文件。</strong></li>
+<li><strong>jsp:useBean-找出或者是初始化Javabean。</strong></li>
+<li><strong>jsp:setProperty-设置JavaBean的属性。</strong></li>
+<li><strong>jsp:getProperty-获取JavaBean的属性。</strong></li>
+<li><strong>jsp:forward-把请求转发到新的页面。</strong></li>
+<li><strong>jsp:plugin-产生特定浏览器的代码。</strong></li>
+</ul>
+</blockquote>
+<br/>
+
+
+
+<h3 id="86、什么是Scriptlets？"><a href="#86、什么是Scriptlets？" class="headerlink" title="86、什么是Scriptlets？"></a>86、什么是Scriptlets？</h3><blockquote>
+<p><strong>JSP技术中，scriptlet是嵌入在JSP页面中的一段Java代码。scriptlet是位于标签内部的所有的东西，在标签与标签之间，用户可以添加任意有效的scriplet。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="87、声明-Decalaration-在哪里？"><a href="#87、声明-Decalaration-在哪里？" class="headerlink" title="87、声明(Decalaration)在哪里？"></a>87、声明(Decalaration)在哪里？</h3><blockquote>
+<p><strong>声明跟Java中的变量声明很相似，它用来声明随后要被表达式或者scriptlet使用的变量。添加的声明必须要用开始和结束标签包起来。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="88、什么是表达式-Expression-？"><a href="#88、什么是表达式-Expression-？" class="headerlink" title="88、什么是表达式(Expression)？"></a>88、什么是表达式(Expression)？</h3><blockquote>
+<p><strong>【列表很长，可以分上、中、下发布】</strong><br><strong>JSP表达式是Web服务器把脚本语言表达式的值转化成一个String对象，插入到返回给客户端的数据流中。表达式是在&lt;%=和%&gt;这两个标签之间定义的。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="89、隐含对象是什么意思？有哪些隐含对象？"><a href="#89、隐含对象是什么意思？有哪些隐含对象？" class="headerlink" title="89、隐含对象是什么意思？有哪些隐含对象？"></a>89、隐含对象是什么意思？有哪些隐含对象？</h3><blockquote>
+<p><strong>JSP隐含对象是页面中的一些Java对象，JSP容器让这些Java对象可以为开发者所使用。开发者不用明确的声明就可以直接使用他们。JSP隐含对象也叫做预定义变量。下面列出了JSP页面中的隐含对象：</strong></p>
+<ul>
+<li><strong>application</strong></li>
+<li><strong>page</strong></li>
+<li><strong>request</strong></li>
+<li><strong>response</strong></li>
+<li><strong>session</strong></li>
+<li><strong>exception</strong></li>
+<li><strong>out</strong></li>
+<li><strong>config</strong></li>
+<li><strong>pageContext</strong></li>
+</ul>
+</blockquote>
+<br/>
+
+
+
+<h3 id="90、面向对象软件开发的优点有哪些？"><a href="#90、面向对象软件开发的优点有哪些？" class="headerlink" title="90、面向对象软件开发的优点有哪些？"></a>90、面向对象软件开发的优点有哪些？</h3><blockquote>
+<ul>
+<li><strong>代码开发模块化，更易维护和修改。</strong></li>
+<li><strong>代码复用。</strong></li>
+<li><strong>增强代码的可靠性和灵活性。</strong></li>
+<li><strong>增加代码的可理解性。</strong></li>
+<li><strong>面向对象编程有很多重要的特性，比如：封装，继承，多态和抽象。</strong></li>
+</ul>
+</blockquote>
+<br/>
+
+
+
+<h3 id="91、封装的定义和好处有哪些？"><a href="#91、封装的定义和好处有哪些？" class="headerlink" title="91、封装的定义和好处有哪些？"></a>91、封装的定义和好处有哪些？</h3><blockquote>
+<p><strong>封装给对象提供了隐藏内部特性和行为的能力。对象提供一些能被其他对象访问的方法来改变它内部的数据。在Java当中，有3种修饰符：public，private和protected。每一种修饰符给其他的位于同一个包或者不同包下面对象赋予了不同的访问权限。</strong></p>
+<p><strong>下面列出了使用封装的一些好处：</strong></p>
+<ul>
+<li><strong>通过隐藏对象的属性来保护对象内部的状态。</strong></li>
+<li><strong>提高了代码的可用性和可维护性，因为对象的行为可以被单独的改变或者是扩展。</strong></li>
+<li><strong>禁止对象之间的不良交互提高模块化。</strong></li>
+</ul>
+<p><strong>参考这个文档获取更多关于封装的细节和示例。</strong></p>
+<p><strong>或：</strong></p>
+<ul>
+<li><p><strong>一是用private把类的细节与外界隔离起来，从而实现数据项和方法的隐藏，而要访问这些数据项和方法唯一的途径就是通过类本身，类才有资格调用它所拥有的资源（方法，数据项属性等等）。所以第一个好处就是数据的安全性提高了。</strong></p>
+</li>
+<li><p><strong>二是通过隐藏隔离，只允许外部对类做有限的访问，开发者可以自由的改变类的内部实现，而无需修改使用该类的那些程序。只要那些在类外部就能被调用的方法保持其外部特征不变，内部代码就可以自由改变，各取所需，利于分工。</strong></p>
+</li>
+<li><p><strong>三就是提高了代码的重用性，封装成工具类以后能够减少很多繁琐的步骤。</strong></p>
+</li>
+</ul>
+</blockquote>
+<br/>
+
+
+
+<h3 id="92、多态的定义？"><a href="#92、多态的定义？" class="headerlink" title="92、多态的定义？"></a>92、多态的定义？</h3><blockquote>
+<p><strong>多态是编程语言给不同的底层数据类型做相同的接口展示的一种能力。一个多态类型上的操作可以应用到其他类型的值上面。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="93、继承的定义？"><a href="#93、继承的定义？" class="headerlink" title="93、继承的定义？"></a>93、继承的定义？</h3><blockquote>
+<p><strong>继承给对象提供了从基类获取字段和方法的能力。继承提供了代码的重用性，也可以在不修改类的情况下给现存的类添加新特性。</strong></p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="94、抽象的定义？抽象和封装的不同点？"><a href="#94、抽象的定义？抽象和封装的不同点？" class="headerlink" title="94、抽象的定义？抽象和封装的不同点？"></a>94、抽象的定义？抽象和封装的不同点？</h3><blockquote>
+<p><strong>抽象是把想法从具体的实例中分离出来的步骤，因此，要根据他们的功能而不是实现细节来创建类。Java支持创建只暴漏接口而不包含方法实现的抽象的类。这种抽象技术的主要目的是把类的行为和实现细节分离开。</strong></p>
+<p><strong>抽象和封装是互补的概念。一方面，抽象关注对象的行为。另一方面，封装关注对象行为的细节。一般是通过隐藏对象内部状态信息做到封装，因此，封装可以看成是用来提供抽象的一种策略。</strong></p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://njuni.online">KAZAMA</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://njuni.online/2022/07/20/Java%E6%A0%A1%E6%8B%9B%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E5%90%88%E9%9B%86/Java%E6%A0%A1%E6%8B%9B%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E5%90%88%E9%9B%86/">http://njuni.online/2022/07/20/Java%E6%A0%A1%E6%8B%9B%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E5%90%88%E9%9B%86/Java%E6%A0%A1%E6%8B%9B%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E5%90%88%E9%9B%86/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://njuni.online" target="_blank">KAZAMA的个人博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/wechat.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/07/20/%E8%AF%BE%E6%97%B63%EF%BC%9A%E5%BC%B9%E6%80%A7%E8%AE%A1%E7%AE%97%E6%9C%8D%E5%8A%A1%E2%80%94%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8ECS%E7%9A%84%E6%A6%82%E5%BF%B5/%E8%AF%BE%E6%97%B63%EF%BC%9A%E5%BC%B9%E6%80%A7%E8%AE%A1%E7%AE%97%E6%9C%8D%E5%8A%A1%E2%80%94%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8ECS%E7%9A%84%E6%A6%82%E5%BF%B5/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info"></div></div></a></div><div class="next-post pull-right"><a href="/2022/07/20/%E8%AF%BE%E6%97%B64%EF%BC%9A%E5%BC%B9%E6%80%A7%E8%AE%A1%E7%AE%97%E6%9C%8D%E5%8A%A1%E2%80%94ECS%E5%AE%9E%E4%BE%8B/%E8%AF%BE%E6%97%B64%EF%BC%9A%E5%BC%B9%E6%80%A7%E8%AE%A1%E7%AE%97%E6%9C%8D%E5%8A%A1%E2%80%94ECS%E5%AE%9E%E4%BE%8B/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info"></div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">KAZAMA</div><div class="author-info__description">技术记录,个人分享,学习备忘</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">179</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/KAZAMA-DREAM"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/KAZAMA-DREAM" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/wyy1778789301@163.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java%E6%A0%A1%E6%8B%9B%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E5%90%88%E9%9B%86"><span class="toc-number">1.</span> <span class="toc-text">Java校招面试题目合集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFJava%E8%99%9A%E6%8B%9F%E6%9C%BA%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88Java%E8%A2%AB%E7%A7%B0%E4%B8%BA%E6%98%AF%E2%80%9C%E5%B9%B3%E5%8F%B0%E6%97%A0%E5%85%B3%E7%9A%84%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E2%80%9D%EF%BC%9F"><span class="toc-number">1.0.1.</span> <span class="toc-text">1、什么是Java虚拟机？为什么Java被称为是“平台无关的编程语言”？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81JDK%E5%92%8CJRE%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.0.2.</span> <span class="toc-text">2、JDK和JRE的区别是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E2%80%9Cstatic%E2%80%9D%E5%85%B3%E9%94%AE%E5%AD%97%E6%98%AF%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D%EF%BC%9FJava%E4%B8%AD%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E9%87%8D%E5%86%99%EF%BC%88override%EF%BC%89%E4%B8%80%E4%B8%AAprivate%E6%88%96%E8%80%85%E6%98%AFstatic%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9F"><span class="toc-number">1.0.3.</span> <span class="toc-text">3、“static”关键字是什么意思？Java中是否可以重写（override）一个private或者是static的方法？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E5%9C%A8static%E7%8E%AF%E5%A2%83%E4%B8%AD%E8%AE%BF%E9%97%AE%E9%9D%9Estatic%E5%8F%98%E9%87%8F%EF%BC%9F"><span class="toc-number">1.0.4.</span> <span class="toc-text">4、是否可以在static环境中访问非static变量？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E3%80%81Java%E4%B8%AD%EF%BC%8C%E4%BB%80%E4%B9%88%E6%98%AF%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%EF%BC%9F%E4%BB%80%E4%B9%88%E6%98%AF%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%E9%87%8D%E8%BD%BD%EF%BC%9F%E4%BB%80%E4%B9%88%E6%98%AF%E5%A4%8D%E5%88%B6%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%EF%BC%9F"><span class="toc-number">1.0.5.</span> <span class="toc-text">5、Java中，什么是构造方法？什么是构造方法重载？什么是复制构造方法？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6%E3%80%81Java%E6%94%AF%E6%8C%81%E5%A4%9A%E7%BB%A7%E6%89%BF%E5%90%97%EF%BC%9F"><span class="toc-number">1.0.6.</span> <span class="toc-text">6、Java支持多继承吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E3%80%81%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.0.7.</span> <span class="toc-text">7、接口和抽象类的区别是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8%E3%80%81%E5%9C%A8Java%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BE%88%E5%A4%9A%E4%BA%BA%E8%AF%B4%E6%9C%89%E5%80%BC%E4%BC%A0%E9%80%92%E5%92%8C%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92%EF%BC%9F%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92%E7%9A%84%E6%9C%AC%E8%B4%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.0.8.</span> <span class="toc-text">8、在Java中为什么很多人说有值传递和引用传递？引用传递的本质是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9%E3%80%81%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.0.9.</span> <span class="toc-text">9、进程和线程的区别是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10%E3%80%81%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%87%A0%E7%A7%8D%E4%B8%8D%E5%90%8C%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%9F%E4%BD%A0%E5%96%9C%E6%AC%A2%E5%93%AA%E4%B8%80%E7%A7%8D%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.0.10.</span> <span class="toc-text">10、创建线程的几种不同的方式？你喜欢哪一种？为什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11%E3%80%81%E6%A6%82%E6%8B%AC%E7%9A%84%E8%A7%A3%E9%87%8A%E4%B8%8B%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%87%A0%E7%A7%8D%E5%8F%AF%E7%94%A8%E7%8A%B6%E6%80%81%EF%BC%9F"><span class="toc-number">1.0.11.</span> <span class="toc-text">11、概括的解释下线程的几种可用状态？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12%E3%80%81%E5%90%8C%E6%AD%A5%E6%96%B9%E6%B3%95%E5%92%8C%E5%90%8C%E6%AD%A5%E4%BB%A3%E7%A0%81%E5%9D%97%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.0.12.</span> <span class="toc-text">12、同步方法和同步代码块的区别是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13%E3%80%81%E5%9C%A8%E7%9B%91%E8%A7%86%E5%99%A8%EF%BC%88Monitor%EF%BC%89%E5%86%85%E9%83%A8%EF%BC%8C%E6%98%AF%E5%A6%82%E4%BD%95%E5%81%9A%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5%E7%9A%84%EF%BC%9F%E7%A8%8B%E5%BA%8F%E5%BA%94%E8%AF%A5%E5%81%9A%E5%93%AA%E7%A7%8D%E7%BA%A7%E5%88%AB%E7%9A%84%E5%90%8C%E6%AD%A5%EF%BC%9F"><span class="toc-number">1.0.13.</span> <span class="toc-text">13、在监视器（Monitor）内部，是如何做线程同步的？程序应该做哪种级别的同步？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E6%AD%BB%E9%94%81%EF%BC%88deadlock%EF%BC%89%EF%BC%9F"><span class="toc-number">1.0.14.</span> <span class="toc-text">14、什么是死锁（deadlock）？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15%E3%80%81%E5%A6%82%E4%BD%95%E7%A1%AE%E4%BF%9DN%E4%B8%AA%E7%BA%BF%E7%A8%8B%E5%8F%AF%E4%BB%A5%E8%AE%BF%E9%97%AEN%E4%B8%AA%E8%B5%84%E6%BA%90%E5%90%8C%E6%97%B6%E5%8F%88%E4%B8%8D%E5%AF%BC%E8%87%B4%E6%AD%BB%E9%94%81%EF%BC%9F"><span class="toc-number">1.0.15.</span> <span class="toc-text">15、如何确保N个线程可以访问N个资源同时又不导致死锁？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16%E3%80%81Java%E9%9B%86%E5%90%88%E7%B1%BB%E6%A1%86%E6%9E%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%8E%A5%E5%8F%A3%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">1.0.16.</span> <span class="toc-text">16、Java集合类框架的基本接口有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9B%86%E5%90%88%E7%B1%BB%E6%B2%A1%E6%9C%89%E5%AE%9E%E7%8E%B0Cloneable%E5%92%8CSerializable%E6%8E%A5%E5%8F%A3%EF%BC%9F"><span class="toc-number">1.0.17.</span> <span class="toc-text">17、为什么集合类没有实现Cloneable和Serializable接口？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E8%BF%AD%E4%BB%A3%E5%99%A8%EF%BC%88Iterator%EF%BC%89"><span class="toc-number">1.0.18.</span> <span class="toc-text">18、什么是迭代器（Iterator）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19%E3%80%81Iterator%E5%92%8CListIterator%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.0.19.</span> <span class="toc-text">19、Iterator和ListIterator的区别是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20%E3%80%81%E5%BF%AB%E9%80%9F%E5%A4%B1%E8%B4%A5%EF%BC%88fail-fast%EF%BC%89%E5%92%8C%E5%AE%89%E5%85%A8%E5%A4%B1%E8%B4%A5%EF%BC%88fail-safe%EF%BC%89%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.0.20.</span> <span class="toc-text">20、快速失败（fail-fast）和安全失败（fail-safe）的区别是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#21%E3%80%81Java%E4%B8%AD%E7%9A%84HashMap%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.0.21.</span> <span class="toc-text">21、Java中的HashMap的工作原理是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22%E3%80%81hashCode-%E5%92%8Cequals-%E6%96%B9%E6%B3%95%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7%E4%BD%93%E7%8E%B0%E5%9C%A8%E4%BB%80%E4%B9%88%E5%9C%B0%E6%96%B9%EF%BC%9F"><span class="toc-number">1.0.22.</span> <span class="toc-text">22、hashCode()和equals()方法的重要性体现在什么地方？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23%E3%80%81HashMap%E5%92%8CHashtable%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.0.23.</span> <span class="toc-text">23、HashMap和Hashtable有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#24%E3%80%81%E6%95%B0%E7%BB%84-Array-%E5%92%8C%E5%88%97%E8%A1%A8-ArrayList-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E5%BA%94%E8%AF%A5%E4%BD%BF%E7%94%A8Array%E8%80%8C%E4%B8%8D%E6%98%AFArrayList%EF%BC%9F"><span class="toc-number">1.0.24.</span> <span class="toc-text">24、数组(Array)和列表(ArrayList)有什么区别？什么时候应该使用Array而不是ArrayList？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#25%E3%80%81ArrayList%E5%92%8CLinkedList%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.0.25.</span> <span class="toc-text">25、ArrayList和LinkedList有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#26%E3%80%81Comparable%E5%92%8CComparator%E6%8E%A5%E5%8F%A3%E6%98%AF%E5%B9%B2%E4%BB%80%E4%B9%88%E7%9A%84%EF%BC%9F%E5%88%97%E5%87%BA%E5%AE%83%E4%BB%AC%E7%9A%84%E5%8C%BA%E5%88%AB%E3%80%82"><span class="toc-number">1.0.26.</span> <span class="toc-text">26、Comparable和Comparator接口是干什么的？列出它们的区别。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#27%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFJava%E4%BC%98%E5%85%88%E7%BA%A7%E9%98%9F%E5%88%97-Priority-Queue-%EF%BC%9F"><span class="toc-number">1.0.27.</span> <span class="toc-text">27、什么是Java优先级队列(Priority Queue)？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#28%E3%80%81%E4%BD%A0%E4%BA%86%E8%A7%A3%E5%A4%A7O%E7%AC%A6%E5%8F%B7-big-O-notation-%E4%B9%88%EF%BC%9F%E4%BD%A0%E8%83%BD%E7%BB%99%E5%87%BA%E4%B8%8D%E5%90%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E4%BE%8B%E5%AD%90%E4%B9%88%EF%BC%9F"><span class="toc-number">1.0.28.</span> <span class="toc-text">28、你了解大O符号(big-O notation)么？你能给出不同数据结构的例子么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#29%E3%80%81%E5%A6%82%E4%BD%95%E6%9D%83%E8%A1%A1%E6%98%AF%E4%BD%BF%E7%94%A8%E6%97%A0%E5%BA%8F%E7%9A%84%E6%95%B0%E7%BB%84%E8%BF%98%E6%98%AF%E6%9C%89%E5%BA%8F%E7%9A%84%E6%95%B0%E7%BB%84%EF%BC%9F"><span class="toc-number">1.0.29.</span> <span class="toc-text">29、如何权衡是使用无序的数组还是有序的数组？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#30%E3%80%81Java%E9%9B%86%E5%90%88%E7%B1%BB%E6%A1%86%E6%9E%B6%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">1.0.30.</span> <span class="toc-text">30、Java集合类框架的最佳实践有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#31%E3%80%81Enumeration%E6%8E%A5%E5%8F%A3%E5%92%8CIterator%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%8C%BA%E5%88%AB%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">1.0.31.</span> <span class="toc-text">31、Enumeration接口和Iterator接口的区别有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#32%E3%80%81HashSet%E5%92%8CTreeSet%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.0.32.</span> <span class="toc-text">32、HashSet和TreeSet有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#33%E3%80%81Java%E4%B8%AD%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%89%E4%BB%80%E4%B9%88%E7%9B%AE%E7%9A%84%EF%BC%9F%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E8%BF%9B%E8%A1%8C%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%EF%BC%9F"><span class="toc-number">1.0.33.</span> <span class="toc-text">33、Java中垃圾回收有什么目的？什么时候进行垃圾回收？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#34%E3%80%81System-gc-%E5%92%8CRuntime-gc-%E4%BC%9A%E5%81%9A%E4%BB%80%E4%B9%88%E4%BA%8B%E6%83%85%EF%BC%9F"><span class="toc-number">1.0.34.</span> <span class="toc-text">34、System.gc()和Runtime.gc()会做什么事情？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#35%E3%80%81finalize-%E6%96%B9%E6%B3%95%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E8%A2%AB%E8%B0%83%E7%94%A8%EF%BC%9F%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0-finalization-%E7%9A%84%E7%9B%AE%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.0.35.</span> <span class="toc-text">35、finalize()方法什么时候被调用？析构函数(finalization)的目的是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#36%E3%80%81%E5%A6%82%E6%9E%9C%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BC%95%E7%94%A8%E8%A2%AB%E7%BD%AE%E4%B8%BAnull%EF%BC%8C%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E6%98%AF%E5%90%A6%E4%BC%9A%E7%AB%8B%E5%8D%B3%E9%87%8A%E6%94%BE%E5%AF%B9%E8%B1%A1%E5%8D%A0%E7%94%A8%E7%9A%84%E5%86%85%E5%AD%98%EF%BC%9F"><span class="toc-number">1.0.36.</span> <span class="toc-text">36、如果对象的引用被置为null，垃圾收集器是否会立即释放对象占用的内存？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#37%E3%80%81Java%E5%A0%86%E7%9A%84%E7%BB%93%E6%9E%84%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%E5%AD%90%E7%9A%84%EF%BC%9F%E4%BB%80%E4%B9%88%E6%98%AF%E5%A0%86%E4%B8%AD%E7%9A%84%E6%B0%B8%E4%B9%85%E4%BB%A3-Perm-Gen-space"><span class="toc-number">1.0.37.</span> <span class="toc-text">37、Java堆的结构是什么样子的？什么是堆中的永久代(Perm Gen space)?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#38%E3%80%81%E4%B8%B2%E8%A1%8C-serial-%E6%94%B6%E9%9B%86%E5%99%A8%E5%92%8C%E5%90%9E%E5%90%90%E9%87%8F-throughput-%E6%94%B6%E9%9B%86%E5%99%A8%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.0.38.</span> <span class="toc-text">38、串行(serial)收集器和吞吐量(throughput)收集器的区别是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#39%E3%80%81%E5%9C%A8Java%E4%B8%AD%EF%BC%8C%E5%AF%B9%E8%B1%A1%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E5%8F%AF%E4%BB%A5%E8%A2%AB%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%EF%BC%9F"><span class="toc-number">1.0.39.</span> <span class="toc-text">39、在Java中，对象什么时候可以被垃圾回收？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#40%E3%80%81JVM%E7%9A%84%E6%B0%B8%E4%B9%85%E4%BB%A3%E4%B8%AD%E4%BC%9A%E5%8F%91%E7%94%9F%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E4%B9%88%EF%BC%9F"><span class="toc-number">1.0.40.</span> <span class="toc-text">40、JVM的永久代中会发生垃圾回收么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#41%E3%80%81Java%E4%B8%AD%E7%9A%84%E4%B8%A4%E7%A7%8D%E5%BC%82%E5%B8%B8%E7%B1%BB%E5%9E%8B%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E4%BB%96%E4%BB%AC%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.0.41.</span> <span class="toc-text">41、Java中的两种异常类型是什么？他们有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#42%E3%80%81Java%E4%B8%ADException%E5%92%8CError%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.0.42.</span> <span class="toc-text">42、Java中Exception和Error有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#43%E3%80%81throw%E5%92%8Cthrows%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.0.43.</span> <span class="toc-text">43、throw和throws有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#44%E3%80%81%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%AE%8C%E6%88%90%E4%BB%A5%E5%90%8E%EF%BC%8CException%E5%AF%B9%E8%B1%A1%E4%BC%9A%E5%8F%91%E7%94%9F%E4%BB%80%E4%B9%88%E5%8F%98%E5%8C%96%EF%BC%9F"><span class="toc-number">1.0.44.</span> <span class="toc-text">44、异常处理完成以后，Exception对象会发生什么变化？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#45%E3%80%81finally%E4%BB%A3%E7%A0%81%E5%9D%97%E5%92%8Cfinalize-%E6%96%B9%E6%B3%95%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.0.45.</span> <span class="toc-text">45、finally代码块和finalize()方法有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#46%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFJDBC%EF%BC%9F"><span class="toc-number">1.0.46.</span> <span class="toc-text">46、什么是JDBC？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#47%E3%80%81%E8%A7%A3%E9%87%8A%E4%B8%8B%E9%A9%B1%E5%8A%A8-Driver-%E5%9C%A8JDBC%E4%B8%AD%E7%9A%84%E8%A7%92%E8%89%B2%E3%80%82"><span class="toc-number">1.0.47.</span> <span class="toc-text">47、解释下驱动(Driver)在JDBC中的角色。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#48%E3%80%81Class-forName-%E6%96%B9%E6%B3%95%E6%9C%89%E4%BB%80%E4%B9%88%E4%BD%9C%E7%94%A8%EF%BC%9F"><span class="toc-number">1.0.48.</span> <span class="toc-text">48、Class.forName()方法有什么作用？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#49%E3%80%81PreparedStatement%E6%AF%94Statement%E6%9C%89%E4%BB%80%E4%B9%88%E4%BC%98%E5%8A%BF%EF%BC%9F"><span class="toc-number">1.0.49.</span> <span class="toc-text">49、PreparedStatement比Statement有什么优势？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#50%E3%80%81%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BD%BF%E7%94%A8CallableStatement%EF%BC%9F%E7%94%A8%E6%9D%A5%E5%87%86%E5%A4%87CallableStatement%E7%9A%84%E6%96%B9%E6%B3%95%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.0.50.</span> <span class="toc-text">50、什么时候使用CallableStatement？用来准备CallableStatement的方法是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#51%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0%E6%98%AF%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D%EF%BC%9F"><span class="toc-number">1.0.51.</span> <span class="toc-text">51、数据库连接池是什么意思？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#52%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFRMI%EF%BC%9F"><span class="toc-number">1.0.52.</span> <span class="toc-text">52、什么是RMI？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#53%E3%80%81RMI%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.0.53.</span> <span class="toc-text">53、RMI体系结构的基本原则是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#54%E3%80%81RMI%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E5%88%86%E5%93%AA%E5%87%A0%E5%B1%82%EF%BC%9F"><span class="toc-number">1.0.54.</span> <span class="toc-text">54、RMI体系结构分哪几层？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#55%E3%80%81RMI%E4%B8%AD%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%8E%A5%E5%8F%A3-Remote-Interface-%E6%89%AE%E6%BC%94%E4%BA%86%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E8%A7%92%E8%89%B2%EF%BC%9F"><span class="toc-number">1.0.55.</span> <span class="toc-text">55、RMI中的远程接口(Remote Interface)扮演了什么样的角色？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#56%E3%80%81java-rmi-Naming%E7%B1%BB%E6%89%AE%E6%BC%94%E4%BA%86%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E8%A7%92%E8%89%B2%EF%BC%9F"><span class="toc-number">1.0.56.</span> <span class="toc-text">56、java.rmi.Naming类扮演了什么样的角色？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#57%E3%80%81RMI%E7%9A%84%E7%BB%91%E5%AE%9A-Binding-%E6%98%AF%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D%EF%BC%9F"><span class="toc-number">1.0.57.</span> <span class="toc-text">57、RMI的绑定(Binding)是什么意思？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#58%E3%80%81Naming%E7%B1%BB%E7%9A%84bind-%E5%92%8Crebind-%E6%96%B9%E6%B3%95%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.0.58.</span> <span class="toc-text">58、Naming类的bind()和rebind()方法有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#59%E3%80%81%E8%AE%A9RMI%E7%A8%8B%E5%BA%8F%E8%83%BD%E6%AD%A3%E7%A1%AE%E8%BF%90%E8%A1%8C%E6%9C%89%E5%93%AA%E4%BA%9B%E6%AD%A5%E9%AA%A4%EF%BC%9F"><span class="toc-number">1.0.59.</span> <span class="toc-text">59、让RMI程序能正确运行有哪些步骤？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#60%E3%80%81RMI%E7%9A%84stub%E6%89%AE%E6%BC%94%E4%BA%86%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E8%A7%92%E8%89%B2%EF%BC%9F"><span class="toc-number">1.0.60.</span> <span class="toc-text">60、RMI的stub扮演了什么样的角色？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#61%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E5%88%86%E5%B8%83%E5%BC%8F%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6-DGC-%EF%BC%9F%E5%AE%83%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F"><span class="toc-number">1.0.61.</span> <span class="toc-text">61、什么是分布式垃圾回收(DGC)？它是如何工作的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#62%E3%80%81RMI%E4%B8%AD%E4%BD%BF%E7%94%A8RMI%E5%AE%89%E5%85%A8%E7%AE%A1%E7%90%86%E5%99%A8-RMISecurityManager-%E7%9A%84%E7%9B%AE%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.0.62.</span> <span class="toc-text">62、RMI中使用RMI安全管理器(RMISecurityManager)的目的是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#63%E3%80%81%E8%A7%A3%E9%87%8A%E4%B8%8BMarshalling%E5%92%8Cdemarshalling%E3%80%82"><span class="toc-number">1.0.63.</span> <span class="toc-text">63、解释下Marshalling和demarshalling。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#64%E3%80%81%E8%A7%A3%E9%87%8A%E4%B8%8BSerialization%E5%92%8CDeserialization%E3%80%82"><span class="toc-number">1.0.64.</span> <span class="toc-text">64、解释下Serialization和Deserialization。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#65%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFServlet%EF%BC%9F"><span class="toc-number">1.0.65.</span> <span class="toc-text">65、什么是Servlet？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#66%E3%80%81%E8%AF%B4%E4%B8%80%E4%B8%8BServlet%E7%9A%84%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E3%80%82"><span class="toc-number">1.0.66.</span> <span class="toc-text">66、说一下Servlet的体系结构。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#67%E3%80%81Applet%E5%92%8CServlet%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.0.67.</span> <span class="toc-text">67、Applet和Servlet有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#68%E3%80%81GenericServlet%E5%92%8CHttpServlet%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.0.68.</span> <span class="toc-text">68、GenericServlet和HttpServlet有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#69%E3%80%81%E8%A7%A3%E9%87%8A%E4%B8%8BServlet%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E3%80%82"><span class="toc-number">1.0.69.</span> <span class="toc-text">69、解释下Servlet的生命周期。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#70%E3%80%81doGet-%E6%96%B9%E6%B3%95%E5%92%8CdoPost-%E6%96%B9%E6%B3%95%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.0.70.</span> <span class="toc-text">70、doGet()方法和doPost()方法有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#71%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFWeb%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%EF%BC%9F"><span class="toc-number">1.0.71.</span> <span class="toc-text">71、什么是Web应用程序？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#72%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%8C%85%E5%90%AB-Server-Side-Include-%EF%BC%9F"><span class="toc-number">1.0.72.</span> <span class="toc-text">72、什么是服务端包含(Server Side Include)？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#73%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFServlet%E9%93%BE-Servlet-Chaining-%EF%BC%9F"><span class="toc-number">1.0.73.</span> <span class="toc-text">73、什么是Servlet链(Servlet Chaining)？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#74%E3%80%81%E5%A6%82%E4%BD%95%E7%9F%A5%E9%81%93%E6%98%AF%E5%93%AA%E4%B8%80%E4%B8%AA%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E6%9C%BA%E5%99%A8%E6%AD%A3%E5%9C%A8%E8%AF%B7%E6%B1%82%E4%BD%A0%E7%9A%84Servlet%EF%BC%9F"><span class="toc-number">1.0.74.</span> <span class="toc-text">74、如何知道是哪一个客户端的机器正在请求你的Servlet？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#75%E3%80%81HTTP%E5%93%8D%E5%BA%94%E7%9A%84%E7%BB%93%E6%9E%84%E6%98%AF%E6%80%8E%E4%B9%88%E6%A0%B7%E7%9A%84%EF%BC%9F"><span class="toc-number">1.0.75.</span> <span class="toc-text">75、HTTP响应的结构是怎么样的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#76%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFcookie%EF%BC%9Fsession%E5%92%8Ccookie%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.0.76.</span> <span class="toc-text">76、什么是cookie？session和cookie有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#77%E3%80%81%E6%B5%8F%E8%A7%88%E5%99%A8%E5%92%8CServlet%E9%80%9A%E4%BF%A1%E4%BD%BF%E7%94%A8%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88%E5%8D%8F%E8%AE%AE%EF%BC%9F"><span class="toc-number">1.0.77.</span> <span class="toc-text">77、浏览器和Servlet通信使用的是什么协议？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#78%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFHTTP%E9%9A%A7%E9%81%93%EF%BC%9F"><span class="toc-number">1.0.78.</span> <span class="toc-text">78、什么是HTTP隧道？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#79%E3%80%81sendRedirect-%E5%92%8Cforward-%E6%96%B9%E6%B3%95%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.0.79.</span> <span class="toc-text">79、sendRedirect()和forward()方法有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFURL%E7%BC%96%E7%A0%81%E5%92%8CURL%E8%A7%A3%E7%A0%81%EF%BC%9F"><span class="toc-number">1.0.80.</span> <span class="toc-text">80、什么是URL编码和URL解码？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#81%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFJSP%E9%A1%B5%E9%9D%A2%EF%BC%9F"><span class="toc-number">1.0.81.</span> <span class="toc-text">81、什么是JSP页面？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#82%E3%80%81JSP%E8%AF%B7%E6%B1%82%E6%98%AF%E5%A6%82%E4%BD%95%E8%A2%AB%E5%A4%84%E7%90%86%E7%9A%84%EF%BC%9F"><span class="toc-number">1.0.82.</span> <span class="toc-text">82、JSP请求是如何被处理的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#83%E3%80%81JSP%E6%9C%89%E4%BB%80%E4%B9%88%E4%BC%98%E7%82%B9%EF%BC%9F"><span class="toc-number">1.0.83.</span> <span class="toc-text">83、JSP有什么优点？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#84%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFJSP%E6%8C%87%E4%BB%A4-Directive-%EF%BC%9FJSP%E4%B8%AD%E6%9C%89%E5%93%AA%E4%BA%9B%E4%B8%8D%E5%90%8C%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%8C%87%E4%BB%A4%EF%BC%9F"><span class="toc-number">1.0.84.</span> <span class="toc-text">84、什么是JSP指令(Directive)？JSP中有哪些不同类型的指令？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#85%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFJSP%E5%8A%A8%E4%BD%9C-JSP-action-%EF%BC%9F"><span class="toc-number">1.0.85.</span> <span class="toc-text">85、什么是JSP动作(JSP action)？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#86%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFScriptlets%EF%BC%9F"><span class="toc-number">1.0.86.</span> <span class="toc-text">86、什么是Scriptlets？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#87%E3%80%81%E5%A3%B0%E6%98%8E-Decalaration-%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F"><span class="toc-number">1.0.87.</span> <span class="toc-text">87、声明(Decalaration)在哪里？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#88%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E8%A1%A8%E8%BE%BE%E5%BC%8F-Expression-%EF%BC%9F"><span class="toc-number">1.0.88.</span> <span class="toc-text">88、什么是表达式(Expression)？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#89%E3%80%81%E9%9A%90%E5%90%AB%E5%AF%B9%E8%B1%A1%E6%98%AF%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D%EF%BC%9F%E6%9C%89%E5%93%AA%E4%BA%9B%E9%9A%90%E5%90%AB%E5%AF%B9%E8%B1%A1%EF%BC%9F"><span class="toc-number">1.0.89.</span> <span class="toc-text">89、隐含对象是什么意思？有哪些隐含对象？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#90%E3%80%81%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E7%9A%84%E4%BC%98%E7%82%B9%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">1.0.90.</span> <span class="toc-text">90、面向对象软件开发的优点有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#91%E3%80%81%E5%B0%81%E8%A3%85%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E5%A5%BD%E5%A4%84%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">1.0.91.</span> <span class="toc-text">91、封装的定义和好处有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#92%E3%80%81%E5%A4%9A%E6%80%81%E7%9A%84%E5%AE%9A%E4%B9%89%EF%BC%9F"><span class="toc-number">1.0.92.</span> <span class="toc-text">92、多态的定义？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#93%E3%80%81%E7%BB%A7%E6%89%BF%E7%9A%84%E5%AE%9A%E4%B9%89%EF%BC%9F"><span class="toc-number">1.0.93.</span> <span class="toc-text">93、继承的定义？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#94%E3%80%81%E6%8A%BD%E8%B1%A1%E7%9A%84%E5%AE%9A%E4%B9%89%EF%BC%9F%E6%8A%BD%E8%B1%A1%E5%92%8C%E5%B0%81%E8%A3%85%E7%9A%84%E4%B8%8D%E5%90%8C%E7%82%B9%EF%BC%9F"><span class="toc-number">1.0.94.</span> <span class="toc-text">94、抽象的定义？抽象和封装的不同点？</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/04/%E5%85%B3%E4%BA%8E%E5%AD%A6%E7%BC%96%E7%A8%8B%E7%9A%84%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" title="无题">无题</a><time datetime="2023-02-04T07:30:29.689Z" title="发表于 2023-02-04 15:30:29">2023-02-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/04/2021-07-30-JS%E4%B8%AD%E7%9A%84innerHTML%EF%BC%8CinnerText%EF%BC%8Cvalue%E7%9A%84%E5%8C%BA%E5%88%AB-JS%E4%B8%AD%E7%9A%84innerHTML%EF%BC%8CinnerText%EF%BC%8Cvalue%E7%9A%84%E5%8C%BA%E5%88%AB/" title="无题">无题</a><time datetime="2023-02-04T07:30:02.522Z" title="发表于 2023-02-04 15:30:02">2023-02-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/04/2022-07-23-Mac-OS-%E4%B8%8A%E8%AE%BE%E7%BD%AE-JAVA-HOME-Mac-OS-%E4%B8%8A%E8%AE%BE%E7%BD%AE-JAVA-HOME/" title="无题">无题</a><time datetime="2023-02-04T07:29:35.332Z" title="发表于 2023-02-04 15:29:35">2023-02-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/04/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%A4%AF%E5%AE%9E%E8%AE%A1%E5%88%92/" title="无题">无题</a><time datetime="2023-02-04T07:29:31.916Z" title="发表于 2023-02-04 15:29:31">2023-02-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/04/%E6%9C%80%E8%BF%91%E7%9C%8B%E5%AE%8C%E4%B8%80%E4%BA%9B%E6%96%87%E7%AB%A0%E5%90%8E%E7%9A%84%E5%AD%A6%E4%B9%A0%E6%84%9F%E6%82%9F/" title="无题">无题</a><time datetime="2023-02-04T07:29:28.152Z" title="发表于 2023-02-04 15:29:28">2023-02-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By KAZAMA</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
