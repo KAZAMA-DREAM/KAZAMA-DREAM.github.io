@@ -1,0 +1,322 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>KAZAMA的个人博客 | KAZAMA的个人博客</title><meta name="author" content="KAZAMA,wyy1778789301@163.com"><meta name="copyright" content="KAZAMA"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="发布者 Publisher 和订阅者subscriber 的 Python 实现1、背景机器人是一种高度复杂的系统性工程，在机器人上可能集成各种传感器（雷达、摄像头、GPS…）以及运动控制实现，为了解耦合，在ROS中每一个功能点都是一个单独的进程，每一个进程都是独立运行的（各种传感器要同时工作，不能阻塞）。 更确切的讲，ROS是进程（也称为Nodes）的分布式框架。因为这些进程设置还可分布于不同主">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KAZAMA的个人博客">
+<meta property="og:url" content="http://njuni.online/2022/11/16/%E5%8F%91%E5%B8%83%E8%80%85%20Publisher%20%E5%92%8C%E8%AE%A2%E9%98%85%E8%80%85subscriber%20%E7%9A%84%20Python%20%E5%AE%9E%E7%8E%B0/%E5%8F%91%E5%B8%83%E8%80%85%20Publisher%20%E5%92%8C%E8%AE%A2%E9%98%85%E8%80%85subscriber%20%E7%9A%84%20Python%20%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:site_name" content="KAZAMA的个人博客">
+<meta property="og:description" content="发布者 Publisher 和订阅者subscriber 的 Python 实现1、背景机器人是一种高度复杂的系统性工程，在机器人上可能集成各种传感器（雷达、摄像头、GPS…）以及运动控制实现，为了解耦合，在ROS中每一个功能点都是一个单独的进程，每一个进程都是独立运行的（各种传感器要同时工作，不能阻塞）。 更确切的讲，ROS是进程（也称为Nodes）的分布式框架。因为这些进程设置还可分布于不同主">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2022-11-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-02-04T07:30:10.097Z">
+<meta property="article:author" content="KAZAMA">
+<meta property="article:tag" content="技术分享 学习备忘">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://njuni.online/2022/11/16/%E5%8F%91%E5%B8%83%E8%80%85%20Publisher%20%E5%92%8C%E8%AE%A2%E9%98%85%E8%80%85subscriber%20%E7%9A%84%20Python%20%E5%AE%9E%E7%8E%B0/%E5%8F%91%E5%B8%83%E8%80%85%20Publisher%20%E5%92%8C%E8%AE%A2%E9%98%85%E8%80%85subscriber%20%E7%9A%84%20Python%20%E5%AE%9E%E7%8E%B0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'KAZAMA的个人博客',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-02-04 15:30:10'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">300</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="KAZAMA的个人博客"><span class="site-name">KAZAMA的个人博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-11-15T16:00:00.000Z" title="发表于 2022-11-16 00:00:00">2022-11-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-04T07:30:10.097Z" title="更新于 2023-02-04 15:30:10">2023-02-04</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="发布者-Publisher-和订阅者subscriber-的-Python-实现"><a href="#发布者-Publisher-和订阅者subscriber-的-Python-实现" class="headerlink" title="发布者 Publisher 和订阅者subscriber 的 Python 实现"></a>发布者 Publisher 和订阅者subscriber 的 Python 实现</h1><h2 id="1、背景"><a href="#1、背景" class="headerlink" title="1、背景"></a>1、背景</h2><p>机器人是一种高度复杂的系统性工程，在机器人上可能集成各种传感器（雷达、摄像头、GPS…）以及运动控制实现，为了解耦合，在<code>ROS</code>中每一个功能点都是一个单独的进程，每一个进程都是独立运行的（各种传感器要同时工作，不能阻塞）。</p>
+<p>更确切的讲，<code>ROS</code>是进程（也称为Nodes）的分布式框架。因为这些进程设置还可分布于不同主机，不同主机协同工作，从而分散计算压力。不过随之也有一个问题：不同进程是如何通信？即不同进程如何实现数据交换的？在此我们就需要介绍一下<code>ROS</code>中的通信机制了。</p>
+<p><code>ROS</code>中的<strong>基本通信机制</strong>主要有如下三种实现策略：</p>
+<ul>
+<li><strong>话题通信</strong>（发布订阅模式）</li>
+<li><strong>服务通信</strong>（请求响应模式）</li>
+<li><strong>参数服务器</strong>（参数共享模式）</li>
+</ul>
+<p>话题通信是<code>ROS</code>中使用频率最高的一种通信模式，话题通信时基于发布订阅者模式的，即一个节点发布消息，另一个节点订阅该消息。话题通信的应用场景也极其广泛，比如下面一个常见场景。</p>
+<blockquote>
+<p><strong>机器人在执行导航功能，使用的传感器是激光雷达，机器人会采集激光雷达感知到的信息并计算，然后生成运动控制信息驱动机器人地盘运动。</strong></p>
+</blockquote>
+<p>在上述场景中多次使用了话题通信模式。</p>
+<ul>
+<li>以激光雷达信息的采集处理为例，在ROS中有一个节点需要时时发布当前雷达采集到的数据，导航模块中也有节点会订阅并解析雷达数据。</li>
+<li>再以运动消息的发布为例，导航模块会根据传感器采集的数据时时计算出运动控制信息并发布给底盘，底盘也可以有一个节点订阅运动信息并最终转换成控制电机的脉冲信号。</li>
+</ul>
+<p>以此类推，像雷达、摄像头、GPS等一些传感器数据的采集，也都是使用了话题通信，换言之，话题通信适用于不断更新的数据传输相关的应用场景。</p>
+<br/>
+
+
+
+<h2 id="2、发布者Publisher"><a href="#2、发布者Publisher" class="headerlink" title="2、发布者Publisher"></a>2、发布者Publisher</h2><h5 id="【1】话题模型"><a href="#【1】话题模型" class="headerlink" title="【1】话题模型"></a>【1】话题模型</h5><p>首先我们要实现下图所示的话题模型，该模型如下图所示，该模型中涉及到三个角色：</p>
+<ul>
+<li><code>ROS Master</code>（管理者）</li>
+<li><code>Talker</code>（发布者）</li>
+<li><code>Listener</code>（订阅者）</li>
+</ul>
+<p><code>ROS Master</code>负责保管<code>Talker</code>和<code>Listener</code>注册的信息，并匹配话题相同的<code>Talker</code>与<code>Listener</code>，帮助<code>Talker</code>与<code>Listener</code>建立连接，连接建立后，<code>Talker</code>可以发布消息，且发布的消息会被<code>Listener</code>订阅。</p>
+<p><img src="https://img-blog.csdnimg.cn/53716ff5a5f0462396eb0991af637c9d.png#pic_center" alt="huati"></p>
+<p>其中，主题名称节点为<code>/turtle1/cmd_vel</code>，发布者和订阅者的消息类型为<code>geometry_msgs::Twist</code>。</p>
+<br/>
+
+
+
+<h5 id="【2】初始化工作空间"><a href="#【2】初始化工作空间" class="headerlink" title="【2】初始化工作空间"></a>【2】初始化工作空间</h5><p><img src="https://img-blog.csdnimg.cn/20201120232854876.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1MTUyNDk4,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>然后把下面的内容放到<code>.bashrc</code>末尾。不懂看这篇文章[传送门][<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45152498/article/details/108652439]">https://blog.csdn.net/qq_45152498/article/details/108652439]</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /home/xiaolong/ros_practice/devel/setup.bash</span><br></pre></td></tr></table></figure>
+
+
+
+<br/>
+
+
+
+<h5 id="【3】创建功能包"><a href="#【3】创建功能包" class="headerlink" title="【3】创建功能包"></a>【3】创建功能包</h5><p><img src="https://img-blog.csdnimg.cn/20201120234607872.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1MTUyNDk4,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>创建好的<code>src</code>:</p>
+<p><img src="https://img-blog.csdnimg.cn/20201120234731141.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1MTUyNDk4,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<br/>
+
+
+
+<h5 id="【3】创建发布者代码"><a href="#【3】创建发布者代码" class="headerlink" title="【3】创建发布者代码"></a>【3】创建发布者代码</h5><p>在<code>scripts</code>文件里面建立一个<code>.py</code>文件。</p>
+<p><code>talker.py</code> 代码内容：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果要编写ROS节点，则需要导入rospy。std_msgs.msg的导入是为了使我们可以重用std_msgs/String消息类型进行发布</span></span><br><span class="line"><span class="keyword">import</span> rospy</span><br><span class="line"><span class="keyword">from</span> geometry_msgs.msg <span class="keyword">import</span> String</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">talker</span>():</span><br><span class="line">	<span class="comment"># 声明你的节点正在使用消息类型String发布到chatter话题上。String实际上是</span></span><br><span class="line">    <span class="comment"># std_msgs.msg.String类。queue_size=10表示队列长度是10，如果任何订阅者没有足够快地接</span></span><br><span class="line">    <span class="comment"># 收他们，则限制已排队消息的数量。</span></span><br><span class="line">    pub = rospy.Publisher(<span class="string">&#x27;chatter&#x27;</span>, String, queue_size = <span class="number">10</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 它告诉rospy你的节点名称。直到rospy获得此信息之前，它才能开始与ROS Master进行通信。</span></span><br><span class="line">    <span class="comment"># 节点将使用名称talker。注意名称不能包含任何斜杠/。anonymous=True通过在名称的末尾添加</span></span><br><span class="line">    <span class="comment"># 随机数来确保你的节点具有唯一名称。</span></span><br><span class="line">    rospy.init_node(<span class="string">&#x27;talker&#x27;</span>, anonymous = <span class="literal">True</span>)</span><br><span class="line"> </span><br><span class="line">    <span class="comment"># rate对象允许你指定自循环的频率。它会追踪记录自上一次调用rate.sleep()后时间的流逝，并</span></span><br><span class="line">    <span class="comment"># 休眠直到一个频率周期的时间。参数为10时，我们期望每秒执行10次循环。简单理解：以每秒10</span></span><br><span class="line">    <span class="comment"># 次的频率在chatter上发布消息。</span></span><br><span class="line">    rate = rospy.Rate(<span class="number">10</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 此循环相当于标准的rospy构造：检查rospy.is_shutdown()标志，然后进行工作。必须通过	</span></span><br><span class="line">    <span class="comment"># is_shutdown()来检查程序是否应该退出（例如Ctrl+C）。</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> rospy.is_shutdown():</span><br><span class="line">        <span class="comment"># 定义了发布消息的内容是 hello world 时间</span></span><br><span class="line">        hello_str = <span class="string">&quot;hello world %s&quot;</span> % rospy.get_time()</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># rospy.loginf()，它执行三项任务：将消息打印到屏幕上，将消息写入node的日志文件，</span></span><br><span class="line">        <span class="comment"># 并将消息写入rosout。rosout是一个方便的调试工具，你可以使用rqt_console提取消息，</span></span><br><span class="line">        <span class="comment"># 而不必查找带有node输出的控制台窗口。</span></span><br><span class="line">        rospy.loginfo(hello_str)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 将字符串发布到chatter话题上</span></span><br><span class="line">        pub.publish(hello_str)</span><br><span class="line">        <span class="comment"># 和rate=rospy.Rate(10)对应，为了保持循环速度。</span></span><br><span class="line">        rate.sleep()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 他会捕获rospy.ROSInterruptException异常，当按Ctrl+C或关闭node时，rospy.sleep()和rospy.rate.sleep()可能会引发该异常。</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        talker()</span><br><span class="line">	<span class="keyword">except</span> rospy.ROSInterruptException:</span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+
+
+<br/>
+
+
+
+<p><strong>总结：如何实现一个发布者？</strong></p>
+<ul>
+<li>初始化ROS节点；</li>
+<li>向ROS Master注册节点信息，包括发布的话题名和话题中的消息类型；</li>
+<li>创建消息数据；</li>
+<li>按照一定频率循环发布消息。</li>
+</ul>
+<br/>
+
+
+
+<h2 id="3、订阅者subscriber"><a href="#3、订阅者subscriber" class="headerlink" title="3、订阅者subscriber"></a>3、订阅者subscriber</h2><p><img src="https://img-blog.csdnimg.cn/1aaa5495a4ab465a99d901c58cde8bba.png#pic_center" alt="dingyue"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> rospy</span><br><span class="line"><span class="keyword">from</span> turtlesim.msg <span class="keyword">import</span> String</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">callback</span>(<span class="params">data</span>):</span><br><span class="line">    rospy.loginfo(rospy.get_caller_id() + <span class="string">&quot;I heard %s&quot;</span>, data.data)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">listener</span>():</span><br><span class="line">	<span class="comment"># 在ROS中，节点是唯一命名的。如果启动了两个同名的节点，上一个节点将被启动。</span></span><br><span class="line">    <span class="comment"># anonymous=True标志意味着rospy将为我们的“侦听器”节点选择一个唯一的名称，</span></span><br><span class="line">    <span class="comment"># 以便多个侦听器可以同时运行。</span></span><br><span class="line">    rospy.init_node(<span class="string">&#x27;listener&#x27;</span>, anonymous=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment"># 创建一个Subscriber，订阅名为chatter的topic，注册回调函数callback</span></span><br><span class="line">    rospy.Subscriber(<span class="string">&quot;chatter&quot;</span>, String, callback)</span><br><span class="line"></span><br><span class="line">	<span class="comment"># 循环等待回调函数，阻止python退出，直到该节点停止。</span></span><br><span class="line">    rospy.spin()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    pose_subscriber()</span><br></pre></td></tr></table></figure>
+
+<p>这声明你的节点订阅了消息类型为<code>std_msgs.msg.String</code>的<code>chatter</code>话题。收到新消息时，将以消息（String）作为第一个参数来调用回调函数。<code>rospy.spin()</code>只是使节点无法退出，直到该节点已关闭。与<code>roscpp</code>不同，<code>rospy.spin()</code>不会影响订阅者回调函数机制，因为它们具有自己的线程。</p>
+<br/>
+
+
+
+<p><strong>总结：如何实现一个订阅者？</strong></p>
+<ul>
+<li>初始化ROS节点；</li>
+<li>订阅需要的话题；</li>
+<li>循环等待话题消息，接收到消息后进入回调函数；</li>
+<li>在回调函数中完成消息处理。</li>
+</ul>
+<br/>
+
+
+
+<h2 id="4、测试"><a href="#4、测试" class="headerlink" title="4、测试"></a>4、测试</h2><h5 id="【1】让我们看看src"><a href="#【1】让我们看看src" class="headerlink" title="【1】让我们看看src"></a>【1】让我们看看src</h5><p><img src="https://img-blog.csdnimg.cn/20201121202408281.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1MTUyNDk4,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<br/>
+
+
+
+<h5 id="【2】启动ROS-Master"><a href="#【2】启动ROS-Master" class="headerlink" title="【2】启动ROS Master"></a>【2】启动ROS Master</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">roscore</span></span><br></pre></td></tr></table></figure>
+
+
+
+<br/>
+
+
+
+<h5 id="【3】启动发布者和订阅者"><a href="#【3】启动发布者和订阅者" class="headerlink" title="【3】启动发布者和订阅者"></a>【3】启动发布者和订阅者</h5><p><img src="https://img-blog.csdnimg.cn/20201121184147530.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1MTUyNDk4,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<br/>
+
+
+
+<h5 id="【4】rqt可视化"><a href="#【4】rqt可视化" class="headerlink" title="【4】rqt可视化"></a>【4】rqt可视化</h5><p><img src="https://img-blog.csdnimg.cn/20201121184339421.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1MTUyNDk4,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<br/>
+
+
+
+<h2 id="5、探索"><a href="#5、探索" class="headerlink" title="5、探索"></a>5、探索</h2><h5 id="【1】在运行节点后可以关闭roscore，此时也可以正常发布和接收。但是不启动ROS-Master直接运行程序却不行。"><a href="#【1】在运行节点后可以关闭roscore，此时也可以正常发布和接收。但是不启动ROS-Master直接运行程序却不行。" class="headerlink" title="【1】在运行节点后可以关闭roscore，此时也可以正常发布和接收。但是不启动ROS Master直接运行程序却不行。"></a>【1】在运行节点后可以关闭<code>roscore</code>，此时也可以正常发布和接收。但是不启动ROS Master直接运行程序却不行。</h5><h5 id="【2】python脚本可以不用编译直接执行，相当于你不用修改CMakeLists-txt文件。但是编译运行需要添加东西。"><a href="#【2】python脚本可以不用编译直接执行，相当于你不用修改CMakeLists-txt文件。但是编译运行需要添加东西。" class="headerlink" title="【2】python脚本可以不用编译直接执行，相当于你不用修改CMakeLists.txt文件。但是编译运行需要添加东西。"></a>【2】python脚本可以不用编译直接执行，相当于你不用修改CMakeLists.txt文件。但是编译运行需要添加东西。</h5><p><img src="https://img-blog.csdnimg.cn/20201121203654489.png#pic_center" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20201121203623458.png#pic_center" alt="在这里插入图片描述"></p>
+<br/>
+
+
+
+<p>但是在工作空间catkin_make却不能通过，而下面这样可以：</p>
+<p><img src="https://img-blog.csdnimg.cn/20201121203926447.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1MTUyNDk4,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h5 id="【3】scripts文件夹可以不要，直接放在topic功能包下，这是因为我们的程序以及功能简单，但是我还是希望你放在scripts下，因为以后你的功能包下基本上不会只有python脚本，而没有其他文件。"><a href="#【3】scripts文件夹可以不要，直接放在topic功能包下，这是因为我们的程序以及功能简单，但是我还是希望你放在scripts下，因为以后你的功能包下基本上不会只有python脚本，而没有其他文件。" class="headerlink" title="【3】scripts文件夹可以不要，直接放在topic功能包下，这是因为我们的程序以及功能简单，但是我还是希望你放在scripts下，因为以后你的功能包下基本上不会只有python脚本，而没有其他文件。"></a>【3】scripts文件夹可以不要，直接放在topic功能包下，这是因为我们的程序以及功能简单，但是我还是希望你放在scripts下，因为以后你的功能包下基本上不会只有python脚本，而没有其他文件。</h5><h5 id="【4】可以使用下面两行代替上面一行，这样执行效果一样"><a href="#【4】可以使用下面两行代替上面一行，这样执行效果一样" class="headerlink" title="【4】可以使用下面两行代替上面一行，这样执行效果一样"></a>【4】可以使用下面两行代替上面一行，这样执行效果一样</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># hello_str = &quot;hello world %s&quot; % rospy.get_time()</span></span><br><span class="line">hello_str = String()</span><br><span class="line">hello_str.data = <span class="string">&quot;hello world %s&quot;</span> % rospy.get_time()</span><br></pre></td></tr></table></figure>
+
+<h5 id="【5】关于回调函数"><a href="#【5】关于回调函数" class="headerlink" title="【5】关于回调函数"></a>【5】关于回调函数</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">callback</span>(<span class="params">data</span>):</span><br><span class="line">    rospy.loginfo(rospy.get_caller_id() + <span class="string">&quot;I heard %s&quot;</span>, data.data)</span><br></pre></td></tr></table></figure>
+
+<p>这说明传递过来的是String对象，而消息内容的话当然是<code>String.data</code>（即data.data）</p>
+<p>注意：String是不能直接更改的，因为这是ROS内部封装好的，你只能引用，要是直接更改岂不是乱套了吗。</p>
+<br/>
+
+
+
+<h2 id="6、话题通信机制"><a href="#6、话题通信机制" class="headerlink" title="6、话题通信机制"></a>6、话题通信机制</h2><h5 id="【1】基本概念"><a href="#【1】基本概念" class="headerlink" title="【1】基本概念"></a>【1】基本概念</h5><p><img src="https://img-blog.csdnimg.cn/20201121204757920.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1MTUyNDk4,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<br/>
+
+
+
+<h5 id="【2】话题通信机制"><a href="#【2】话题通信机制" class="headerlink" title="【2】话题通信机制"></a>【2】话题通信机制</h5><p><img src="https://img-blog.csdnimg.cn/20201121205133477.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1MTUyNDk4,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20201121205504248.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1MTUyNDk4,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20201121205528624.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1MTUyNDk4,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://njuni.online">KAZAMA</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://njuni.online/2022/11/16/%E5%8F%91%E5%B8%83%E8%80%85%20Publisher%20%E5%92%8C%E8%AE%A2%E9%98%85%E8%80%85subscriber%20%E7%9A%84%20Python%20%E5%AE%9E%E7%8E%B0/%E5%8F%91%E5%B8%83%E8%80%85%20Publisher%20%E5%92%8C%E8%AE%A2%E9%98%85%E8%80%85subscriber%20%E7%9A%84%20Python%20%E5%AE%9E%E7%8E%B0/">http://njuni.online/2022/11/16/%E5%8F%91%E5%B8%83%E8%80%85%20Publisher%20%E5%92%8C%E8%AE%A2%E9%98%85%E8%80%85subscriber%20%E7%9A%84%20Python%20%E5%AE%9E%E7%8E%B0/%E5%8F%91%E5%B8%83%E8%80%85%20Publisher%20%E5%92%8C%E8%AE%A2%E9%98%85%E8%80%85subscriber%20%E7%9A%84%20Python%20%E5%AE%9E%E7%8E%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://njuni.online" target="_blank">KAZAMA的个人博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/wechat.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/11/20/Qt%E4%B8%AD%E5%A4%9A%E4%B8%AA%E4%BF%A1%E5%8F%B7%E8%BF%9E%E6%8E%A5%E4%B8%80%E4%B8%AA%E6%A7%BD%E5%87%BD%E6%95%B0%EF%BC%88sender()%E5%87%BD%E6%95%B0%EF%BC%89/Qt%E4%B8%AD%E5%A4%9A%E4%B8%AA%E4%BF%A1%E5%8F%B7%E8%BF%9E%E6%8E%A5%E4%B8%80%E4%B8%AA%E6%A7%BD%E5%87%BD%E6%95%B0%EF%BC%88sender()%E5%87%BD%E6%95%B0%EF%BC%89/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info"></div></div></a></div><div class="next-post pull-right"><a href="/2022/11/13/C++%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/C++%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info"></div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">KAZAMA</div><div class="author-info__description">技术记录,个人分享,学习备忘</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">300</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/KAZAMA-DREAM"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/KAZAMA-DREAM" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/wyy1778789301@163.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%91%E5%B8%83%E8%80%85-Publisher-%E5%92%8C%E8%AE%A2%E9%98%85%E8%80%85subscriber-%E7%9A%84-Python-%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.</span> <span class="toc-text">发布者 Publisher 和订阅者subscriber 的 Python 实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E8%83%8C%E6%99%AF"><span class="toc-number">1.1.</span> <span class="toc-text">1、背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E5%8F%91%E5%B8%83%E8%80%85Publisher"><span class="toc-number">1.2.</span> <span class="toc-text">2、发布者Publisher</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%901%E3%80%91%E8%AF%9D%E9%A2%98%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.0.0.1.</span> <span class="toc-text">【1】话题模型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%902%E3%80%91%E5%88%9D%E5%A7%8B%E5%8C%96%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4"><span class="toc-number">1.2.0.0.2.</span> <span class="toc-text">【2】初始化工作空间</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%903%E3%80%91%E5%88%9B%E5%BB%BA%E5%8A%9F%E8%83%BD%E5%8C%85"><span class="toc-number">1.2.0.0.3.</span> <span class="toc-text">【3】创建功能包</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%903%E3%80%91%E5%88%9B%E5%BB%BA%E5%8F%91%E5%B8%83%E8%80%85%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.0.0.4.</span> <span class="toc-text">【3】创建发布者代码</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E8%AE%A2%E9%98%85%E8%80%85subscriber"><span class="toc-number">1.3.</span> <span class="toc-text">3、订阅者subscriber</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E6%B5%8B%E8%AF%95"><span class="toc-number">1.4.</span> <span class="toc-text">4、测试</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%901%E3%80%91%E8%AE%A9%E6%88%91%E4%BB%AC%E7%9C%8B%E7%9C%8Bsrc"><span class="toc-number">1.4.0.0.1.</span> <span class="toc-text">【1】让我们看看src</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%902%E3%80%91%E5%90%AF%E5%8A%A8ROS-Master"><span class="toc-number">1.4.0.0.2.</span> <span class="toc-text">【2】启动ROS Master</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%903%E3%80%91%E5%90%AF%E5%8A%A8%E5%8F%91%E5%B8%83%E8%80%85%E5%92%8C%E8%AE%A2%E9%98%85%E8%80%85"><span class="toc-number">1.4.0.0.3.</span> <span class="toc-text">【3】启动发布者和订阅者</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%904%E3%80%91rqt%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-number">1.4.0.0.4.</span> <span class="toc-text">【4】rqt可视化</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81%E6%8E%A2%E7%B4%A2"><span class="toc-number">1.5.</span> <span class="toc-text">5、探索</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%901%E3%80%91%E5%9C%A8%E8%BF%90%E8%A1%8C%E8%8A%82%E7%82%B9%E5%90%8E%E5%8F%AF%E4%BB%A5%E5%85%B3%E9%97%ADroscore%EF%BC%8C%E6%AD%A4%E6%97%B6%E4%B9%9F%E5%8F%AF%E4%BB%A5%E6%AD%A3%E5%B8%B8%E5%8F%91%E5%B8%83%E5%92%8C%E6%8E%A5%E6%94%B6%E3%80%82%E4%BD%86%E6%98%AF%E4%B8%8D%E5%90%AF%E5%8A%A8ROS-Master%E7%9B%B4%E6%8E%A5%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F%E5%8D%B4%E4%B8%8D%E8%A1%8C%E3%80%82"><span class="toc-number">1.5.0.0.1.</span> <span class="toc-text">【1】在运行节点后可以关闭roscore，此时也可以正常发布和接收。但是不启动ROS Master直接运行程序却不行。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%902%E3%80%91python%E8%84%9A%E6%9C%AC%E5%8F%AF%E4%BB%A5%E4%B8%8D%E7%94%A8%E7%BC%96%E8%AF%91%E7%9B%B4%E6%8E%A5%E6%89%A7%E8%A1%8C%EF%BC%8C%E7%9B%B8%E5%BD%93%E4%BA%8E%E4%BD%A0%E4%B8%8D%E7%94%A8%E4%BF%AE%E6%94%B9CMakeLists-txt%E6%96%87%E4%BB%B6%E3%80%82%E4%BD%86%E6%98%AF%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C%E9%9C%80%E8%A6%81%E6%B7%BB%E5%8A%A0%E4%B8%9C%E8%A5%BF%E3%80%82"><span class="toc-number">1.5.0.0.2.</span> <span class="toc-text">【2】python脚本可以不用编译直接执行，相当于你不用修改CMakeLists.txt文件。但是编译运行需要添加东西。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%903%E3%80%91scripts%E6%96%87%E4%BB%B6%E5%A4%B9%E5%8F%AF%E4%BB%A5%E4%B8%8D%E8%A6%81%EF%BC%8C%E7%9B%B4%E6%8E%A5%E6%94%BE%E5%9C%A8topic%E5%8A%9F%E8%83%BD%E5%8C%85%E4%B8%8B%EF%BC%8C%E8%BF%99%E6%98%AF%E5%9B%A0%E4%B8%BA%E6%88%91%E4%BB%AC%E7%9A%84%E7%A8%8B%E5%BA%8F%E4%BB%A5%E5%8F%8A%E5%8A%9F%E8%83%BD%E7%AE%80%E5%8D%95%EF%BC%8C%E4%BD%86%E6%98%AF%E6%88%91%E8%BF%98%E6%98%AF%E5%B8%8C%E6%9C%9B%E4%BD%A0%E6%94%BE%E5%9C%A8scripts%E4%B8%8B%EF%BC%8C%E5%9B%A0%E4%B8%BA%E4%BB%A5%E5%90%8E%E4%BD%A0%E7%9A%84%E5%8A%9F%E8%83%BD%E5%8C%85%E4%B8%8B%E5%9F%BA%E6%9C%AC%E4%B8%8A%E4%B8%8D%E4%BC%9A%E5%8F%AA%E6%9C%89python%E8%84%9A%E6%9C%AC%EF%BC%8C%E8%80%8C%E6%B2%A1%E6%9C%89%E5%85%B6%E4%BB%96%E6%96%87%E4%BB%B6%E3%80%82"><span class="toc-number">1.5.0.0.3.</span> <span class="toc-text">【3】scripts文件夹可以不要，直接放在topic功能包下，这是因为我们的程序以及功能简单，但是我还是希望你放在scripts下，因为以后你的功能包下基本上不会只有python脚本，而没有其他文件。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%904%E3%80%91%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E4%B8%8B%E9%9D%A2%E4%B8%A4%E8%A1%8C%E4%BB%A3%E6%9B%BF%E4%B8%8A%E9%9D%A2%E4%B8%80%E8%A1%8C%EF%BC%8C%E8%BF%99%E6%A0%B7%E6%89%A7%E8%A1%8C%E6%95%88%E6%9E%9C%E4%B8%80%E6%A0%B7"><span class="toc-number">1.5.0.0.4.</span> <span class="toc-text">【4】可以使用下面两行代替上面一行，这样执行效果一样</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%905%E3%80%91%E5%85%B3%E4%BA%8E%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0"><span class="toc-number">1.5.0.0.5.</span> <span class="toc-text">【5】关于回调函数</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%E3%80%81%E8%AF%9D%E9%A2%98%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6"><span class="toc-number">1.6.</span> <span class="toc-text">6、话题通信机制</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%901%E3%80%91%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.6.0.0.1.</span> <span class="toc-text">【1】基本概念</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%902%E3%80%91%E8%AF%9D%E9%A2%98%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6"><span class="toc-number">1.6.0.0.2.</span> <span class="toc-text">【2】话题通信机制</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/04/2021-07-30-JS%E4%B8%AD%E7%9A%84innerHTML%EF%BC%8CinnerText%EF%BC%8Cvalue%E7%9A%84%E5%8C%BA%E5%88%AB-JS%E4%B8%AD%E7%9A%84innerHTML%EF%BC%8CinnerText%EF%BC%8Cvalue%E7%9A%84%E5%8C%BA%E5%88%AB/" title="无题">无题</a><time datetime="2023-02-04T07:30:02.522Z" title="发表于 2023-02-04 15:30:02">2023-02-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/04/2022-07-23-Mac-OS-%E4%B8%8A%E8%AE%BE%E7%BD%AE-JAVA-HOME-Mac-OS-%E4%B8%8A%E8%AE%BE%E7%BD%AE-JAVA-HOME/" title="无题">无题</a><time datetime="2023-02-04T07:29:35.332Z" title="发表于 2023-02-04 15:29:35">2023-02-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/01/25/hello-world/" title="Hello World">Hello World</a><time datetime="2023-01-25T09:51:15.064Z" title="发表于 2023-01-25 17:51:15">2023-01-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/12/30/JDK%E4%BD%BF%E7%94%A8IDEA%EF%BC%8C%E9%85%8D%E7%BD%AEJavaFX/JDK%E4%BD%BF%E7%94%A8IDEA%EF%BC%8C%E9%85%8D%E7%BD%AEJavaFX/" title="无题">无题</a><time datetime="2022-12-29T16:00:00.000Z" title="发表于 2022-12-30 00:00:00">2022-12-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%A4%AF%E5%AE%9E%E8%AE%A1%E5%88%92/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%A4%AF%E5%AE%9E%E8%AE%A1%E5%88%92/" title="无题">无题</a><time datetime="2022-12-29T16:00:00.000Z" title="发表于 2022-12-30 00:00:00">2022-12-30</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By KAZAMA</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

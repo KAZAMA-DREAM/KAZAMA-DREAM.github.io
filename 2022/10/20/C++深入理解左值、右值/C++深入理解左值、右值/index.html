@@ -1,0 +1,414 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>KAZAMA的个人博客 | KAZAMA的个人博客</title><meta name="author" content="KAZAMA,wyy1778789301@163.com"><meta name="copyright" content="KAZAMA"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="C++深入理解左值、右值1、背景1234567void fun(int&amp; x) &amp;#123;    &#x2F;&#x2F;&amp;#125;int main() &amp;#123;    fun(10);    return 0;&amp;#125;  1error: invalid initialization of non-const reference of type ‘int&amp;’ from an rvalue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KAZAMA的个人博客">
+<meta property="og:url" content="http://njuni.online/2022/10/20/C++%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%B7%A6%E5%80%BC%E3%80%81%E5%8F%B3%E5%80%BC/C++%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%B7%A6%E5%80%BC%E3%80%81%E5%8F%B3%E5%80%BC/index.html">
+<meta property="og:site_name" content="KAZAMA的个人博客">
+<meta property="og:description" content="C++深入理解左值、右值1、背景1234567void fun(int&amp; x) &amp;#123;    &#x2F;&#x2F;&amp;#125;int main() &amp;#123;    fun(10);    return 0;&amp;#125;  1error: invalid initialization of non-const reference of type ‘int&amp;’ from an rvalue">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2022-10-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-02-04T07:30:03.725Z">
+<meta property="article:author" content="KAZAMA">
+<meta property="article:tag" content="技术分享 学习备忘">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://njuni.online/2022/10/20/C++%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%B7%A6%E5%80%BC%E3%80%81%E5%8F%B3%E5%80%BC/C++%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%B7%A6%E5%80%BC%E3%80%81%E5%8F%B3%E5%80%BC/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'KAZAMA的个人博客',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-02-04 15:30:03'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">300</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="KAZAMA的个人博客"><span class="site-name">KAZAMA的个人博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-10-19T16:00:00.000Z" title="发表于 2022-10-20 00:00:00">2022-10-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-04T07:30:03.725Z" title="更新于 2023-02-04 15:30:03">2023-02-04</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="C-深入理解左值、右值"><a href="#C-深入理解左值、右值" class="headerlink" title="C++深入理解左值、右值"></a>C++深入理解左值、右值</h1><h2 id="1、背景"><a href="#1、背景" class="headerlink" title="1、背景"></a>1、背景</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">fun</span><span class="params">(<span class="type">int</span>&amp; x)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">fun</span>(<span class="number">10</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error: invalid initialization of non-<span class="type">const</span> reference of type ‘<span class="type">int</span>&amp;’ from an rvalue of type ‘<span class="type">int</span>’</span><br></pre></td></tr></table></figure>
+
+<p>其中上述报错中的rvalue就是10，也就是说10就是<code>rvalue</code>，那么到底什么是rvalue，rvalue的意义是什么？这就是本文的目的，通过本文，让你彻底搞清楚什么是C++下的值类别，以及如何区分左值、纯右值和将亡值。</p>
+<p><img src="/upload/2022/10/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%B7%A6%E5%80%BC%E5%8F%B3%E5%80%BC.png" alt="深入理解左值右值"></p>
+<br/>
+
+
+
+<h2 id="2、历史"><a href="#2、历史" class="headerlink" title="2、历史"></a>2、历史</h2><p>编程语言CPL第一次引入了值类别，不过其定义比较简单，即对于赋值运算符，在运算符左边的为左值，在运算符右边的为右值。</p>
+<p>C语言遵循与CPL类似的分类法，但是弱化了赋值的作用，C语言中的表达式被分为<code>左值</code>和其他（函数和非对象值），其中左值被定义为标识一个对象的表达式。不过，C语言中的左值与CPL中的左值区别是，在C语言中lvalue是<code>locator value</code>的简写，因此lvalue对应了一块内存地址。</p>
+<p>C++11开始，对值类别又进行了详细分类，在原有<code>左值</code>的基础上增加了<code>纯右值</code>和<code>消亡值</code>，并对以上三种类型通过<code>是否具名（identity）</code>和<code>可移动（moveable）</code>，又增加了<code>gvalue</code>和<code>rvalue</code>两种组合类型，在后面的内容中，会对这几种类型进行详细讲解。</p>
+<br/>
+
+
+
+<h2 id="3、表达式"><a href="#3、表达式" class="headerlink" title="3、表达式"></a>3、表达式</h2><p>C/C++代码是由标识符、表达式和语句以及一些必要的符号（大括号等）组成。</p>
+<p>表达式由按照语言规则排列的运算符，常量和变量组成。一个表达式可以包含一个或多个操作数，零个或多个运算符来计算值。每个表达式都会产生一些值，该值将在赋值运算符的帮助下分配给变量。</p>
+<p>在C/C++中，表达式有很多种，我们常见的有前后缀表达式、条件运算符表达式等。字面值（literal）和变量（variable）是最简单的表达式，函数的返回值也被认为是表达式。</p>
+<p>表达式是可求值的，对表达式求值可得到一个结果，这个结果有两个属性：</p>
+<ul>
+<li>类型。这个我们很常见，比如int、string、引用或者我们自定义的类。类型确定了表达式可以进行哪些操作。</li>
+<li>值类别（下面会细讲）。</li>
+</ul>
+<br/>
+
+
+
+<h2 id="4、值类别"><a href="#4、值类别" class="headerlink" title="4、值类别"></a>4、值类别</h2><p>在上节中，我们提到表达式是可求值的，而值类别就是求值结果的属性之一。</p>
+<p>在C++11之前，表达式的值分为左值和右值两种，其中右值就是我们理解中的字面值1、true、NULL等。</p>
+<p>自C++11开始，表达式的值分为<code>左值（lvalue，left value）</code>、<code>将亡值（xvalue，expiring value）</code>、<code>纯右值（pvalue，pure ravlue）</code>以及两种混合类别<code>泛左值（glvalue，generalized lvalue）</code>和<code>右值（rvalue，right value）</code>五种。</p>
+<p>这五种类别的分类基于表达式的两个特征：</p>
+<ul>
+<li>具名（identity）：可以确定表达式是否与另一表达式指代同一实体，例如通过比较它们所标识的对象或函数的（直接或间接获得的）地址</li>
+<li>可被移动：移动构造函数、移动赋值运算符或实现了移动语义的其他函数重载能够绑定于这个表达式</li>
+</ul>
+<p>结合以上两个特征，对五种表达式值类别进行重新定义：</p>
+<ul>
+<li>lvalue：具名且不可被移动</li>
+<li>xvalue：具名且可被移动</li>
+<li>prvalue：不具名且可被移动</li>
+<li>glvalue：具名，lvalue和xvalue都属于glvalue</li>
+<li>rvalue：可被移动的表达式，prvalue和xvalue都属于rvalue</li>
+</ul>
+<p>用图表示如下：</p>
+<p><img src="/upload/2022/10/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%B7%A6%E5%80%BC%E5%8F%B3%E5%80%BC2.png" alt="深入理解左值右值2"></p>
+<p>从glvalue和rvalue出发，将具名(indentity)和可移动两个特征结合起来，如下图所示：</p>
+<p><img src="/upload/2022/10/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%B7%A6%E5%80%BC%E5%8F%B3%E5%80%BC3.png" alt="深入理解左值右值3"></p>
+<p>在上图中，I代表indentity，M代表moveable。以xvalue为例，在上图中xvalue为(I&amp;M)，即代表具名且可移动。</p>
+<blockquote>
+<p>对于indentity，有些文章译为<code>有身份的</code>，有些文章译为<code>具名的</code>，本文统一称为<code>具名的</code>。</p>
+</blockquote>
+<br/>
+
+
+
+<h2 id="5、左值"><a href="#5、左值" class="headerlink" title="5、左值"></a>5、左值</h2><p>左值（lvalue，left value），顾名思义就是赋值符号左边的值。准确来说，左值是表达式结束（不一定是赋值表达式）后依然存在的对象。</p>
+<p>可以将左值看作是一个关联了名称的内存位置，运行程序的其他部分来访问它。在这里，我们将“名称”解释为任何可用于访问内存位置的表达式。所以，如果arr是一个数组，那么arr[1]和*(arr+1)都将被视为相同内存位置的“名称”。</p>
+<p>左值具有一下特征：</p>
+<ul>
+<li>可通过取地址运算符获取其地址</li>
+<li>可修改的左值可用作内建赋值和内建符合赋值运算符的左操作数</li>
+<li>可以用来初始化左值引用（后面有讲）</li>
+</ul>
+<p>那么哪些是左值呢？以下是汇总：</p>
+<ul>
+<li>变量名、函数名以及数据成员名</li>
+<li>返回左值引用的函数调用</li>
+<li>由赋值运算符或复合赋值运算符连接的表达式，如（a=b，a-=b等）</li>
+<li>解引用表达式 <code>*ptr</code></li>
+<li>前置自增和自减表达式<code>（++a，++b）</code></li>
+<li>成员访问<code>（点）</code>运算符的结果</li>
+<li>由指针访问成员<code>（-&gt;）</code>运算符的结果</li>
+<li>下表运算符的结果<code>（ [] ）</code></li>
+<li>字符串字面值<code>（“abc”）</code></li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">1</span>;  <span class="comment">// a是左值</span></span><br><span class="line"><span class="function">T&amp; <span class="title">f</span><span class="params">()</span></span>;</span><br><span class="line"><span class="built_in">f</span>(); <span class="comment">//左值</span></span><br><span class="line">++a; <span class="comment">//左值</span></span><br><span class="line">--a; <span class="comment">//左值</span></span><br><span class="line"><span class="type">int</span> b = a; <span class="comment">//a和b都是左值</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">S</span>* ptr = &amp;obj; <span class="comment">// ptr为左值</span></span><br><span class="line">arr[<span class="number">1</span>] = <span class="number">2</span>; <span class="comment">// 左值</span></span><br><span class="line"><span class="type">int</span> *p = &amp;a; <span class="comment">// p为左值</span></span><br><span class="line">*p = <span class="number">10</span>; <span class="comment">// *p为左值</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyClass</span>&#123;&#125;;</span><br><span class="line">MyClass c; <span class="comment">// c为左值</span></span><br><span class="line"><span class="string">&quot;abc&quot;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>对于一个表达式，凡是对其取地址（&amp;）操作可以成功的都是左值</p>
+</blockquote>
+<br/>
+
+
+
+<h2 id="6、纯右值"><a href="#6、纯右值" class="headerlink" title="6、纯右值"></a>6、纯右值</h2><p>在前面有提过，自C++11开始，纯右值（pvalue，pure ravlue）相对于之前的右值，那么什么是纯右值呢？</p>
+<p>字面值或者函数返回的非引用都是纯右值。</p>
+<p>以下表达式的值都是纯右值：</p>
+<ul>
+<li>字面值（字符串字面值除外），例如1，’a’，true等</li>
+<li>返回值为非引用的函数调用或操作符重载，例如：str.substr(1, 2)，str1+str2，or it++</li>
+<li>后置自增和自减表达式（a++，a–）</li>
+<li>算术表达式</li>
+<li>逻辑表达式</li>
+<li>比较表达式</li>
+<li>取地址表达式</li>
+<li>lambda表达式</li>
+</ul>
+<p>为了加深对右值的理解，下面的例子是常见的纯右值：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">nullptr</span>;</span><br><span class="line"><span class="literal">true</span>;</span><br><span class="line"><span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">fun</span><span class="params">()</span></span>;</span><br><span class="line"><span class="built_in">fun</span>();</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> b = <span class="number">2</span>;</span><br><span class="line">a + b;</span><br><span class="line"></span><br><span class="line">a++;</span><br><span class="line">b--;</span><br><span class="line"></span><br><span class="line">a &gt; b;</span><br><span class="line">a &amp;&amp; b;</span><br></pre></td></tr></table></figure>
+
+<p>纯右值特征：</p>
+<ul>
+<li>等同于C++11之前的右值</li>
+<li>不会是多态</li>
+<li>不会是抽象类型或数组</li>
+<li>不会是不完全类型</li>
+</ul>
+<br/>
+
+
+
+<h2 id="7、将亡值"><a href="#7、将亡值" class="headerlink" title="7、将亡值"></a>7、将亡值</h2><p>将亡值（xvalue，expiring value），顾名思义即将消亡的值，是C++11新增的跟右值引用相关的表达式，通常是将要被移动的对象（移为他用），比如返回右值引用T&amp;&amp;的函数返回值、std::move的返回值，或者转换为T&amp;&amp;的类型转换函数的返回值。</p>
+<p>将亡值可以理解为通过“盗取”其他变量内存空间的方式获取到的值。在确保其他变量不再使用、或即将被销毁时，通过“盗取”的方式可以避免内存空间的释放和分配，能够延长变量值的生命期。（通过右值引用来续命）。</p>
+<p>xvalue只能通过两种方式来获得，这两种方式都涉及到将一个左值赋给（转化为）一个右值引用：</p>
+<ul>
+<li>返回右值引用的函数的调用表达式，如<code>static_cast&lt;T&amp;&amp;&gt;(t);</code>该表达式得到一个xvalue</li>
+<li>转换为右值引用的转换函数的调用表达式，如：std::move(t)、satic_cast&lt;T&amp;&amp;&gt;(t)</li>
+</ul>
+<p>下面通过几个代码来详细分析什么时将亡值：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::string <span class="title">fun</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  std::string str;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">std::string s = <span class="built_in">fun</span>();</span><br></pre></td></tr></table></figure>
+
+<p>在函数fun()中，str是一个局部变量，并在函数结束时候被返回。</p>
+<p>在C++11之前，s=fun()；会调用拷贝构造函数，会将整个str复制一份，然后把str销毁。如过str特别大的话，会造成大量额外开销。在这一行中，s是左值，fun()是右值（纯右值），fun()产生的那个返回值作为一个临时值，一旦str被s复制后，将被销毁，无法获取、也不能修改。</p>
+<p>自C++11开始，引入了move语义，编译器会将这部分代码优化成move操作，即不再是之前的复制操作，而是move。此时，str会被进行隐式右值转换，等价于static_cast &lt; std::string&amp;&amp; &gt; (str)，进而此处的s会将fun局部返回的值进行移动。</p>
+<blockquote>
+<p>无论是C++11之前的拷贝，还是C++11的move，str在填充（拷贝或者move）给s之后，将被销毁，而被销毁的这个值，就成为将亡值。</p>
+</blockquote>
+<p>将亡值就定义了这样一种行为：具名的临时值、同时又能够被move。</p>
+<br/>
+
+
+
+<h2 id="8、混合类型"><a href="#8、混合类型" class="headerlink" title="8、混合类型"></a>8、混合类型</h2><h5 id="【1】泛左值"><a href="#【1】泛左值" class="headerlink" title="【1】泛左值"></a>【1】泛左值</h5><p>泛左值（glvalue，generalized lavlue），又称<code>广义左值</code>，是具名表达式，对应了一块内存。glvalue有lvalue和xvalue两种形式。</p>
+<p>一个表达式时具名的，则称为glvalue，例子如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">S</span>&#123;</span><br><span class="line">  <span class="type">int</span> n;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">S <span class="title">fun</span><span class="params">()</span></span>;</span><br><span class="line">S s;</span><br><span class="line">s;</span><br><span class="line">std::<span class="built_in">move</span>(s);</span><br><span class="line"></span><br><span class="line"><span class="built_in">fun</span>();</span><br><span class="line">S&#123;&#125;;</span><br><span class="line">S&#123;&#125;.n;</span><br></pre></td></tr></table></figure>
+
+<p>在上述代码中：</p>
+<ul>
+<li>定义了结构体S和函数fun()</li>
+<li>第6行声明了类型为S的变量s，因为其时具名的，所以是glvalue</li>
+<li>第7行同上，因为s具名，所以未glvalue</li>
+<li>第8行中调用了move函数，将左值s转换成xvalue，所以是glvalue</li>
+<li>第10行中，fun()是不具名的，是纯右值，所以不是glvalue</li>
+<li>第11行中，生成一个不具名的临时变量，是纯右值，所以不是glvalue</li>
+<li>第12行中，n具名，所以是glvalue</li>
+</ul>
+<p>glvalue的特征如下：</p>
+<ul>
+<li>可以自带转换成prvalue</li>
+<li>可以是多态的</li>
+<li>可以是不完整类型，如前置声明但未定义的类类型</li>
+</ul>
+<br/>
+
+
+
+<h5 id="【2】右值"><a href="#【2】右值" class="headerlink" title="【2】右值"></a>【2】右值</h5><p>右值（rvalue，right value）是指可以移动的表达式。prvalue和xvalue都是rvalue，具体的示例见下文。</p>
+<p>rvalue具有以下特征：</p>
+<ul>
+<li>无法对rvalue进行取地址操作。例如：&amp;1，&amp;(a+b)，这些表达式没有意义，也编译不过。</li>
+<li>rvalue不能放在赋值或者组合赋值符号的左边，例如：3=5，3+=5，这些表达式没有意义，也编译不过。</li>
+<li>rvalue可以用来初始化const左值引用（见下文）。例如：const int&amp; a=1。</li>
+<li>rvalue可以用来初始化右值引用（见下文）。</li>
+<li>rvalue可以影响函数重载：当被用作函数实参且该函数有两种重载可用，其中之一接收右值引用的形参而另一个接收const的左值引用的形参时，右值将被绑定到右值引用的重载之上。</li>
+</ul>
+<br/>
+
+
+
+<h2 id="9、深入"><a href="#9、深入" class="headerlink" title="9、深入"></a>9、深入</h2><p>经过前面的内容，我们对左值和右值（纯右值和将亡值）有了一个初步的认识，在本节，我们借助一些例子，来加深对左值和右值的理解。</p>
+<h5 id="【1】前置自增（减）是左值，后置自增（减）是纯右值"><a href="#【1】前置自增（减）是左值，后置自增（减）是纯右值" class="headerlink" title="【1】前置自增（减）是左值，后置自增（减）是纯右值"></a>【1】前置自增（减）是左值，后置自增（减）是纯右值</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">++i;</span><br><span class="line">--i;</span><br><span class="line">i++;</span><br><span class="line">i--;</span><br></pre></td></tr></table></figure>
+
+<p>在上面代码中，我们定义了一个int类型的变量i，并初始化为0。</p>
+<ul>
+<li>++i的操作是对i加1后再赋值给i，所以++i的结果是具名的，名称就是i，所以++i是左值</li>
+<li>对于i++而言，先将i的值进行拷贝（此处假设拷贝到临时变量ii），然后再对i加1，最后返回ii（其实不存在的，为了再此表述方便）。所以i++是不具名的，因此不是glvalue，所以i++是右值，又因为不具名，且是右值，所以i++是纯右值</li>
+<li>同理，–i是左值，i–是纯右值</li>
+</ul>
+<br/>
+
+
+
+<h5 id="【2】算数表达式是纯右值"><a href="#【2】算数表达式是纯右值" class="headerlink" title="【2】算数表达式是纯右值"></a>【2】算数表达式是纯右值</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> y = <span class="number">0</span>;</span><br><span class="line">x + y;</span><br><span class="line">x &amp;&amp; y;</span><br><span class="line">x == y;</span><br></pre></td></tr></table></figure>
+
+<p>再上述代码中，x+y得到的是一个不具名的临时对象，所以x+y是纯右值；而x&amp;&amp;y和x==y得到的是一个bool常量值，要么是true要么是false，所以是纯右值。</p>
+<br/>
+
+
+
+<h5 id="【3】解引用是左值，取地址是纯右值"><a href="#【3】解引用是左值，取地址是纯右值" class="headerlink" title="【3】解引用是左值，取地址是纯右值"></a>【3】解引用是左值，取地址是纯右值</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> *y = &amp;x;</span><br><span class="line">*y = <span class="number">1</span>;</span><br><span class="line">&amp;y;</span><br></pre></td></tr></table></figure>
+
+<p>*y得到的是y指向地址的实际值，所以&amp;( *y )是合法的，因此 *y 是左值；对&amp;y操作得到的是一个地址，即一个long值，所以是一个字面值，因此&amp;y是纯右值。</p>
+<br/>
+
+
+
+<h5 id="【4】字符串字面值是左值"><a href="#【4】字符串字面值是左值" class="headerlink" title="【4】字符串字面值是左值"></a>【4】字符串字面值是左值</h5><p>字符串字面值为左值，这个比较特殊。在前面提到过字面值都是纯右值（字符串字面值除外），一个很重要的原因就是字符串字面值可以获取地址。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 下面代码在编译器中可正常编译且运行</span></span><br><span class="line">std::cout &lt;&lt; &amp;<span class="string">&quot;abc&quot;</span> &lt;&lt; std::endl;</span><br></pre></td></tr></table></figure>
+
+<p>这是因为C++将字符串字面值实现为char数组，实实在在地为每个字符都分配了空间并且允许程序员对其进行操作。如果从存储区的概念来理解，那就是字符串字面值存储在常量区。</p>
+<br/>
+
+
+
+<h2 id="10、引用"><a href="#10、引用" class="headerlink" title="10、引用"></a>10、引用</h2><p>既然提到了左值右值，就得提一下引用。</p>
+<p>在C++11之前，引用分为左值引用和常量左值引用两种，但是自C++11起，引入了右值引用，也就是说，在C++11中，包含了如下3种引用：</p>
+<ul>
+<li>左值引用</li>
+<li>常量左值引用(不希望被修改)</li>
+<li>右值引用</li>
+</ul>
+<p>左值引用和常量左值引用，我们很常见，如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">std::string str = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">std::string &amp;s = str;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> &amp;a = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> &amp;b = <span class="number">10</span>; <span class="comment">// 错</span></span><br></pre></td></tr></table></figure>
+
+<p>在上述代码中，s是一个左值引用，而a是一个const左值引用。那么，为什么最后一句<code>int &amp;b=10</code>; 编译器会报错？这是因为10是常量，而常量是右值，一个右值怎么能被左值引用去引用呢。</p>
+<p>那么什么是右值引用呢？右值引用就是引用右值的引用，这不废话吗？？？</p>
+<p>在C++11中引入了右值引用，因为右值的生命周期很短，右值引用的引入，使得可以延长右值的生命周期。在C++中规定，右值引用是&amp;&amp;，即由2个&amp;表示，而左值引用时一个&amp;表示。右值引用的作用是为了<code>绑定右值</code>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> &amp;rb = a; <span class="comment">// b为左值引用</span></span><br><span class="line"><span class="type">int</span> &amp;&amp;rrb = a; <span class="comment">// 错误，a是左值，右值引用不能绑定左值</span></span><br><span class="line"><span class="type">int</span> &amp;&amp;rrb1 = <span class="number">1</span>; <span class="comment">// 正确，1为右值</span></span><br><span class="line"><span class="type">int</span> &amp;rb1 = i * <span class="number">2</span>; <span class="comment">// 错误，i * 2是右值，而rb1位左值引用</span></span><br><span class="line"><span class="type">int</span> &amp;&amp;rrb2 = i * <span class="number">2</span>; <span class="comment">// 正确</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> &amp;c = <span class="number">1</span>; <span class="comment">// 正确</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> &amp;c1 = i * <span class="number">2</span>; <span class="comment">// 正确</span></span><br></pre></td></tr></table></figure>
+
+<p>在这里，我们需要注意的一点就是右值引用虽然是引用右值，但是其本身是左值，以下代码为例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> &amp;&amp;a = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在上述代码中，a是一个右值引用，但是其本身是左值，因为：</p>
+<ul>
+<li>a出现在等号（=）的左边</li>
+<li>可以对a取地址</li>
+</ul>
+<p>我们在前面就有提到过，一个表达式有两个属性，分别为<code>类型</code>和<code>值类别</code>。本节说的<code>左值引用</code>和<code>右值引用</code>就属于<code>类型</code>，而<code>左值</code>和<code>右值</code>则属于<code>值类别</code>范畴，这个概念很重要，千万不能混淆。</p>
+<p>可能有人会问，除了自己根据规则区分左值引用和右值引用，有没有更快更准确的方式来判断？系统提供了API</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">std::is_lvalue_reference</span><br><span class="line">is_rvalue_reference</span><br><span class="line">  </span><br><span class="line"><span class="type">int</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> &amp;ra = a;</span><br><span class="line"><span class="type">int</span> &amp;&amp;b = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">std::cout &lt;&lt; std::is_lvalue_reference&lt;<span class="keyword">decltype</span>(ra)&gt;::value &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">std::cout &lt;&lt; std::is_rvalue_reference&lt;<span class="keyword">decltype</span>(ra)&gt;::value &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">std::cout &lt;&lt; std::is_rvalue_reference&lt;<span class="keyword">decltype</span>(b)&gt;::value &lt;&lt; std::endl;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://njuni.online">KAZAMA</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://njuni.online/2022/10/20/C++%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%B7%A6%E5%80%BC%E3%80%81%E5%8F%B3%E5%80%BC/C++%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%B7%A6%E5%80%BC%E3%80%81%E5%8F%B3%E5%80%BC/">http://njuni.online/2022/10/20/C++%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%B7%A6%E5%80%BC%E3%80%81%E5%8F%B3%E5%80%BC/C++%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%B7%A6%E5%80%BC%E3%80%81%E5%8F%B3%E5%80%BC/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://njuni.online" target="_blank">KAZAMA的个人博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/wechat.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/10/22/%E3%80%90Modern%20C++%E3%80%91%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/%E3%80%90Modern%20C++%E3%80%91%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info"></div></div></a></div><div class="next-post pull-right"><a href="/2022/10/18/%E7%BB%86%E6%8E%A2%E7%BC%96%E8%AF%91%E5%99%A8%E8%BF%94%E5%9B%9E%E5%80%BC%E4%BC%98%E5%8C%96/%E7%BB%86%E6%8E%A2%E7%BC%96%E8%AF%91%E5%99%A8%E8%BF%94%E5%9B%9E%E5%80%BC%E4%BC%98%E5%8C%96/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info"></div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">KAZAMA</div><div class="author-info__description">技术记录,个人分享,学习备忘</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">300</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/KAZAMA-DREAM"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/KAZAMA-DREAM" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/wyy1778789301@163.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#C-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%B7%A6%E5%80%BC%E3%80%81%E5%8F%B3%E5%80%BC"><span class="toc-number">1.</span> <span class="toc-text">C++深入理解左值、右值</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E8%83%8C%E6%99%AF"><span class="toc-number">1.1.</span> <span class="toc-text">1、背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E5%8E%86%E5%8F%B2"><span class="toc-number">1.2.</span> <span class="toc-text">2、历史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">1.3.</span> <span class="toc-text">3、表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E5%80%BC%E7%B1%BB%E5%88%AB"><span class="toc-number">1.4.</span> <span class="toc-text">4、值类别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81%E5%B7%A6%E5%80%BC"><span class="toc-number">1.5.</span> <span class="toc-text">5、左值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%E3%80%81%E7%BA%AF%E5%8F%B3%E5%80%BC"><span class="toc-number">1.6.</span> <span class="toc-text">6、纯右值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7%E3%80%81%E5%B0%86%E4%BA%A1%E5%80%BC"><span class="toc-number">1.7.</span> <span class="toc-text">7、将亡值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8%E3%80%81%E6%B7%B7%E5%90%88%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.8.</span> <span class="toc-text">8、混合类型</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%901%E3%80%91%E6%B3%9B%E5%B7%A6%E5%80%BC"><span class="toc-number">1.8.0.0.1.</span> <span class="toc-text">【1】泛左值</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%902%E3%80%91%E5%8F%B3%E5%80%BC"><span class="toc-number">1.8.0.0.2.</span> <span class="toc-text">【2】右值</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9%E3%80%81%E6%B7%B1%E5%85%A5"><span class="toc-number">1.9.</span> <span class="toc-text">9、深入</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%901%E3%80%91%E5%89%8D%E7%BD%AE%E8%87%AA%E5%A2%9E%EF%BC%88%E5%87%8F%EF%BC%89%E6%98%AF%E5%B7%A6%E5%80%BC%EF%BC%8C%E5%90%8E%E7%BD%AE%E8%87%AA%E5%A2%9E%EF%BC%88%E5%87%8F%EF%BC%89%E6%98%AF%E7%BA%AF%E5%8F%B3%E5%80%BC"><span class="toc-number">1.9.0.0.1.</span> <span class="toc-text">【1】前置自增（减）是左值，后置自增（减）是纯右值</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%902%E3%80%91%E7%AE%97%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%98%AF%E7%BA%AF%E5%8F%B3%E5%80%BC"><span class="toc-number">1.9.0.0.2.</span> <span class="toc-text">【2】算数表达式是纯右值</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%903%E3%80%91%E8%A7%A3%E5%BC%95%E7%94%A8%E6%98%AF%E5%B7%A6%E5%80%BC%EF%BC%8C%E5%8F%96%E5%9C%B0%E5%9D%80%E6%98%AF%E7%BA%AF%E5%8F%B3%E5%80%BC"><span class="toc-number">1.9.0.0.3.</span> <span class="toc-text">【3】解引用是左值，取地址是纯右值</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%904%E3%80%91%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AD%97%E9%9D%A2%E5%80%BC%E6%98%AF%E5%B7%A6%E5%80%BC"><span class="toc-number">1.9.0.0.4.</span> <span class="toc-text">【4】字符串字面值是左值</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10%E3%80%81%E5%BC%95%E7%94%A8"><span class="toc-number">1.10.</span> <span class="toc-text">10、引用</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/04/2021-07-30-JS%E4%B8%AD%E7%9A%84innerHTML%EF%BC%8CinnerText%EF%BC%8Cvalue%E7%9A%84%E5%8C%BA%E5%88%AB-JS%E4%B8%AD%E7%9A%84innerHTML%EF%BC%8CinnerText%EF%BC%8Cvalue%E7%9A%84%E5%8C%BA%E5%88%AB/" title="无题">无题</a><time datetime="2023-02-04T07:30:02.522Z" title="发表于 2023-02-04 15:30:02">2023-02-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/04/2022-07-23-Mac-OS-%E4%B8%8A%E8%AE%BE%E7%BD%AE-JAVA-HOME-Mac-OS-%E4%B8%8A%E8%AE%BE%E7%BD%AE-JAVA-HOME/" title="无题">无题</a><time datetime="2023-02-04T07:29:35.332Z" title="发表于 2023-02-04 15:29:35">2023-02-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/01/25/hello-world/" title="Hello World">Hello World</a><time datetime="2023-01-25T09:51:15.064Z" title="发表于 2023-01-25 17:51:15">2023-01-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/12/30/JDK%E4%BD%BF%E7%94%A8IDEA%EF%BC%8C%E9%85%8D%E7%BD%AEJavaFX/JDK%E4%BD%BF%E7%94%A8IDEA%EF%BC%8C%E9%85%8D%E7%BD%AEJavaFX/" title="无题">无题</a><time datetime="2022-12-29T16:00:00.000Z" title="发表于 2022-12-30 00:00:00">2022-12-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%A4%AF%E5%AE%9E%E8%AE%A1%E5%88%92/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%A4%AF%E5%AE%9E%E8%AE%A1%E5%88%92/" title="无题">无题</a><time datetime="2022-12-29T16:00:00.000Z" title="发表于 2022-12-30 00:00:00">2022-12-30</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By KAZAMA</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
