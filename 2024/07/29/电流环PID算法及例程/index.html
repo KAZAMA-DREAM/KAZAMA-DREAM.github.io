@@ -1,0 +1,304 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>KAZAMAのBlog | KAZAMAのBlog</title><meta name="author" content="KAZAMA,wyy1778789301@163.com"><meta name="copyright" content="KAZAMA"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="title: 电流环PID算法及例程date: 2024-07-29 20:17:07password:abstract: Here’s something encrypted, password is required to continue reading.message: Hey, password is required here.wrong_pass_message: Oh, this">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KAZAMAのBlog">
+<meta property="og:url" content="http://www.kazama.top/2024/07/29/%E7%94%B5%E6%B5%81%E7%8E%AFPID%E7%AE%97%E6%B3%95%E5%8F%8A%E4%BE%8B%E7%A8%8B/index.html">
+<meta property="og:site_name" content="KAZAMAのBlog">
+<meta property="og:description" content="title: 电流环PID算法及例程date: 2024-07-29 20:17:07password:abstract: Here’s something encrypted, password is required to continue reading.message: Hey, password is required here.wrong_pass_message: Oh, this">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列5">
+<meta property="article:published_time" content="2024-07-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-07-29T06:39:50.453Z">
+<meta property="article:author" content="KAZAMA">
+<meta property="article:tag" content="技术分享 学习备忘">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列5"><link rel="shortcut icon" href="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列1"><link rel="canonical" href="http://www.kazama.top/2024/07/29/%E7%94%B5%E6%B5%81%E7%8E%AFPID%E7%AE%97%E6%B3%95%E5%8F%8A%E4%BE%8B%E7%A8%8B/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'KAZAMAのBlog',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-07-29 14:39:50'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列3" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">372</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">26</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/share/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列5')"><nav id="nav"><span id="blog-info"><a href="/" title="KAZAMAのBlog"><span class="site-name">KAZAMAのBlog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/share/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-28T16:00:00.000Z" title="发表于 2024-07-29 00:00:00">2024-07-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-29T06:39:50.453Z" title="更新于 2024-07-29 14:39:50">2024-07-29</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>14分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>title: 电流环PID算法及例程<br>date: 2024-07-29 20:17:07<br>password:<br>abstract: Here’s something encrypted, password is required to continue reading.<br>message: Hey, password is required here.<br>wrong_pass_message: Oh, this is an invalid password. Check and try again, please.<br>updated: 2024-07-29<br>tags: spwm<br>categories:<br>keywords: DSP28335<br>description: 本篇教你电流环PID算法及例程<br>top_img:<br>comments:<br>cover: <a target="_blank" rel="noopener" href="https://api.r10086.com/%E6%A8%B1%E9%81%93%E9%9A%8F%E6%9C%BA%E5%9B%BE%E7%89%87api%E6%8E%A5%E5%8F%A3.php?%E5%9B%BE%E7%89%87%E7%B3%BB%E5%88%97=%E9%A3%8E%E6%99%AF%E7%B3%BB%E5%88%977">https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列7</a><br>toc:<br>toc_number:<br>toc_style_simple:<br>copyright:<br>copyright_author:<br>copyright_author_href:<br>copyright_url:<br>copyright_info:<br>mathjax:<br>katex:<br>aplayer:<br>highlight_shrink:<br>aside: </p>
+<h1 id="电流环PID算法及例程"><a href="#电流环PID算法及例程" class="headerlink" title="电流环PID算法及例程"></a>电流环PID算法及例程</h1><h2 id="1-什么是电流环PID算法"><a href="#1-什么是电流环PID算法" class="headerlink" title="1    什么是电流环PID算法"></a>1    什么是电流环PID算法</h2><p>电流环PID算法是一种常用的控制算法，用于控制电机或其他设备中的电流。PID算法基于三个控制参数：比例（Proportional）、积分（Integral）或微分（Derivative），通过对当前误差、累计误差和误差变化率进行计算，来生成相应的控制输出。</p>
+<p>下面是电流环PID算法的基本原理和步骤：</p>
+<ol>
+<li><strong>错误计算：</strong>首先需要计算电流环的误差，即期望电流与实际电流之间的差异。这通常通过将期望电流值减去实际电流值得到。</li>
+<li><strong>比例项计算：</strong>根据比例参数（Kp），将误差乘以一个比例增益，得到比例项的输出。比例项直接反映了误差的大小，控制输出与误差成正比。</li>
+<li><strong>积分项计算：</strong>根据积分参数（Ki），对误差进行累加，并乘以一个积分增益，得到积分项的输出。积分项可以消除静态误差，逐渐减小系统的稳态误差。</li>
+<li><strong>微分项计算：</strong>根据微分参数（Kd），计算误差的变化率，并乘以一个微分增益，得到微分项的输出。微分项可以预测误差的未来变化趋势，用于抑制系统的过冲和振荡。</li>
+<li><strong>控制输出计算：</strong>将比例项、积分项和微分项的输出相加，得到最终的控制输出。这个控制输出可以作为电流环的控制信号，用于调节电流到期望值。</li>
+</ol>
+<p>要注意的是，比例、积分和微分参数的选择对PID控制效果有很大影响。合适的参数调节可以使系统响应快速、稳定，并达到较小的稳态误差。一般情况下，参数的选择需要通过实际系统测试和调试来确定，可以使用试探法或自整定方法进行参数调优。</p>
+<p>此外，在实际应用中，还需要考虑采样时间、输出限幅、饱和处理等因素，以确保系统的稳定性和可靠性。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">float32 <span class="title function_">LOCATION_PID_realize</span><span class="params">(LOCATION_PID* pid, float32 temp_val)</span> &#123;</span><br><span class="line">    <span class="comment">// 目标值只在这里参与计算，计算目标值与实际值的误差</span></span><br><span class="line">    pid-&gt;err = pid-&gt;target_val - temp_val;</span><br><span class="line">    <span class="comment">// 误差累积</span></span><br><span class="line">    pid-&gt;integral += pid-&gt;err;</span><br><span class="line">    <span class="comment">// PID算法实现</span></span><br><span class="line">    pid-&gt;actual_val = pid-&gt;Kp * pid-&gt;err + pid-&gt;Ki * pid-&gt;integral + pid-&gt;Kd * (pid-&gt;err - pid-&gt;err_last);</span><br><span class="line">    <span class="comment">// 误差传递</span></span><br><span class="line">    pid-&gt;err_last = pid-&gt;err;</span><br><span class="line">    <span class="comment">// 返回的值是经过pid运算以后的值</span></span><br><span class="line">    <span class="keyword">return</span> pid-&gt;actual_val;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// PI控制代码</span></span><br><span class="line">float32 <span class="title function_">LOCATION_PID_realize</span><span class="params">(LOCATION_PID* pid, float32 temp_val)</span> &#123;</span><br><span class="line">    <span class="comment">// 目标值只在这里参与计算，计算目标值与实际值的误差</span></span><br><span class="line">    pid-&gt;err = pid-&gt;target_val - temp_val;</span><br><span class="line">    <span class="comment">// 误差累积</span></span><br><span class="line">    pid-&gt;integral += pid-&gt;err;</span><br><span class="line">    <span class="comment">// PID算法实现</span></span><br><span class="line">    pid-&gt;actual_val = pid-&gt;Kp * pid-&gt;err + pid-&gt;Ki * pid-&gt;integral;</span><br><span class="line">    <span class="comment">// 误差传递</span></span><br><span class="line">    pid-&gt;err_last = pid-&gt;err;</span><br><span class="line">    <span class="comment">// 返回的值是经过pid运算以后的值</span></span><br><span class="line">    <span class="keyword">return</span> pid-&gt;actual_val;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<br/>
+
+
+
+<h2 id="2-电流环的作用"><a href="#2-电流环的作用" class="headerlink" title="2    电流环的作用"></a>2    电流环的作用</h2><p>前文不断强调，进行磁场定向控制需要控制的是电流而非电压，只是因为我们没有办法直接去控制电流才暂时退而求其次地去控制电压。虽然电压控制的效果也还不错，但由于电机不是单纯的阻性负载，所以控制电压并不能得到一个完美的效果。终极目标是控制电流，没有电流控制的foc不能叫foc，所以电流环最本质的作用是什么就不用多说了。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-07-29-%E7%94%B5%E6%B5%81%E7%8E%AFPID%E7%AE%97%E6%B3%95%E5%8F%8A%E4%BE%8B%E7%A8%8B/20240729113141.png"></p>
+<p>注：虽然框图中含有编码器，但它并不是电压控制的反馈环节，仅用来获取转子电角度，所以称其为开环控制。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-07-29-%E7%94%B5%E6%B5%81%E7%8E%AFPID%E7%AE%97%E6%B3%95%E5%8F%8A%E4%BE%8B%E7%A8%8B/20240729113622.png"></p>
+<h3 id="2-1-让id尽可能接近0，提高效率"><a href="#2-1-让id尽可能接近0，提高效率" class="headerlink" title="2.1    让id尽可能接近0，提高效率"></a>2.1    让id尽可能接近0，提高效率</h3><p>使用电压开环控制时，由于种种原因，id并不是一直为0，可能存在偏移或跳动，转速越高这种情况就越厉害，而使用电流闭环可以较好的遏制这种现象。</p>
+<p>下面两张图显示了在20V供电下，某台电机空载全速转动下的id和iq波形，其中蓝色的是id。第一张图使用电压开环控制，第二张图使用电流闭环控制。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-07-29-%E7%94%B5%E6%B5%81%E7%8E%AFPID%E7%AE%97%E6%B3%95%E5%8F%8A%E4%BE%8B%E7%A8%8B/20240729114250.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-07-29-%E7%94%B5%E6%B5%81%E7%8E%AFPID%E7%AE%97%E6%B3%95%E5%8F%8A%E4%BE%8B%E7%A8%8B/20240729114258.png"></p>
+<br/>
+
+
+
+<h3 id="2-2-起到一个限流保护的作用"><a href="#2-2-起到一个限流保护的作用" class="headerlink" title="2.2    起到一个限流保护的作用"></a>2.2    起到一个限流保护的作用</h3><p>当电机堵转的时候，电流等于电压除以电阻。假如电压是12V，电机内阻是0.1欧姆，那么此时流过电机的电流就是120安培。如果电机的额定电流只有10安培，那么它很有可能在1秒钟之内冒烟烧掉，同时120安培的大电流对于小型驱动板而言也是致命的。我们可以在硬件上增加过流保护的功能，当触发过流保护时直接关断三相全桥。但我们想要的是限流，尽可能地将电机流过的电流限制在给定值之下，而不是达到阈值就关断电机，因此硬件上的过流保护只是作为最后一道保护措施，真正的限流通常是由软件上的电流环来实现。将电机的电流限死在额定电流之下，这样即使电机堵转也不用担心烧毁电机或是驱动器。</p>
+<br/>
+
+
+
+<h3 id="2-3-力矩控制"><a href="#2-3-力矩控制" class="headerlink" title="2.3    力矩控制"></a>2.3    力矩控制</h3><p>电机的输出转矩和电流基本上是成正比的，因此控制了电流也就相当于控制了电机的输出转矩。（这里也再强调一下，要让电机输出转矩是需要给它添加负载的。如果电机空载，那么它的输出转矩只需要克服摩擦力和空气阻力等，此时的输出转矩是非常小的。所以这里说的控制电机的输出转矩，其实是控制电机的最大输出转矩，也就是堵转时的转矩。）</p>
+<br/>
+
+
+
+<h2 id="3-电流环的实现"><a href="#3-电流环的实现" class="headerlink" title="3    电流环的实现"></a>3    电流环的实现</h2><p>由前文的控制框图可知，实现电流环需要做这么几件事情：①电机三相电流采集②克拉克变换③帕克变换④电流环PID运算</p>
+<h3 id="3-1-电流采样"><a href="#3-1-电流采样" class="headerlink" title="3.1    电流采样"></a>3.1    电流采样</h3><p>电流采样的方案大致有电流互感和电阻采样两种，而电阻采样又分为低端采样、母线采样和高端采样。对于电阻采样而言无论是哪一种，其原理都是一样的，根据欧姆定律可得电流等于电压除以电阻。由于电阻阻值是我们给定的，所以只要采集了电阻两端的电压就可以算出流过电阻的电流。为了尽可能不影响电路正常工作，我们选用的采样电阻的阻值一般都会很小（毫欧级），所以电阻两端的电压往往会比较小，比如10豪欧的电阻，流过10安培的电流，其两端电压仅为100毫伏，因此我们需要运算放大器来放大这个电压信号，最后送给单片机的ADC。</p>
+<p>最终的换算公式如下：（3.3V的参考电压，12位的ADC，电流单位安培，电阻单位欧姆）</p>
+<p>​                                                           <strong>电流 = ADC原始值 / 4096 ∗ 3.3 / 采样电阻阻值 / 运放放大倍数</strong></p>
+<p>这里也提几个关键的地方：①对于低端采样，一定要在采样电阻对应的下桥臂开启的时候采样，否则下桥臂关断的时候几乎不会有电流流过采样电阻（高端采样也类似）。②对于母线采样，任何时候都有电流流过采样电阻，但这并不意味着任何时间点都可以采样，一定要避开mos管开启或关断的瞬间，否则会采集到非常严重的尖峰噪音（这个原则对于高端和低端采样也适用）。③电流采样的效果会直接影响到电流环的控制效果，因此不可马虎。</p>
+<br/>
+
+
+
+<h3 id="3-2-克拉克变换和帕克变换"><a href="#3-2-克拉克变换和帕克变换" class="headerlink" title="3.2    克拉克变换和帕克变换"></a>3.2    克拉克变换和帕克变换</h3><p>两个变换加起来就四句代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">Clarke_Park</span><span class="params">(<span class="keyword">struct</span> MOTO_Type * moto, <span class="type">int32_t</span> currA, <span class="type">int32_t</span> currC)</span> &#123;</span><br><span class="line">    moto-&gt;iAlpha = (<span class="type">float32_t</span>)currA;</span><br><span class="line">    moto-&gt;iBeta = -(<span class="type">float32_t</span>)(currA + <span class="number">2</span> * currC) * <span class="number">0.5773502692f</span>;</span><br><span class="line">    </span><br><span class="line">    moto-&gt;id = moto-&gt;iAlpha * moto-&gt;cosVal + moto-&gt;iBeta * moto-&gt;sinVal;</span><br><span class="line">    moto-&gt;iq = -moto-&gt;iAlpha * moto-&gt;sinVal + moto-&gt;iBeta * moto-&gt;cosVal;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为什么只需要两相电流而不是三相呢？因为三相电流之和等于0，知道两相可以倒推出第三相。为什么我这里用的是A相和C相的电流呢？一方面是有时候要方便板子布线，另一方面是用AB相的很多，这里介绍一下其他的，希望大家学会灵活运用。如果对具体的推导过程有兴趣的可以观看硬石专题8第6第7小节，链接已放在底部。</p>
+<br/>
+
+
+
+<h3 id="3-3-PI运算"><a href="#3-3-PI运算" class="headerlink" title="3.3    PI运算"></a>3.3    PI运算</h3><blockquote>
+<p>首先明确一点，对于电流环而言一般是不会使用微分项D的，这个不是我说的，而是查阅了一些相关资料（包括ti的公开课，一些开源方案的源码）找到的结论。</p>
+</blockquote>
+<p>经过克拉克变换以及帕克变换，我们的三相交流电流量已经变成了两个直流的电流量，因此可以很容易的使用PID去控制它。PID相信大家都非常熟悉，而去掉了D就更简单了：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">Curr_PI_Cal</span><span class="params">(<span class="keyword">struct</span> PI_Type *PI_Control, <span class="type">float32_t</span> target, <span class="type">float32_t</span> resultMax)</span> &#123;</span><br><span class="line">    PI_Control-&gt;target = target;</span><br><span class="line">    PI_Control-&gt;error = PI_Control-&gt;target - PI_Control-&gt;value;							<span class="comment">//误差等于目标值减去测量值</span></span><br><span class="line">    PI_Control-&gt;errSum += PI_Control-&gt;error * PI_Control-&gt;ki;							<span class="comment">//积分项累加</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(PI_Control-&gt;errSum &gt; PI_Control-&gt;errSumMax)										<span class="comment">//积分限幅</span></span><br><span class="line">        PI_Control-&gt;errSum = PI_Control-&gt;errSumMax;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(PI_Control-&gt;errSum &lt; -PI_Control-&gt;errSumMax)</span><br><span class="line">        PI_Control-&gt;errSum = -PI_Control-&gt;errSumMax;   </span><br><span class="line">    </span><br><span class="line">    PI_Control-&gt;result = PI_Control-&gt;kp * PI_Control-&gt;error + PI_Control-&gt;errSum;		<span class="comment">//得到PI运算结果</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(PI_Control-&gt;result &gt; resultMax)													<span class="comment">//最大输出限幅</span></span><br><span class="line">        PI_Control-&gt;result = resultMax;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(PI_Control-&gt;result &lt; -resultMax)</span><br><span class="line">        PI_Control-&gt;result = -resultMax;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这里有一个地方可能和大家以往用的不太一样：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PI_Control-&gt;result = PI_Control-&gt;kp * PI_Control-&gt;error + PI_Control-&gt;errSum;</span><br><span class="line">PI_Control-&gt;result = PI_Control-&gt;kp * PI_Control-&gt;error + PI_Control-&gt;ki * PI_Control-&gt;errSum;</span><br></pre></td></tr></table></figure>
+
+<p>用下面这种的应该会多一些，但这种形式有个缺点就是它的积分限幅值是会随着ki的调整而变化，并且不直观，你也不知道限幅了多少。因此推荐使用上面这种形式，先将整个积分项不停地累加起来，再对其限幅。因为电流环的输入是电流id、iq，输出是电压ud、uq，而我们的ud、uq是受限于供电电压的，你不可能给你的驱动板供电12V却让它输出20V，过大的积分限幅是完全没有意义的，只会让你的电流环严重超调，而过小的限幅会让你的电机发挥不出力量，比如你的驱动板是12V供电，却只能达到6V的效果。那么多大的限幅是合适的呢？还记得前文介绍svpwm说的最大不失真电压Uref吗？</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-07-29-%E7%94%B5%E6%B5%81%E7%8E%AFPID%E7%AE%97%E6%B3%95%E5%8F%8A%E4%BE%8B%E7%A8%8B/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20240729140903.png"></p>
+<p>积分限幅就可以通过这个公式算出来，比方说12V供电，那么积分限幅值就可以取6.93。同样的，代码最下边的resultMax也取这个数。</p>
+<p>这里也温馨提示一下，Uref是通过ud和uq两个矢量合成的，所以要让Uref小于限幅值，并非仅让ud、uq分别小于限幅值就够了。</p>
+<br/>
+
+
+
+<h2 id="4-电流环的调试"><a href="#4-电流环的调试" class="headerlink" title="4    电流环的调试"></a>4    电流环的调试</h2><blockquote>
+<p>同样先明确几点：①对于普通的无刷电机，id给定值为零。②调试时先调D轴的PI参数，如果效果满意，就把D轴的PI参数原封不动的赋给Q轴。</p>
+</blockquote>
+<h3 id="4-1-参数整定方法"><a href="#4-1-参数整定方法" class="headerlink" title="4.1    参数整定方法"></a>4.1    参数整定方法</h3><p>电流环的PI参数是可以算出来的，只要知道了电机的电阻和电感，就能得到这台电机的电流环PI参数。具体的推导过程可以参考下面链接的第一个视频。这里只说结论。</p>
+<p>对于串联型的PI控制器：</p>
+<p>​                                                                                         <strong>Kp = L × bandwidth × 2π</strong></p>
+<p>​                                                                                                  <strong>Ki = R / L</strong><br>对于并联型的PI控制器：</p>
+<p>​                                                                                       <strong>Kp = L × bandwidth × 2π</strong></p>
+<p>​                                                                                     <strong>Ki = R × bandwidth × 2π</strong></p>
+<p><strong>解释：</strong></p>
+<ol>
+<li>这里的 L 和 R 的单位是 H 和 Ω</li>
+<li>如果你不清楚串联型和并联型PI控制器的区别，那么你用的百分之99就是并联型的PI控制器。前面的代码就是并联型的。</li>
+<li>这里的带宽是自己给定的，带宽越小系统越稳定，响应越慢；带宽越大系统越不稳定，但响应越快</li>
+<li>根据ti的资料，带宽取电流采样频率的 1/20 ；根据视频中那位大佬的回复，电流环带宽从100Hz到1000Hz的都有。</li>
+<li>有些资料把 2π 放进带宽里面，而有些则是分开计算，这就产生了一个误区，两种计算方法会使PI参数相差6.28倍。个人两种方法都尝试过，不乘6.28的PI参数的阶跃响应波形更平滑，而乘以6.28的波形会略有超调，但电机并未产生震荡且能够正常工作。这里我更加偏向要乘6.28的说法，各位看着办。</li>
+</ol>
+<br/>
+
+
+
+<h3 id="4-2-调试实例"><a href="#4-2-调试实例" class="headerlink" title="4.2    调试实例"></a>4.2    调试实例</h3><p>使用5208云台电机，通过万用表等仪器测得电阻为 11.4Ω，电感由于没有专业仪器，只好参考相似型号电机，估测为 3mH 左右（由于电机是闲鱼买的，没有详细参数，后面可以通过细调Kp参数来解决）。使用并联型PI，带宽这里取300Hz，可得：</p>
+<p>​                                                                                    <strong>Kp = 0.003 × 300 × 2π = 5.625</strong></p>
+<p>​                                                                                    <strong>Ki = 11.4 × 300 × 2π = 21477.6</strong></p>
+<p>但由于我使用ADC的原始值作为反馈信号，因此PI参数也要相应的改变一下。由前面的公式计算得到： 电流 = ADC原始值 / 500，因此PI参数也要除以500。还有一点也要注意，算出来的Ki参数是不包含积分时间的，因此要补上，我这里的积分时间是 1 / 8000 秒。所以最终的PI参数为：</p>
+<p>​                                                                                          Kp = 5.625 / 500 = 0.01125</p>
+<p>​                                                                                    Ki = 21477.6 / 500 / 8000 = 0.00537</p>
+<p> 下面把调好的参数下载到单片机里，看一下D轴电流的阶跃响应如何（这里暂时先不给Q轴赋值）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-07-29-%E7%94%B5%E6%B5%81%E7%8E%AFPID%E7%AE%97%E6%B3%95%E5%8F%8A%E4%BE%8B%E7%A8%8B/20240729143536.png"></p>
+<p>这里给定的目标值是200，也就是0.4A，可以看到响应波形是很漂亮的，除了上升和下降的终点处有一些毛刺。</p>
+<p> 下面将D轴的PI参数原封不动的赋给Q轴试试：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-07-29-%E7%94%B5%E6%B5%81%E7%8E%AFPID%E7%AE%97%E6%B3%95%E5%8F%8A%E4%BE%8B%E7%A8%8B/20240729143617.png"></p>
+<p>这里D轴给定值为0，Q轴给定值仅为50（0.1A），但由于电机空载电流达不到0.1A，因此Q轴电流环积分项迅速饱和，此时电机正全速旋转。</p>
+<p> 我们将D轴设定值设为0，Q轴设定值设为200，然后用手反复堵转电机看一看响应波形：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-07-29-%E7%94%B5%E6%B5%81%E7%8E%AFPID%E7%AE%97%E6%B3%95%E5%8F%8A%E4%BE%8B%E7%A8%8B/20240729143715.png"></p>
+<p>当电机堵转时，Q轴电流被限制在200（0.4A）附近；当松开电机时，电机迅速地恢复全速转动，且Q轴电流仅为空载电流。并且当Q轴的设定值越大，堵转时电机的输出转矩越大。</p>
+<p> 至此，电流环的调试基本完成，大家可以参考这三张图来判断电流环的调试是否正确。第三张图的Q轴电流存在超调是因为之前全速转动的时候积分项已完全饱和，突然的堵转使积分项来不及释放干净而导致过冲，解决的办法是使用抗饱和的PI控制器，如动态积分限幅等。但如果是要求不高的场合，正确的静态积分限幅已经足够了。</p>
+<p><strong>解释：</strong></p>
+<p>先调D轴是因为如果调Q轴会使电机转起来，而电机空载下的电流非常小，如果达不到我们的给定值，积分器会迅速饱和，使电机全速转动。<br>串联型的PI控制器和并联型的本质上是一样的，只是Ki参数会不同。并联型的Ki相当于串联型的Kp*Ki，因此对于串联型的来说，调节Kp会使积分项的增益也随之改变。但是串联型的好处就在于使用Ki实现零极点对消，然后通过调节Kp来调整带宽。并联型的如果要调整带宽，则PI参数需要一起调。</p>
+<p><strong>参考资料：</strong></p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Qi4y1t7X2?from=search&seid=11450621745663870399&spm_id_from=333.337.0.0">视频：【电机控制】《PID调节器》第一部分：电流环设计</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LE411W7M9?from=search&seid=17451889351667026293&spm_id_from=333.788.b_636f6d6d656e74.14">视频：TI公开培训(中文字幕) 电机控制，PI控制器，PID控制器和现场定向控制</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Fs411p7Zc?from=search&seid=14235390528476416403&spm_id_from=333.337.0.0">视频：硬石相关章节</a></li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://www.kazama.top">KAZAMA</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.kazama.top/2024/07/29/%E7%94%B5%E6%B5%81%E7%8E%AFPID%E7%AE%97%E6%B3%95%E5%8F%8A%E4%BE%8B%E7%A8%8B/">http://www.kazama.top/2024/07/29/%E7%94%B5%E6%B5%81%E7%8E%AFPID%E7%AE%97%E6%B3%95%E5%8F%8A%E4%BE%8B%E7%A8%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.kazama.top" target="_blank">KAZAMAのBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列5" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/wechat.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/07/28/DSP28335%E5%AE%9E%E7%8E%B0PID%E9%97%AD%E7%8E%AF/" title="DSP28335实现PID闭环"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列6" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">DSP28335实现PID闭环</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列3" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">KAZAMA</div><div class="author-info__description">技术记录,个人分享,学习备忘</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">372</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">26</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/KAZAMA-DREAM"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/KAZAMA-DREAM" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/wyy1778789301@163.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%B5%E6%B5%81%E7%8E%AFPID%E7%AE%97%E6%B3%95%E5%8F%8A%E4%BE%8B%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">电流环PID算法及例程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E7%94%B5%E6%B5%81%E7%8E%AFPID%E7%AE%97%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text">1    什么是电流环PID算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%94%B5%E6%B5%81%E7%8E%AF%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">1.2.</span> <span class="toc-text">2    电流环的作用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E8%AE%A9id%E5%B0%BD%E5%8F%AF%E8%83%BD%E6%8E%A5%E8%BF%910%EF%BC%8C%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1    让id尽可能接近0，提高效率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E8%B5%B7%E5%88%B0%E4%B8%80%E4%B8%AA%E9%99%90%E6%B5%81%E4%BF%9D%E6%8A%A4%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2    起到一个限流保护的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%8A%9B%E7%9F%A9%E6%8E%A7%E5%88%B6"><span class="toc-number">1.2.3.</span> <span class="toc-text">2.3    力矩控制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%94%B5%E6%B5%81%E7%8E%AF%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.3.</span> <span class="toc-text">3    电流环的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E7%94%B5%E6%B5%81%E9%87%87%E6%A0%B7"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1    电流采样</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%85%8B%E6%8B%89%E5%85%8B%E5%8F%98%E6%8D%A2%E5%92%8C%E5%B8%95%E5%85%8B%E5%8F%98%E6%8D%A2"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.2    克拉克变换和帕克变换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-PI%E8%BF%90%E7%AE%97"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.3    PI运算</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%94%B5%E6%B5%81%E7%8E%AF%E7%9A%84%E8%B0%83%E8%AF%95"><span class="toc-number">1.4.</span> <span class="toc-text">4    电流环的调试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E5%8F%82%E6%95%B0%E6%95%B4%E5%AE%9A%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.1.</span> <span class="toc-text">4.1    参数整定方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E8%B0%83%E8%AF%95%E5%AE%9E%E4%BE%8B"><span class="toc-number">1.4.2.</span> <span class="toc-text">4.2    调试实例</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/07/29/%E7%94%B5%E6%B5%81%E7%8E%AFPID%E7%AE%97%E6%B3%95%E5%8F%8A%E4%BE%8B%E7%A8%8B/" title="无题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列5" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2024/07/29/%E7%94%B5%E6%B5%81%E7%8E%AFPID%E7%AE%97%E6%B3%95%E5%8F%8A%E4%BE%8B%E7%A8%8B/" title="无题">无题</a><time datetime="2024-07-28T16:00:00.000Z" title="发表于 2024-07-29 00:00:00">2024-07-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/28/DSP28335%E5%AE%9E%E7%8E%B0PID%E9%97%AD%E7%8E%AF/" title="DSP28335实现PID闭环"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列6" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="DSP28335实现PID闭环"/></a><div class="content"><a class="title" href="/2024/07/28/DSP28335%E5%AE%9E%E7%8E%B0PID%E9%97%AD%E7%8E%AF/" title="DSP28335实现PID闭环">DSP28335实现PID闭环</a><time datetime="2024-07-28T12:17:07.000Z" title="发表于 2024-07-28 20:17:07">2024-07-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/26/%E7%94%B5%E6%BA%90%E7%9A%84%E6%8E%A7%E5%88%B6%E6%A8%A1%E5%BC%8F/" title="电源的控制模式"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列5" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="电源的控制模式"/></a><div class="content"><a class="title" href="/2024/07/26/%E7%94%B5%E6%BA%90%E7%9A%84%E6%8E%A7%E5%88%B6%E6%A8%A1%E5%BC%8F/" title="电源的控制模式">电源的控制模式</a><time datetime="2024-07-26T12:17:07.000Z" title="发表于 2024-07-26 20:17:07">2024-07-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/25/spwm%E5%AE%9E%E7%8E%B0%E5%8D%95%E5%90%91%E9%80%86%E5%8F%98/" title="spwm实现单向逆变"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列4" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="spwm实现单向逆变"/></a><div class="content"><a class="title" href="/2024/07/25/spwm%E5%AE%9E%E7%8E%B0%E5%8D%95%E5%90%91%E9%80%86%E5%8F%98/" title="spwm实现单向逆变">spwm实现单向逆变</a><time datetime="2024-07-25T12:17:07.000Z" title="发表于 2024-07-25 20:17:07">2024-07-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/22/%E7%94%B5%E5%8E%8B%E7%8E%AF%E5%92%8C%E7%94%B5%E6%B5%81%E7%8E%AF%E7%9A%84%E7%90%86%E8%A7%A3/" title="电压环和电流环的理解"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列3" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="电压环和电流环的理解"/></a><div class="content"><a class="title" href="/2024/07/22/%E7%94%B5%E5%8E%8B%E7%8E%AF%E5%92%8C%E7%94%B5%E6%B5%81%E7%8E%AF%E7%9A%84%E7%90%86%E8%A7%A3/" title="电压环和电流环的理解">电压环和电流环的理解</a><time datetime="2024-07-22T12:17:07.000Z" title="发表于 2024-07-22 20:17:07">2024-07-22</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列5')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By KAZAMA</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
