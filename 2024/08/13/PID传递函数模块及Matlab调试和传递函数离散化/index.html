@@ -1,0 +1,492 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>PID传递函数模块及Matlab调试和传递函数离散化 | KAZAMAのBlog</title><meta name="author" content="KAZAMA,wyy1778789301@163.com"><meta name="copyright" content="KAZAMA"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="本篇教你PID传递函数模块及Matlab调试和传递函数离散化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PID传递函数模块及Matlab调试和传递函数离散化">
+<meta property="og:url" content="http://www.kazama.top/2024/08/13/PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/index.html">
+<meta property="og:site_name" content="KAZAMAのBlog">
+<meta property="og:description" content="本篇教你PID传递函数模块及Matlab调试和传递函数离散化">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列10">
+<meta property="article:published_time" content="2024-08-13T12:17:07.000Z">
+<meta property="article:modified_time" content="2024-08-12T16:00:00.000Z">
+<meta property="article:author" content="KAZAMA">
+<meta property="article:tag" content="Matlab">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列10"><link rel="shortcut icon" href="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列1"><link rel="canonical" href="http://www.kazama.top/2024/08/13/PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'PID传递函数模块及Matlab调试和传递函数离散化',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-08-13 00:00:00'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列3" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">387</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/share/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列10')"><nav id="nav"><span id="blog-info"><a href="/" title="KAZAMAのBlog"><span class="site-name">KAZAMAのBlog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/share/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">PID传递函数模块及Matlab调试和传递函数离散化</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-13T12:17:07.000Z" title="发表于 2024-08-13 20:17:07">2024-08-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-08-12T16:00:00.000Z" title="更新于 2024-08-13 00:00:00">2024-08-13</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>13分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="PID传递函数模块及Matlab调试和传递函数离散化"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="PID传递函数模块及Matlab调试和传递函数离散化"><a href="#PID传递函数模块及Matlab调试和传递函数离散化" class="headerlink" title="PID传递函数模块及Matlab调试和传递函数离散化"></a>PID传递函数模块及Matlab调试和传递函数离散化</h1><h2 id="1-simulink中微分模块、传递函数模块使用"><a href="#1-simulink中微分模块、传递函数模块使用" class="headerlink" title="1    simulink中微分模块、传递函数模块使用"></a>1    simulink中微分模块、传递函数模块使用</h2><p>大多数物理系统可以用微分方程来描述，因此可以用连续系统模拟。最简单的模型为<strong>线性模型</strong>和<strong>定常模型</strong>。</p>
+<p>在simulink中，用来模拟连续系统的模块有四种：<strong>增益模块</strong>、<strong>求和模块</strong>、<strong>微分模块</strong>、<strong>积分模块</strong>。另外，传递函数模块也常常用来模拟物理系统和控制器。</p>
+<h3 id="1-1-积分、微分模块"><a href="#1-1-积分、微分模块" class="headerlink" title="1.1    积分、微分模块"></a>1.1    积分、微分模块</h3><p><strong>积分模块：</strong></p>
+<ul>
+<li>定义：计算输入信号从起始时间到当前时间对时间的积分，即：对输入信号积分。</li>
+<li>需要初始化条件。</li>
+<li>连续状态。</li>
+</ul>
+<p><strong>微分模块：</strong></p>
+<ul>
+<li>定义：计算输入对时间的变化率。</li>
+<li>根据输出的返回的差值来拟合输入变化的速率。</li>
+</ul>
+<p><strong>实例：</strong>在simulink中选择正弦信号作为输入信号，并选择微分模块作为微分程序，利用示波器输出微分后的信号波形。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240813090302.png"></p>
+<p><strong>输出波形：</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240813090344.png"></p>
+<p>输入波形为黄色，输出波形为蓝色。输入波形为正弦信号，由于微分模块作用，因此输出模块为余弦信号，在本例中由于0时刻，初始值为0，因此输出信号波形在0时刻有突变。</p>
+<br/>
+
+
+
+<h3 id="1-2-传递函数模块使用及举例应用"><a href="#1-2-传递函数模块使用及举例应用" class="headerlink" title="1.2    传递函数模块使用及举例应用"></a>1.2    传递函数模块使用及举例应用</h3><p>传递函数模块表示法频繁用于<strong>控制系统设计</strong>和<strong>系统的动态模拟</strong>，传递函数的定义为<strong>系统在零初始状态下输出的Laplace变换与输入的Laplace变换之比</strong>。因此，传递函数是一种描述系统动力学输入输出关系的简便方法。</p>
+<p>在本例中，以二阶低通滤波器为例，在simulink中应用传递函数模块，阶跃信号作为输入信号，并用示波器展示输出信号波形。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240813092537.png"></p>
+<p>其中，传递函数为：(-1) / (s^2 + 3s + 1)，并在simulink中的传递函数模块设置分子、分母参数。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240813093515.png"></p>
+<p>输出波形：随时间发生衰减，并最终稳定于-1。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240813093633.png"></p>
+<br/>
+
+
+
+<h3 id="1-3-Matlab中波特图使用方法"><a href="#1-3-Matlab中波特图使用方法" class="headerlink" title="1.3    Matlab中波特图使用方法"></a>1.3    Matlab中波特图使用方法</h3><p>首先，在Matlab命令窗口中输入<strong>help bode</strong>学习下如何使用波特图。得到help文档：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240813094032.png"></p>
+<p>在该文档中可以看出，在使用波特图之前，需要先定义传递函数，上图红箭头指的是help文档给我们举的例子，以下是我们利用上面的传递函数得到的波特图，传递函数：(-1) / (s^2 + 3s + 1)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240813094405.png"></p>
+<p>首先，在命令行窗口，如上图箭头指示那样，我先令g等于传递函数表达式，然后利用bode(g)指令绘制波特图，并得到如下图：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240813094646.png"></p>
+<p>从这个图中可以看到：随着输入信号频率的增加，对应的通过的幅值信号衰减比较严重，而在频率较低的情况下，信号比较容易通过，因此为低通滤波器。</p>
+<br/>
+
+
+
+<h2 id="2-PID控制参数Matlab调试"><a href="#2-PID控制参数Matlab调试" class="headerlink" title="2    PID控制参数Matlab调试"></a>2    PID控制参数Matlab调试</h2><h3 id="2-1-序"><a href="#2-1-序" class="headerlink" title="2.1    序"></a>2.1    序</h3><p>首先最重要的是了解每个参数调节了系统响应的哪些属性，通过观察响应从而调节参数改变属性。</p>
+<p><strong>PID作用概述：</strong></p>
+<ol>
+<li>P产生响应速度和力度，过小响应慢，过大会产生振荡，是I和D的基础。</li>
+<li>I在有系统误差和外力作用时消除偏差、提高进度，同时也会增加响应速度，产生过冲，过大会产生振荡。</li>
+<li>D抑制过冲和振荡，过小系统会过冲，过大会减慢响应速度。D的另外一个作用时抵抗外界的突发干扰，阻止系统的突变。</li>
+</ol>
+<p>同时调节顺序是：P &gt; I &gt; D</p>
+<p><strong>PID调节目标：</strong></p>
+<ul>
+<li>衰减比在4-10之间最佳，也就是响应曲线的前两个幅值B：B1的比值在4-10之间。</li>
+<li>稳态误差趋近于0。</li>
+<li>系统响应越快越好。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240813101023.png"></p>
+<br/>
+
+
+
+<h3 id="2-2-P参数选取"><a href="#2-2-P参数选取" class="headerlink" title="2.2    P参数选取"></a>2.2    P参数选取</h3><p>tip：在第一步牢记<strong>P产生响应速度和力度，过小响应慢，过大会产生振荡，是I和D的基础。</strong></p>
+<p>如果想自己调试尝试可以打开matlab，运行simulink，照着下面的图进行连接，如果想直接应用可以往后看。</p>
+<p>图中的系统为一个PID控制二阶系统。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240813101543.png"></p>
+<p>拿上面的系统进行举例，首先设定P=0.1，I=0，D=0观察响应。可以看到图像没有超调，说明P产生的响应速度和力度太小了。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240813102024.png"></p>
+<p>P=1，I=0，D=0观察系统响应，超调量出现但是只有一个波形，同时也就意味着调节时间太慢了，继续加大P。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240813102249.png"></p>
+<p>P=10，I=0，D=0，此时调节时间显著下降，可以看到此时的数量级已经调整完成，也就是P参数只需要微调。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240813102732.png"></p>
+<p>P=100，I=0，D=0，系统开始变得振荡。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240813102941.png"></p>
+<p>如果继续加大P，系统会达到一个临界值，产生等幅振荡，最后开始发散，如下图。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240813103237.png"></p>
+<br/>
+
+
+
+<h3 id="2-3-I的调节"><a href="#2-3-I的调节" class="headerlink" title="2.3    I的调节"></a>2.3    I的调节</h3><p>tip：I在有系统误差和外力作用时消除、提高精度，同时也会增加响应速度，产生过冲，过大会产生振荡。</p>
+<p>I主要调节稳态输出，消除扰动。由于系统没有扰动输入因此看不到I对于消除扰动的效果。P=10，I=10，D=0，此时I过大导致系统振荡加剧。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240813104414.png"></p>
+<p>P=10，I=1，D=0，此时响应波形基本符合预期。观察稳态输出约为0.963左右。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240813104606.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240813104640.png"></p>
+<p>P=10，I=0.1，D=0，可以看到几乎响应波形没有变化。说明在没有扰动的情况下I只要不过大影响不大。但是稳态输出变化为0.916。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240813104905.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240813104932.png"></p>
+<p>P=10，I=0，D=0，稳态输出变为0.91左右。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240813105102.png"></p>
+<p>最终我们可以通过I少量调节稳态输出的值，最终将稳态误差消除。关于I对波形影响的作用总结如下图：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240813105259.png"></p>
+<br/>
+
+
+
+<h3 id="2-4-D的调节"><a href="#2-4-D的调节" class="headerlink" title="2.4    D的调节"></a>2.4    D的调节</h3><p>tip：D抑制过冲和振荡，过小系统会过冲，过大会减慢响应速度。D的另一个作用是抵抗外界的突发干扰，阻止系统的突变。</p>
+<p>P=10，I=0.1，D=10，可以看到将所有的冲击都消除掉了。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240813105632.png"></p>
+<p>P=10，I=0.1，D=1，消除冲击减弱，此时显然衰减比不符合要求。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240813105816.png"></p>
+<p>P=10，I=0.1，D=1，此时基本符合要求。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240813105916.png"></p>
+<br/>
+
+
+
+<h3 id="2-5-总结"><a href="#2-5-总结" class="headerlink" title="2.5    总结"></a>2.5    总结</h3><p>首先调节P的数量级达到一个只有2个左右明显峰值的波形，再调节I找到不会波形振荡也不会没有超调的的区间，在区间内找到一个I将稳态误差尽可能消除。最终使用D来控制衰减比和波形的峰值、超调量。最后根据要求的稳态值、调节时间、超调量、上升时间、峰值时间等指标进行微调达到目标。</p>
+<blockquote>
+<p>参数整定找最佳，从小到大顺序查，<br>先是比例后积分，最后再把微分加，<br>曲线振荡很频繁，比例度盘要放大，<br>曲线漂浮绕大湾，比例度盘往小扳，<br>曲线偏离回复慢，积分时间往下降，<br>曲线波动周期长，积分时间再加长，<br>曲线振荡频率快，先把微分降下来，<br>动差大来波动慢，微分时间应加长，<br>理想曲线两个波，前高后低4比1，<br>一看二调多分析，调节质量不会低 。</p>
+</blockquote>
+<br/>
+
+
+
+<h2 id="3-传递函数如何离散化转化为差分方程"><a href="#3-传递函数如何离散化转化为差分方程" class="headerlink" title="3    传递函数如何离散化转化为差分方程"></a>3    传递函数如何离散化转化为差分方程</h2><h3 id="3-1-前言"><a href="#3-1-前言" class="headerlink" title="3.1    前言"></a>3.1    前言</h3><p>我们在Matlab/Simulink做实验仿真的对象一般习惯使用s域传递函数，但是真正转化到单片机中时，又无法识别传递函数，因此需要进行传递函数的离散化，转化为差分方程来处理。</p>
+<p><strong>离散化的目的：</strong></p>
+<ul>
+<li>将s域下的传递函数转换为离散的z域函数。</li>
+<li>将离散域下的函数转化为差分方程，然后在单片机中实现。</li>
+</ul>
+<br/>
+
+
+
+<h3 id="3-2-传递函数形式"><a href="#3-2-传递函数形式" class="headerlink" title="3.2    传递函数形式"></a>3.2    传递函数形式</h3><p>一阶惯性环节形如以下形式：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815000918.png"></p>
+<p>如何将上式改写成差分方程，需要按照下述流程。S域传递函数——Z域离散函数——差分方程。第一步先将其离散化。</p>
+<br/>
+
+
+
+<h3 id="3-3-离散化方法"><a href="#3-3-离散化方法" class="headerlink" title="3.3    离散化方法"></a>3.3    离散化方法</h3><h4 id="3-3-1-一阶向前差分"><a href="#3-3-1-一阶向前差分" class="headerlink" title="3.3.1    一阶向前差分"></a>3.3.1    一阶向前差分</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815001618.png"></p>
+<p>将传递函数中的s使用上式进行替换即可，接下来是推导过程。（T为离散化采样时间）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815094759.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815095003.png"></p>
+<br/>
+
+
+
+<h4 id="3-3-2-一阶向后差分"><a href="#3-3-2-一阶向后差分" class="headerlink" title="3.3.2    一阶向后差分"></a>3.3.2    一阶向后差分</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815001656.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815095224.png"></p>
+<br/>
+
+
+
+<h4 id="3-3-3-双线性变换"><a href="#3-3-3-双线性变换" class="headerlink" title="3.3.3    双线性变换"></a>3.3.3    双线性变换</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815001746.png"></p>
+<p>一阶向前、向后差分法的依据是积分的矩形法则，有时效果并不好，故出现了依据<strong>积分的梯形法则</strong>的双线性变换法（又称塔斯汀法）。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815095708.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815100030.png"></p>
+<br/>
+
+
+
+<h4 id="3-3-4-零阶保持器法"><a href="#3-3-4-零阶保持器法" class="headerlink" title="3.3.4    零阶保持器法"></a>3.3.4    零阶保持器法</h4><h4 id="3-3-5-一阶保持器法"><a href="#3-3-5-一阶保持器法" class="headerlink" title="3.3.5    一阶保持器法"></a>3.3.5    一阶保持器法</h4><h4 id="3-3-6-脉冲响应不变法"><a href="#3-3-6-脉冲响应不变法" class="headerlink" title="3.3.6    脉冲响应不变法"></a>3.3.6    脉冲响应不变法</h4><br/>
+
+
+
+<p>至此，<strong>将传递函数中的s全部替换，得到传递函数的离散域表示（即差分方程）</strong>。我们也可以使用matlab中的c2d函数来对传递函数离散化，调用格式如下。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[numZ denZ]=c2d(num,den,‘tustin’) <span class="comment">%bilinear method</span></span><br></pre></td></tr></table></figure>
+
+<p>c2d()中第一个参数为<code>s域传递函数</code>，第二个参数为<code>采样间隔时间</code>，第三个参数表示<code>离散的方法</code>。</p>
+<p>离散方法包括以下几种方法：</p>
+<ul>
+<li>zoh零阶保持器</li>
+<li>foh一阶保持器</li>
+<li>tustin双线性变换法</li>
+<li>matched零极点匹配法</li>
+<li>impulse脉冲响应不变法</li>
+</ul>
+<p>注意：得到的差分方程的表示如下，n必须大于等于m(<strong>因为未来时刻的信息无法获知</strong>)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815101623.png"></p>
+<p>与s域传递函数类似，z呈降幂排列，但是首相幂为0，无正幂项。</p>
+<p>式中：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815103101.png"></p>
+<p>表示前n个采样时刻的信号值。</p>
+<p>当从连续域到离散域的离散效果不好时，有如下改进的方法：</p>
+<ul>
+<li>选取更适合的离散化方法。</li>
+<li>提高采样频率。</li>
+<li>修正连续域设计，如增加稳定裕度指标等。</li>
+</ul>
+<br/>
+
+
+
+<h3 id="3-4-实例说明"><a href="#3-4-实例说明" class="headerlink" title="3.4    实例说明"></a>3.4    实例说明</h3><h4 id="3-4-1-实例一"><a href="#3-4-1-实例一" class="headerlink" title="3.4.1    实例一"></a>3.4.1    实例一</h4><p>假设当前我们获得的传递函数模型如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815001910.png"></p>
+<p>采用方法一：将模型中的s用方法一替代。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815002017.png"></p>
+<p>化简得：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815002108.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815002128.png"></p>
+<p>接下来根据以下转化关系：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815002255.png"></p>
+<p>上式可写成：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815002330.png"></p>
+<p>到此差分转换结束。其余变换可参考同样方法。</p>
+<br/>
+
+
+
+<h4 id="3-4-2-实例二"><a href="#3-4-2-实例二" class="headerlink" title="3.4.2    实例二"></a>3.4.2    实例二</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815105523.png"></p>
+<br/>
+
+
+
+<h3 id="3-5-Matlab辅助完成"><a href="#3-5-Matlab辅助完成" class="headerlink" title="3.5    Matlab辅助完成"></a>3.5    Matlab辅助完成</h3><p>s域的传递函数在matlab中可如此表示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815002504.png"></p>
+<p>通过如下方式获得Z变换形式：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815002542.png"></p>
+<p>分子分母同除以z，获得以下形式：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815002638.png"></p>
+<p>进一步：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815002733.png"></p>
+<p>其他情况可参考。暂时到这里结束，提醒一下，单片机中采用差分方程切记设置初值，初始化初值。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% 例2</span></span><br><span class="line">ts=<span class="number">0.001</span>;<span class="comment">%采样时间=0.001s </span></span><br><span class="line">sys=tf(<span class="number">400</span>,[<span class="number">1</span>,<span class="number">50</span>,<span class="number">0</span>]);<span class="comment">%建立被控对象传递函数 </span></span><br><span class="line">dsys=c2d(sys,ts,<span class="string">&#x27;z&#x27;</span>);<span class="comment">%把传递函数离散化（问题1） </span></span><br><span class="line">[num,den]=tfdata(dsys,<span class="string">&#x27;v&#x27;</span>);<span class="comment">%离散化后提取分子、分母</span></span><br></pre></td></tr></table></figure>
+
+
+
+<br/>
+
+
+
+<h3 id="3-6-使用不同离散化方法的影响"><a href="#3-6-使用不同离散化方法的影响" class="headerlink" title="3.6    使用不同离散化方法的影响"></a>3.6    使用不同离散化方法的影响</h3><p>下面我们首先使用不同离散化方法对传函G(s) = 1/(0.2s+1)进行离散，离散化采样时间Ts=0.05：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815115514.png"></p>
+<p>然后对比不同离散化方法后的bode图和未离散化的系统bode图：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815144242.png"></p>
+<p>从bode图中可以看出，前向差分法离散化以后偏离实际的系统更远，不能保证系统的稳定性。而后向差分法和双线性变换法，更接近未离散化的bode图，所以后向差分法和双线性变换法在工程中较为常用。</p>
+<br/>
+
+
+
+<h4 id="3-6-1-传递函数到单片机实现的例子"><a href="#3-6-1-传递函数到单片机实现的例子" class="headerlink" title="3.6.1    传递函数到单片机实现的例子"></a>3.6.1    传递函数到单片机实现的例子</h4><p>假设一个低通滤波器的传函为：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815144827.png"></p>
+<p>我们先用matlab看一下该传函的特性：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; num=<span class="number">1</span>;</span><br><span class="line">den=[<span class="number">6.687e-4</span>,<span class="number">1</span>];</span><br><span class="line">sys=tf(num,den);</span><br><span class="line">p=bodeoptions;</span><br><span class="line">p.FreqUnits= <span class="string">&#x27;Hz&#x27;</span>;</span><br><span class="line">bode(sys,p)</span><br></pre></td></tr></table></figure>
+
+<p>看一下它的bode图：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815145032.png"></p>
+<p>从图中可以看到该低通滤波器截止频率为237Hz，截止频率处相移位45度。</p>
+<p>我们也用simulink搭建一个仿真，验证下当该滤波器输入一个237Hz的正弦波时，输出是不是一个为-3dB衰减，且相移45度的正弦波。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815145340.png"></p>
+<p>波形如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815150357.png"></p>
+<p>图中sine Wave和sine Wave1两个波形相差90度，而滤波出来的Transfer Fcn波形可以正好相差45度，衰减-3dB。</p>
+<p><strong>我们现在用matlab对他进行离散化：</strong></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">num=<span class="number">1</span>;</span><br><span class="line">den=[<span class="number">6.687e-4</span>,<span class="number">1</span>];</span><br><span class="line">sys=tf(num,den);</span><br><span class="line">ts=<span class="number">64e-6</span>;</span><br><span class="line">&gt;&gt;  dsys=c2d(sys,ts,<span class="string">&#x27;z&#x27;</span>) <span class="comment">% 注意连续转离散（c2d），和离散转连续（d2c）的用法</span></span><br><span class="line"></span><br><span class="line">dsys =</span><br><span class="line"> </span><br><span class="line">   <span class="number">0.09127</span></span><br><span class="line">  ----------</span><br><span class="line">  z - <span class="number">0.9087</span></span><br></pre></td></tr></table></figure>
+
+<p>然后我们用simulink再搭建他对应的离散传递函数下的系统特性有没有变化：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815150217.png"></p>
+<p>采样时间为ts=64e^-6，波形如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815150504.png"></p>
+<p>从图中可以看出滤波出来的Discrete Transfer Fcn波形正好相差45度，衰减-3dB，所以它在离散下特性没变。</p>
+<p><strong>下面将离散域下的函数转化为差分方程：</strong></p>
+<p>假设输入为x，输出为y。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815150959.png"></p>
+<p>转化为上面的差分方程后，就可以在单片机中实现了，我们也可以在simulink中用sfun仿真，看下转化为数字滤波后的特性是否发生变化。同样输入幅值为1，频率为237Hz的正弦波，仿真如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815151402.png"></p>
+<p>sfun如下：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">y</span> = <span class="title">fcn</span><span class="params">(u)</span></span></span><br><span class="line"><span class="keyword">persistent</span> yl;  <span class="comment">%定义一个静态变量</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">isempty</span>(yl)  <span class="comment">%给静态变量赋初值</span></span><br><span class="line">   yl=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">persistent</span> ul;</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">isempty</span>(ul)</span><br><span class="line">    ul=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">y=<span class="number">0.9086</span>*yl+<span class="number">0.09136</span>*ul;</span><br><span class="line">yl=y;</span><br><span class="line">ul=u;</span><br></pre></td></tr></table></figure>
+
+<p>仿真波形如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815151641.png"></p>
+<p>从图中可以看出滤波出来的Matlab Function波形正好相差45度，衰减-3dB。</p>
+<p>注意：可能有的人会问，一阶低通滤波器的差分方程的形式不应该是：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815151912.png"></p>
+<p>是的，这个是用一阶后项差分法离散后得出的差分方程。</p>
+<p>因为没有找到，matlab中传递函数怎么进行一阶后项差分离散（也就是用 s = (1-z^-1) / Ts 替代），其实我们也可以定义符号变量进行替代。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; syms s z Ts;<span class="comment">%定义符号变量 </span></span><br><span class="line">s=(<span class="number">1</span>-z^<span class="number">-1</span>)/Ts;<span class="comment">%一阶后项差分</span></span><br><span class="line">sys=<span class="number">1</span>/(s+<span class="number">1</span>);</span><br><span class="line">subs(sys,[s],[z])<span class="comment">%传递函数中用z替代s</span></span><br><span class="line"> </span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line"> </span><br><span class="line"><span class="number">-1</span>/((<span class="number">1</span>/z - <span class="number">1</span>)/Ts - <span class="number">1</span>) <span class="comment">%这里我们可以对符号表达式进行各种化简</span></span><br><span class="line">                      <span class="comment">%参见matlab符号表达式的化简常用命令函数</span></span><br><span class="line"> simplify(<span class="built_in">ans</span>) <span class="comment">%对结果进行化简</span></span><br><span class="line">                     </span><br><span class="line"> </span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line"> </span><br><span class="line">(Ts*z)/(z + Ts*z - <span class="number">1</span>)</span><br><span class="line"> </span><br><span class="line">&gt;&gt; pretty(<span class="built_in">ans</span>)<span class="comment">%美化下结果</span></span><br><span class="line">    Ts z</span><br><span class="line">------------</span><br><span class="line">z + Ts z - <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>化成差分方程的形式：(化简后的公式，第二个+号改为×号)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815153330.png"></p>
+<p>以上整个就是传递函数的离散化的单片机实现过程了。</p>
+<br/>
+
+
+
+<h3 id="3-7-二阶以上传函的离散化（使用状态方程的方式）"><a href="#3-7-二阶以上传函的离散化（使用状态方程的方式）" class="headerlink" title="3.7    二阶以上传函的离散化（使用状态方程的方式）"></a>3.7    二阶以上传函的离散化（使用状态方程的方式）</h3><blockquote>
+<p>传递函数要编程实现，就必须先进行离散化。前面我们介绍了一阶传递函数的离散化，其过程比较简单。那么对于二阶及二阶以上的传递函数怎么离散化呢？我们可以把传递函数转化为状态方程，这样就可以变成多个一阶的传递函数，然后再进行离散化。</p>
+<p>传递函数离散化步骤：</p>
+<ol>
+<li>传递函数转化为状态方程。</li>
+<li>状态方程离散化。</li>
+</ol>
+</blockquote>
+<h4 id="3-7-1-传递函数转化为状态方程"><a href="#3-7-1-传递函数转化为状态方程" class="headerlink" title="3.7.1    传递函数转化为状态方程"></a>3.7.1    传递函数转化为状态方程</h4><p>这里我们举一个简单的例子，把下面的传递函数转化为状态方程的形式：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815155034.png"></p>
+<p>这里我们借助matlab工具求解，代码如下：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; num=[<span class="number">2</span> <span class="number">1</span>];</span><br><span class="line">&gt;&gt; den=[<span class="number">1</span> <span class="number">7</span> <span class="number">9</span>];</span><br><span class="line">&gt;&gt; sys=tf(num,den)</span><br><span class="line"></span><br><span class="line">sys =</span><br><span class="line"> </span><br><span class="line">     <span class="number">2</span> s + <span class="number">1</span></span><br><span class="line">  -------------</span><br><span class="line">  s^<span class="number">2</span> + <span class="number">7</span> s + <span class="number">9</span></span><br><span class="line"> </span><br><span class="line">Continuous-time transfer <span class="keyword">function</span>.</span><br><span class="line"></span><br><span class="line">&gt;&gt; [A B C D]=tf2ss(num,den)</span><br><span class="line"></span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">    <span class="number">-7</span>    <span class="number">-9</span></span><br><span class="line">     <span class="number">1</span>     <span class="number">0</span></span><br><span class="line"></span><br><span class="line">B =</span><br><span class="line"></span><br><span class="line">     <span class="number">1</span></span><br><span class="line">     <span class="number">0</span></span><br><span class="line"></span><br><span class="line">C =</span><br><span class="line"></span><br><span class="line">     <span class="number">2</span>     <span class="number">1</span></span><br><span class="line"></span><br><span class="line">D =</span><br><span class="line"></span><br><span class="line">     <span class="number">0</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; </span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815155416.png"></p>
+<br/>
+
+
+
+<h4 id="3-7-2-状态方程离散化"><a href="#3-7-2-状态方程离散化" class="headerlink" title="3.7.2    状态方程离散化"></a>3.7.2    状态方程离散化</h4><p>我们把上面的状态方程离散化，写出matlab function模块仿真如下：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">y</span> = <span class="title">fcn</span><span class="params">(u,Ts)</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">persistent</span> x1 x2;</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">isempty</span>(x1)</span><br><span class="line">    x1=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">isempty</span>(x2)</span><br><span class="line">    x2=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">x1 = x1 + Ts*x2;</span><br><span class="line">x2 = x2 + Ts*(<span class="number">-9</span>*x1<span class="number">-7</span>*x2+u);</span><br><span class="line">y = x1+<span class="number">2</span>*x2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+
+
+<br/>
+
+
+
+<h4 id="3-7-3-传递函数离散化的仿真验证"><a href="#3-7-3-传递函数离散化的仿真验证" class="headerlink" title="3.7.3    传递函数离散化的仿真验证"></a>3.7.3    传递函数离散化的仿真验证</h4><p>我们把上面例子中的传递函数，状态方程和离散化的代码进行仿真验证下查看其阶跃响应：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815160143.png"></p>
+<p>三种方式的阶跃响应结果完全重合如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-13-PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/20240815160324.png"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://www.kazama.top">KAZAMA</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.kazama.top/2024/08/13/PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/">http://www.kazama.top/2024/08/13/PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.kazama.top" target="_blank">KAZAMAのBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Matlab/">Matlab</a></div><div class="post_share"><div class="social-share" data-image="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列10" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/wechat.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/08/14/%E6%95%B4%E6%B5%81%E6%A1%A5%E5%8F%8A%E4%B8%89%E7%9B%B8PWM%E6%95%B4%E6%B5%81%E5%99%A8%E5%8E%9F%E7%90%86/" title="整流桥及三相PWM整流器原理"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列1" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">整流桥及三相PWM整流器原理</div></div></a></div><div class="next-post pull-right"><a href="/2024/08/10/Matlab%E7%BB%98%E5%88%B6Bode%E5%9B%BE%E5%8F%8ABode%E5%9B%BE%E5%88%86%E6%9E%90%E7%B3%BB%E7%BB%9F%E6%80%A7%E8%83%BD/" title="Matlab绘制Bode图及Bode图分析系统性能"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列9" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Matlab绘制Bode图及Bode图分析系统性能</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/08/01/Matlab%E4%B9%8BSimulink%E4%B8%AD%E7%9A%84sum%E6%A8%A1%E5%9D%97%E7%AC%A6%E5%8F%B7%E5%88%86%E5%B8%83/" title="Matlab之Simulink中的sum模块符号分布"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列9" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-01</div><div class="title">Matlab之Simulink中的sum模块符号分布</div></div></a></div><div><a href="/2024/08/01/Matlab%E6%A8%A1%E5%9D%97%E5%AD%A6%E4%B9%A0/" title="Matlab模块学习"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列10" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-01</div><div class="title">Matlab模块学习</div></div></a></div><div><a href="/2024/08/02/%E5%8D%95%E7%89%87%E6%9C%BAADC%E9%87%87%E6%A0%B7%E7%AE%97%E6%B3%95%E6%9C%89%E6%95%88%E5%80%BC%E9%87%87%E6%A0%B7%E6%B3%95/" title="单片机ADC采样算法有效值采样法"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列10" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-02</div><div class="title">单片机ADC采样算法有效值采样法</div></div></a></div><div><a href="/2024/08/04/%E5%A6%82%E4%BD%95%E5%9C%A8Simulink%E4%B8%AD%E4%BD%BF%E7%94%A8PID_Tuner%E8%BF%9B%E8%A1%8CPID%E8%B0%83%E5%8F%82/" title="如何在Simulink中使用PID_Tuner进行PID调参"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列2" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-04</div><div class="title">如何在Simulink中使用PID_Tuner进行PID调参</div></div></a></div><div><a href="/2024/08/06/%E6%A0%B9%E6%8D%AE%E7%A6%BB%E6%95%A3%E7%82%B9%E7%94%A8matlab%E6%8B%9F%E5%90%88%E5%87%BA%E5%85%B6%E5%AF%B9%E5%BA%94%E7%9A%84%E5%87%BD%E6%95%B0/" title="根据离散点用matlab拟合出其对应的函数"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列4" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-06</div><div class="title">根据离散点用matlab拟合出其对应的函数</div></div></a></div><div><a href="/2024/08/03/Qt%E7%9A%845%E7%A7%8D%E5%AF%B9%E8%AF%9D%E6%A1%86%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/" title="Qt的5种对话框使用详解"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列1" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-03</div><div class="title">Qt的5种对话框使用详解</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列3" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">KAZAMA</div><div class="author-info__description">技术记录,个人分享,学习备忘</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">387</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/KAZAMA-DREAM"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/KAZAMA-DREAM" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/wyy1778789301@163.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96"><span class="toc-text">PID传递函数模块及Matlab调试和传递函数离散化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-simulink%E4%B8%AD%E5%BE%AE%E5%88%86%E6%A8%A1%E5%9D%97%E3%80%81%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E4%BD%BF%E7%94%A8"><span class="toc-text">1    simulink中微分模块、传递函数模块使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E7%A7%AF%E5%88%86%E3%80%81%E5%BE%AE%E5%88%86%E6%A8%A1%E5%9D%97"><span class="toc-text">1.1    积分、微分模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E4%BD%BF%E7%94%A8%E5%8F%8A%E4%B8%BE%E4%BE%8B%E5%BA%94%E7%94%A8"><span class="toc-text">1.2    传递函数模块使用及举例应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-Matlab%E4%B8%AD%E6%B3%A2%E7%89%B9%E5%9B%BE%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">1.3    Matlab中波特图使用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-PID%E6%8E%A7%E5%88%B6%E5%8F%82%E6%95%B0Matlab%E8%B0%83%E8%AF%95"><span class="toc-text">2    PID控制参数Matlab调试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%BA%8F"><span class="toc-text">2.1    序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-P%E5%8F%82%E6%95%B0%E9%80%89%E5%8F%96"><span class="toc-text">2.2    P参数选取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-I%E7%9A%84%E8%B0%83%E8%8A%82"><span class="toc-text">2.3    I的调节</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-D%E7%9A%84%E8%B0%83%E8%8A%82"><span class="toc-text">2.4    D的调节</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E6%80%BB%E7%BB%93"><span class="toc-text">2.5    总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E5%A6%82%E4%BD%95%E7%A6%BB%E6%95%A3%E5%8C%96%E8%BD%AC%E5%8C%96%E4%B8%BA%E5%B7%AE%E5%88%86%E6%96%B9%E7%A8%8B"><span class="toc-text">3    传递函数如何离散化转化为差分方程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%89%8D%E8%A8%80"><span class="toc-text">3.1    前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E5%BD%A2%E5%BC%8F"><span class="toc-text">3.2    传递函数形式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E7%A6%BB%E6%95%A3%E5%8C%96%E6%96%B9%E6%B3%95"><span class="toc-text">3.3    离散化方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-1-%E4%B8%80%E9%98%B6%E5%90%91%E5%89%8D%E5%B7%AE%E5%88%86"><span class="toc-text">3.3.1    一阶向前差分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-2-%E4%B8%80%E9%98%B6%E5%90%91%E5%90%8E%E5%B7%AE%E5%88%86"><span class="toc-text">3.3.2    一阶向后差分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-3-%E5%8F%8C%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2"><span class="toc-text">3.3.3    双线性变换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-4-%E9%9B%B6%E9%98%B6%E4%BF%9D%E6%8C%81%E5%99%A8%E6%B3%95"><span class="toc-text">3.3.4    零阶保持器法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-5-%E4%B8%80%E9%98%B6%E4%BF%9D%E6%8C%81%E5%99%A8%E6%B3%95"><span class="toc-text">3.3.5    一阶保持器法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-6-%E8%84%89%E5%86%B2%E5%93%8D%E5%BA%94%E4%B8%8D%E5%8F%98%E6%B3%95"><span class="toc-text">3.3.6    脉冲响应不变法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E5%AE%9E%E4%BE%8B%E8%AF%B4%E6%98%8E"><span class="toc-text">3.4    实例说明</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-1-%E5%AE%9E%E4%BE%8B%E4%B8%80"><span class="toc-text">3.4.1    实例一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-2-%E5%AE%9E%E4%BE%8B%E4%BA%8C"><span class="toc-text">3.4.2    实例二</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-Matlab%E8%BE%85%E5%8A%A9%E5%AE%8C%E6%88%90"><span class="toc-text">3.5    Matlab辅助完成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6-%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%90%8C%E7%A6%BB%E6%95%A3%E5%8C%96%E6%96%B9%E6%B3%95%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-text">3.6    使用不同离散化方法的影响</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-6-1-%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E5%88%B0%E5%8D%95%E7%89%87%E6%9C%BA%E5%AE%9E%E7%8E%B0%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-text">3.6.1    传递函数到单片机实现的例子</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-7-%E4%BA%8C%E9%98%B6%E4%BB%A5%E4%B8%8A%E4%BC%A0%E5%87%BD%E7%9A%84%E7%A6%BB%E6%95%A3%E5%8C%96%EF%BC%88%E4%BD%BF%E7%94%A8%E7%8A%B6%E6%80%81%E6%96%B9%E7%A8%8B%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%89"><span class="toc-text">3.7    二阶以上传函的离散化（使用状态方程的方式）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-7-1-%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E8%BD%AC%E5%8C%96%E4%B8%BA%E7%8A%B6%E6%80%81%E6%96%B9%E7%A8%8B"><span class="toc-text">3.7.1    传递函数转化为状态方程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-7-2-%E7%8A%B6%E6%80%81%E6%96%B9%E7%A8%8B%E7%A6%BB%E6%95%A3%E5%8C%96"><span class="toc-text">3.7.2    状态方程离散化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-7-3-%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96%E7%9A%84%E4%BB%BF%E7%9C%9F%E9%AA%8C%E8%AF%81"><span class="toc-text">3.7.3    传递函数离散化的仿真验证</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/08/14/%E6%95%B4%E6%B5%81%E6%A1%A5%E5%8F%8A%E4%B8%89%E7%9B%B8PWM%E6%95%B4%E6%B5%81%E5%99%A8%E5%8E%9F%E7%90%86/" title="整流桥及三相PWM整流器原理"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列1" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="整流桥及三相PWM整流器原理"/></a><div class="content"><a class="title" href="/2024/08/14/%E6%95%B4%E6%B5%81%E6%A1%A5%E5%8F%8A%E4%B8%89%E7%9B%B8PWM%E6%95%B4%E6%B5%81%E5%99%A8%E5%8E%9F%E7%90%86/" title="整流桥及三相PWM整流器原理">整流桥及三相PWM整流器原理</a><time datetime="2024-08-14T12:17:07.000Z" title="发表于 2024-08-14 20:17:07">2024-08-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/08/13/PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/" title="PID传递函数模块及Matlab调试和传递函数离散化"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列10" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="PID传递函数模块及Matlab调试和传递函数离散化"/></a><div class="content"><a class="title" href="/2024/08/13/PID%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9D%97%E5%8F%8AMatlab%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E7%A6%BB%E6%95%A3%E5%8C%96/" title="PID传递函数模块及Matlab调试和传递函数离散化">PID传递函数模块及Matlab调试和传递函数离散化</a><time datetime="2024-08-13T12:17:07.000Z" title="发表于 2024-08-13 20:17:07">2024-08-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/08/10/Matlab%E7%BB%98%E5%88%B6Bode%E5%9B%BE%E5%8F%8ABode%E5%9B%BE%E5%88%86%E6%9E%90%E7%B3%BB%E7%BB%9F%E6%80%A7%E8%83%BD/" title="Matlab绘制Bode图及Bode图分析系统性能"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列9" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Matlab绘制Bode图及Bode图分析系统性能"/></a><div class="content"><a class="title" href="/2024/08/10/Matlab%E7%BB%98%E5%88%B6Bode%E5%9B%BE%E5%8F%8ABode%E5%9B%BE%E5%88%86%E6%9E%90%E7%B3%BB%E7%BB%9F%E6%80%A7%E8%83%BD/" title="Matlab绘制Bode图及Bode图分析系统性能">Matlab绘制Bode图及Bode图分析系统性能</a><time datetime="2024-08-10T12:17:07.000Z" title="发表于 2024-08-10 20:17:07">2024-08-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/08/09/%E4%B8%89%E7%9B%B8LCL%E5%8F%98%E6%B5%81%E5%99%A8%E7%94%B5%E6%B5%81%E7%8E%AF%E5%BB%BA%E6%A8%A1%E5%8F%8A%E7%94%B5%E6%B5%81%E9%97%AD%E7%8E%AF%E6%8E%A7%E5%88%B6%E6%8E%A2%E7%B4%A2/" title="三相LCL变流器电流环建模及电流闭环控制探索"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="三相LCL变流器电流环建模及电流闭环控制探索"/></a><div class="content"><a class="title" href="/2024/08/09/%E4%B8%89%E7%9B%B8LCL%E5%8F%98%E6%B5%81%E5%99%A8%E7%94%B5%E6%B5%81%E7%8E%AF%E5%BB%BA%E6%A8%A1%E5%8F%8A%E7%94%B5%E6%B5%81%E9%97%AD%E7%8E%AF%E6%8E%A7%E5%88%B6%E6%8E%A2%E7%B4%A2/" title="三相LCL变流器电流环建模及电流闭环控制探索">三相LCL变流器电流环建模及电流闭环控制探索</a><time datetime="2024-08-09T12:17:07.000Z" title="发表于 2024-08-09 20:17:07">2024-08-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/08/08/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" title="深入浅出通信原理"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列6" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="深入浅出通信原理"/></a><div class="content"><a class="title" href="/2024/08/08/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" title="深入浅出通信原理">深入浅出通信原理</a><time datetime="2024-08-08T12:17:07.000Z" title="发表于 2024-08-08 20:17:07">2024-08-08</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列10')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By KAZAMA</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
