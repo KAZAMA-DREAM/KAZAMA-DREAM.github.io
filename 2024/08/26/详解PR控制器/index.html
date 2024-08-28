@@ -1,0 +1,429 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>详解PR控制器 | KAZAMAのBlog</title><meta name="author" content="KAZAMA,wyy1778789301@163.com"><meta name="copyright" content="KAZAMA"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="本篇教你详解PR控制器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="详解PR控制器">
+<meta property="og:url" content="http://www.kazama.top/2024/08/26/%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/index.html">
+<meta property="og:site_name" content="KAZAMAのBlog">
+<meta property="og:description" content="本篇教你详解PR控制器">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列7">
+<meta property="article:published_time" content="2024-08-26T12:17:07.000Z">
+<meta property="article:modified_time" content="2024-08-26T12:17:07.000Z">
+<meta property="article:author" content="KAZAMA">
+<meta property="article:tag" content="PR控制器">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列7"><link rel="shortcut icon" href="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列1"><link rel="canonical" href="http://www.kazama.top/2024/08/26/%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '详解PR控制器',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-08-26 20:17:07'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列3" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">393</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">35</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/share/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列7')"><nav id="nav"><span id="blog-info"><a href="/" title="KAZAMAのBlog"><span class="site-name">KAZAMAのBlog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/share/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">详解PR控制器</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-26T12:17:07.000Z" title="发表于 2024-08-26 20:17:07">2024-08-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-08-26T12:17:07.000Z" title="更新于 2024-08-26 20:17:07">2024-08-26</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>24分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="详解PR控制器"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="详解PR控制器"><a href="#详解PR控制器" class="headerlink" title="详解PR控制器"></a>详解PR控制器</h1><h2 id="1-PR控制以及使用PR控制用于单相离-并网逆变器"><a href="#1-PR控制以及使用PR控制用于单相离-并网逆变器" class="headerlink" title="1    PR控制以及使用PR控制用于单相离/并网逆变器"></a>1    PR控制以及使用PR控制用于单相离/并网逆变器</h2><h3 id="1-0-前言"><a href="#1-0-前言" class="headerlink" title="1.0    前言"></a>1.0    前言</h3><p>在一个闭环控制系统中，可分为输入参考值、闭环控制器、执行机构、输出参数，反馈系数，这几个部分。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240827091508.png"></p>
+<p>设计一款控制器，可以让系统的输出参数跟踪输入参考值，达到了控制的目的。在直流控制系统中，常用的控制器就是比例微分积分（Proportion Integration Defferentiation，PID）控制器了。然而，在交流系统中，PID控制器由于对高频信号的跟踪性能较差，并不能满足设计要求。而PR控制器，对特定频率信号的跟踪效果是良好的。</p>
+<br/>
+
+
+
+<h3 id="1-1-基本知识"><a href="#1-1-基本知识" class="headerlink" title="1.1    基本知识"></a>1.1    基本知识</h3><p><strong>PR控制器原理：</strong></p>
+<p>系统在双闭环控制过程中通常使用传统的PI控制器，但是电网在基波处的增益是有限值，PI控制器能够实现对直流信号的无静差追踪，却并不能在正弦信号的追踪过程中实现无静差，相应产生的稳态误差会造成追踪电流在有效值幅值和相位上的误差。电流有效值幅值上的误差，可以通过增大控制器的比例系数，相应的增大基波频率的增益来实现，但是并不能完全的消除误差，仍是有差调节。在幅值误差得到有效改善的情况下，系统的误差主要表现为相位误差，需要通过控制器的改进来减小相位的误差值。</p>
+<p>根据PR控制器在跟踪控制方面的优势，用PR控制器替代PI控制器，在系统加载冲击性负载时，可以有很好的响应速度，保证了系统良好的动态稳定性。</p>
+<p>下面给出 PR 控制器的传递函数以及对应的基波频率处的增益:</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826160517.png"></p>
+<p>根据（1）（2）可以看出，由于基波频率处的增益趋于无穷大，使系统在追踪固定频率正弦信号时能够实现无静差追踪。</p>
+<br/>
+
+
+
+<p>PR控制的传递函数形式为：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826141822.png"></p>
+<p>利用matlab绘制一下该传递函数的幅频响应，是在谐振频率ω = ωo的频率点增益无穷大，且没有相位滞后。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826142025.png"></p>
+<p>根据PR控制器上述的特性，我们可以设计<strong>谐振频率等于电网的角频率</strong>，使<strong>电网基波信号增益无穷大而其他频段增益小</strong>，从而应用在交流电路的控制中。</p>
+<p>至于为什么不用传统的<strong>PI控制</strong>，其原因是<strong>PI控制器对于交流信号的控制性能差，对直流信号的跟踪性能好，直流信号增益无穷</strong>。因此DC-DC变换中多采用PI控制，而在交流中也可以通过DQ坐标变换，将<strong>需要控制的交流信号变换为直流信号</strong>，再用直流控制器PI控制旋转坐标系下的d轴分量与q轴分量，从而间接控制交流量的效果。</p>
+<p>总而言之，<strong>PI是直流信号控制器，PR是交流控制器</strong>。</p>
+<br/>
+
+
+
+<h3 id="1-2-实际使用"><a href="#1-2-实际使用" class="headerlink" title="1.2    实际使用"></a>1.2    实际使用</h3><p>实际应用中，虽然 PR 控制在基波频率处拥有较高 的增益,但是相角裕度较小,带宽较窄,引起系统发生振荡，容易造成控制器谐振频率的偏移,影响系统稳定。由于电网频率不会严格的等于50Hz，难免存在波动，因此前文提到的PR控制器在电网频率稍微偏离50Hz，增益大幅衰减。为增加相角裕度和带宽宽度、控制的鲁棒性，可以通过添加增益较高的低通滤波器实现，增加截止频率ωc，改写传递函数为：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826143148.png"></p>
+<p>修改后的PR控制器，亦称为<strong>准比例谐振控制</strong>（Quasis Proportional Resonant），在谐振频率附近的小范围内，仍然具有高增益，因此能适用电网频率波动的情况。</p>
+<p>增加了2ωr之后，减小了谐振频率处的增益，但是却在谐振频率附近形成了一个具有较大增益的频带，由此减小频率偏移带来的影响。</p>
+<p>你可以改变 ωrωr，通过在MATLAB中运行如下代码来亲自感受一下：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">s = tf([<span class="number">1</span>, <span class="number">0</span>], <span class="number">1</span>) ;</span><br><span class="line"></span><br><span class="line">Kp = <span class="number">15</span> ;</span><br><span class="line">Kr = <span class="number">2000</span> ;</span><br><span class="line">wr = <span class="number">50</span> * <span class="number">2</span> * <span class="built_in">pi</span> ;</span><br><span class="line">wi = <span class="built_in">pi</span> ;</span><br><span class="line"></span><br><span class="line">G_PR = Kp + Kr * s / (s^<span class="number">2</span> + wr^<span class="number">2</span>)</span><br><span class="line"><span class="built_in">figure</span></span><br><span class="line">bode(G_PR)</span><br><span class="line"></span><br><span class="line">G_QPR = Kp + <span class="number">2</span> * wi * Kr * s / (s^<span class="number">2</span> + <span class="number">2</span> * wi * s +  wr^<span class="number">2</span>)</span><br><span class="line"><span class="built_in">figure</span></span><br><span class="line">bode(G_QPR)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>至此，我们发现应用准谐振控制时需要整定3个参数，Kp、Kr、ωc。先回顾PID的三个参数。</p>
+<ul>
+<li>P因子，决定响应速度。</li>
+<li>I因子，决定稳态误差。</li>
+<li>D因子，决定抗扰能力。</li>
+</ul>
+<p>而通常在电力电子中多用PI控制，电力传动有PI也有PD。PI控制电机无静差调速，可用于舵机消除抖动。</p>
+<p>式中:Kp，Kr，ωc 为控制器参数，ω0=314 rad/s。</p>
+<p>PI 控制PR控制和准 PR 控制的频率特性如图所示。</p>
+<p>kp=10，ki = kr = 100；</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826161905.png"></p>
+<p>图中，PI 控制器在基波频率处的增益几乎为零,而PR控制器与准PR 控制器在基波频率处的增益却很大, 且具有相似的频率特性,可以在指定的频率下对稳态误差 进行有效的消除,故可利用准PR控制器来代替PI控制器,从而在消除幅值误差的同时消除相位误差,做到对指 定信号的准确追踪,消除了稳态误差。</p>
+<p><strong>波特图详细对比</strong></p>
+<p>下图是当Kp分别取为1、10、100，Ki=10时PI控制器的波特图（蓝色是Kp=1，绿色是Kp=10，红色是Kp=100）。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826172603.png"></p>
+<p>附上实现代码：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% this is Matlab code:</span></span><br><span class="line">Ki=<span class="number">10</span>;</span><br><span class="line">Kp=<span class="number">1</span>;</span><br><span class="line">PIs1=tf([Kp,Ki],[<span class="number">1</span>,<span class="number">0</span>])</span><br><span class="line">Kp=<span class="number">10</span>;</span><br><span class="line">PIs2=tf([Kp,Ki],[<span class="number">1</span>,<span class="number">0</span>])</span><br><span class="line">Kp=<span class="number">100</span>;</span><br><span class="line">PIs3=tf([Kp,Ki],[<span class="number">1</span>,<span class="number">0</span>])</span><br><span class="line">bode(PIs1,PIs2,PIs3)</span><br><span class="line">title(<span class="string">&#x27;Bode Diagram of PI: Kp=1,10,100. Ki=10&#x27;</span>)</span><br><span class="line">grid on</span><br></pre></td></tr></table></figure>
+
+<p>下图是当Kp=1，Ki分别取为1、10、100时PI控制器的波特图（蓝色是Ki=1，绿色是Ki=10，红色是Ki=100）。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826172701.png"></p>
+<p>附上实现代码：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Kp=<span class="number">1</span></span><br><span class="line">Ki=<span class="number">1</span></span><br><span class="line">PIs1=tf([Kp,Ki],[<span class="number">1</span>,<span class="number">0</span>])</span><br><span class="line">Ki=<span class="number">10</span></span><br><span class="line">PIs2=tf([Kp,Ki],[<span class="number">1</span>,<span class="number">0</span>])</span><br><span class="line">Ki=<span class="number">100</span></span><br><span class="line">PIs3=tf([Kp,Ki],[<span class="number">1</span>,<span class="number">0</span>])</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">2</span>)</span><br><span class="line">bode(PIs1,PIs2,PIs3)</span><br><span class="line">grid on</span><br><span class="line">title(<span class="string">&#x27;Bode Diagram of PI: Kp=1. Ki=1,10,100&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，PI控制器对高频信号的增益会较低，而对低频信号会有较大的放大作用。假如使用PI控制器对50Hz及以上（角频率314rad/sec）的正弦波进行跟踪，系统的跟踪特性会较差。而且会把低频噪声放大。</p>
+<p>下图是当Kp分别取为1、10、100，Kr=1时理想的PR控制器的波特图（蓝色是Kp=1，绿色是Kp=10，红色是Kp=100）。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826172812.png"></p>
+<p>附实现代码：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Kr=<span class="number">1</span>;</span><br><span class="line">Kp=<span class="number">1</span>;</span><br><span class="line">PR_ideal1 = Kp + tf([Kr,<span class="number">0</span>],[<span class="number">1</span>,<span class="number">0</span>,wo^<span class="number">2</span>])</span><br><span class="line">Kp=<span class="number">10</span>;</span><br><span class="line">PR_ideal2 = Kp + tf([Kr,<span class="number">0</span>],[<span class="number">1</span>,<span class="number">0</span>,wo^<span class="number">2</span>])</span><br><span class="line">Kp=<span class="number">100</span>;</span><br><span class="line">PR_ideal3 = Kp + tf([Kr,<span class="number">0</span>],[<span class="number">1</span>,<span class="number">0</span>,wo^<span class="number">2</span>])</span><br><span class="line">bode(PR_ideal1,PR_ideal2,PR_ideal3)</span><br><span class="line">grid on</span><br><span class="line">title(<span class="string">&#x27;Bode Diagram of ideal PR: Kp = 1,10,100. Kr = 1&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>下图是当Kp=1，Kr分别取为1、10、100时理想的PR控制器的波特图（蓝色是Kr=1，绿色是Kr=10，红色是Kr=100）。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826172910.png"></p>
+<p>附实现代码:</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Kp=<span class="number">1</span>;</span><br><span class="line">Kr=<span class="number">1</span>;</span><br><span class="line">PR_ideal1 = Kp + tf([Kr,<span class="number">0</span>],[<span class="number">1</span>,<span class="number">0</span>,wo^<span class="number">2</span>])</span><br><span class="line">Kr=<span class="number">10</span>;</span><br><span class="line">PR_ideal2 = Kp + tf([Kr,<span class="number">0</span>],[<span class="number">1</span>,<span class="number">0</span>,wo^<span class="number">2</span>])</span><br><span class="line">Kr=<span class="number">100</span>;</span><br><span class="line">PR_ideal3 = Kp + tf([Kr,<span class="number">0</span>],[<span class="number">1</span>,<span class="number">0</span>,wo^<span class="number">2</span>])</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">4</span>)</span><br><span class="line">bode(PR_ideal1,PR_ideal2,PR_ideal3)</span><br><span class="line">grid on</span><br><span class="line">title(<span class="string">&#x27;Bode Diagram of ideal PR: Kp = 1. Kr = 1,10,100&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>上面理想PR的波特图，可以看到就算调整PR的参数，波形也没什么大的变化。在实际使用中，可能进行实时调参的。图像变化这么小，跟踪效果也不会好。</p>
+<p>接下来看看实际使用的PR控制器的波特图。</p>
+<p>下图是当Kp分别取为1、10、100，Kr=1时实际的PR控制器的波特图（蓝色是Kp=1，绿色是Kp=10，红色是Kp=100）。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826173030.png"></p>
+<p>附实现代码：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Kr=<span class="number">1</span>;</span><br><span class="line">Kp=<span class="number">1</span>;</span><br><span class="line">PR1=Kp+tf([<span class="number">2</span>*Kr*wc,<span class="number">0</span>],[<span class="number">1</span>,<span class="number">2</span>*wc,wo^<span class="number">2</span>])</span><br><span class="line">Kp=<span class="number">10</span>;</span><br><span class="line">PR2=Kp+tf([<span class="number">2</span>*Kr*wc,<span class="number">0</span>],[<span class="number">1</span>,<span class="number">2</span>*wc,wo^<span class="number">2</span>])</span><br><span class="line">Kp=<span class="number">100</span>;</span><br><span class="line">PR3=Kp+tf([<span class="number">2</span>*Kr*wc,<span class="number">0</span>],[<span class="number">1</span>,<span class="number">2</span>*wc,wo^<span class="number">2</span>])</span><br><span class="line">bode(PR1,PR2,PR3)</span><br><span class="line">grid on</span><br><span class="line">title(<span class="string">&#x27;Bode Diagram of actual PR: Kp = 1,10,100. Kr = 1&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>下图是当Kp=1，Kr分别取为1、10、100时实际的PR控制器的波特图（蓝色是Kr=1，绿色是Kr=10，红色是Kr=100）。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240827000318.png"></p>
+<p>附实现代码：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Kp=<span class="number">1</span>;</span><br><span class="line">Kr=<span class="number">1</span>;</span><br><span class="line">PR1=Kp+tf([<span class="number">2</span>*Kr*wc,<span class="number">0</span>],[<span class="number">1</span>,<span class="number">2</span>*wc,wo^<span class="number">2</span>])</span><br><span class="line">Kr=<span class="number">10</span>;</span><br><span class="line">PR2=Kp+tf([<span class="number">2</span>*Kr*wc,<span class="number">0</span>],[<span class="number">1</span>,<span class="number">2</span>*wc,wo^<span class="number">2</span>])</span><br><span class="line">Kr=<span class="number">100</span>;</span><br><span class="line">PR3=Kp+tf([<span class="number">2</span>*Kr*wc,<span class="number">0</span>],[<span class="number">1</span>,<span class="number">2</span>*wc,wo^<span class="number">2</span>])</span><br><span class="line">bode(PR1,PR2,PR3)</span><br><span class="line">grid on</span><br><span class="line">title(<span class="string">&#x27;Bode Diagram of actual PR: Kp = 1. Kr = 1,10,100&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>PI和PR的Kp作用类似，都是增大开环增益，增加控制精度。</p>
+<p>Ki和Kr作用类似：降低系统稳态误差。</p>
+<p><strong>准PR控制器的设计</strong></p>
+<p>通过对准PR控制器的传递函数的分析,可以明确在 控制器参数的设计过程中,主要是对 Kp ,Kr,ωc 进行选 择,所以本文首先使用控制变量的方法来对各个参数的作用进行分析。</p>
+<p>首先令 Kp2 =0,ωc =1,同时使 Kr 不断变化,对应的频 率特性如图 4 所示。<br>Kr1=10<br>Kr2=100<br>Kr3=1000<br>Kr4=10000</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826162301.png"></p>
+<p>由图 可知,在参数 Kr 的变化过程中,只有控制器的增益相应的进行变化,并且随着 Kr 的增大,控制器的增益 增大的同时,稳定性不断加强,但却不会对控制器的带宽 造成影响。然而 Kr 增大到一定程度就会引起谐波分量的放大,所以要合理的选择参数 Kr,既满足基波频率处有较 大的增益,又能具有一定的衰减性。</p>
+<p>令 Kp=0,Kr=1,ωc 进行不断变化,对应的频率特性如图所示。<br>Wc =1,<br>Wc =5,<br>Wc =15，<br>Wc =30,<br>Wc =50，</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826162616.png"></p>
+<p>从图 5 中可得,在参数ωc 变化过程中,控制器的增益与带宽同时发生变化,说明ωc 对两者都存在相关性,虽然 随着ωc 的增大,控制器基波频率处的增益未发生改变,但 控制器非基波频率处的增益和带宽却同时变大,所以参数 ωc 的选择需要根据频率的波动和控制器带宽的需求共同决定。</p>
+<p>在分析 Kp变化之前,先令 Kp =0,并将 jω=s 带入到H(s)中,得到</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826162929.png"></p>
+<p>令上式中的ω0/2ωc=Q,则 Q 看作 PR 控制器谐振环节 的品质系数。<br>设电网允许的频率波动是±0.5 Hz,此时的控制器带 宽为 d=1 Hz，<br>,在 |Q （ω/ω0 -ω0/ ω） | =1 时可得频率之间相差带宽为 d = ωc /2πQ = ωc/ π,对应的ωc =3.14。</p>
+<p>最后令 Kr=100,ωc =3.14,Kp 进行变化,对应的频率特性如图 所示<br>kp= 0.1 ，<br>kp= 1 ，<br>kp= 10，</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826163021.png"></p>
+<p>根据上图 的变化,控制器的增益与带宽都受到 Kp变化的影响,但是随着 Kp 的增大,控制器增益在基波频率处的增益并未发生改变，只在非基波频率处增益相应的增 大，对应的带宽随着 Kp的增大而减小。所以随着 Kp 的 不断增大,使系统的抗干扰能力不断增强,但是并不能无 限增大,若 K p 2 过大会造成系统的振荡而影响其稳定性。计根据对控制器各个参数的分析,准 PR 控制参数的设 一般需要按照以下步骤设计[1 3]:<br>1）ωc值的确定,此值主要与系统截止频率的带宽需求有关（ωc可以调节谐振频段宽度，同时调节谐振峰值增益，ω0就是谐振频率点）;<br>2）Kr值的确定,此值主要根据系统所需的峰值增益 的大小来进行取值（Kr可以调节谐振峰值增益，同时调节谐振频段宽度）;<br>3）Kp值的确定,此值主要根据系统对比例增益的要求来选择最佳的Kp 值（Kp可以调节PR控制器的整体增益）。<br>按照上述步骤设计的控制器参数,使准 PR 控制器系 统具有很强的稳定性与抗干扰性,系统的控制效果达到最佳。根据本系统实际实验过程的需要,选择的准 PR 控制 参数如下：Kp=6.5，Kr =120，ωc=8，得到的准PR控制器 Bode 图如图 所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826163113.png"></p>
+<p><strong>准 PR 控制的谐波补偿环</strong></p>
+<p>为了增强系统的抗干扰能力,在准 PR 控制器中增加各个主要频次谐波的谐振补偿环,使系统在谐波频率点处产生较大的增益,同时保证系统有足够的相角裕度和良好的动态性能。根据实际中谐振补偿方式的需要合理进行选择,谐振补偿环的传递函数为:</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826163220.png"></p>
+<p>下面以 3 次谐波为例,如图所示。在准 PR 控制器 中添加 3 次谐波补偿环,并画出对应的 Bode 图。添加了谐波补偿环后,对应的谐波频率处产生了很大增益,实现了对应谐波的无静差追踪,同时抑制了谐波对系统电能质量的影响。一般情况下，通过添加特定次数的谐波补偿环,在实现对基波成分跟踪的同时，还能对特定次数的谐 波成分进行跟踪，实现对特定次数谐波的消除，从而减小了谐波造成的污染,提高了逆变器系统的电能质量。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826163434.png"></p>
+<br/>
+
+
+
+<p>为了观察准比例谐振控制器中三个参数的影响，同样用MATLAB绘制bode图，控制变量法来看。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826144000.png"></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">figure</span>()</span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">3</span>,<span class="number">1</span>)</span><br><span class="line">Kp=<span class="number">1</span>;Kr=<span class="number">100</span>;wc=<span class="number">0.5</span>*<span class="number">2</span>*<span class="built_in">pi</span>;wo=<span class="number">100</span>*<span class="built_in">pi</span>;PRs1=Kp+tf([<span class="number">2</span>*Kr*wc,<span class="number">0</span>],[<span class="number">1</span> <span class="number">2</span>*wc wo*wo]);bode(PRs1);<span class="built_in">hold</span> on;</span><br><span class="line">Kp=<span class="number">10</span>;Kr=<span class="number">100</span>;wc=<span class="number">0.5</span>*<span class="number">2</span>*<span class="built_in">pi</span>;wo=<span class="number">100</span>*<span class="built_in">pi</span>;PRs1=Kp+tf([<span class="number">2</span>*Kr*wc,<span class="number">0</span>],[<span class="number">1</span> <span class="number">2</span>*wc wo*wo]);bode(PRs1);<span class="built_in">hold</span> on;</span><br><span class="line">Kp=<span class="number">100</span>;Kr=<span class="number">100</span>;wc=<span class="number">0.5</span>*<span class="number">2</span>*<span class="built_in">pi</span>;wo=<span class="number">100</span>*<span class="built_in">pi</span>;PRs1=Kp+tf([<span class="number">2</span>*Kr*wc,<span class="number">0</span>],[<span class="number">1</span> <span class="number">2</span>*wc wo*wo]);bode(PRs1);<span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;KP=1&#x27;</span>,<span class="string">&#x27;KP=10&#x27;</span>,<span class="string">&#x27;KP=100&#x27;</span>);title(<span class="string">&#x27;变KP&#x27;</span>)</span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>)</span><br><span class="line">Kp=<span class="number">1</span>;Kr=<span class="number">10</span>;wc=<span class="number">0.5</span>*<span class="number">2</span>*<span class="built_in">pi</span>;wo=<span class="number">100</span>*<span class="built_in">pi</span>;PRs1=Kp+tf([<span class="number">2</span>*Kr*wc,<span class="number">0</span>],[<span class="number">1</span> <span class="number">2</span>*wc wo*wo]);bode(PRs1);<span class="built_in">hold</span> on;</span><br><span class="line">Kp=<span class="number">1</span>;Kr=<span class="number">100</span>;wc=<span class="number">0.5</span>*<span class="number">2</span>*<span class="built_in">pi</span>;wo=<span class="number">100</span>*<span class="built_in">pi</span>;PRs1=Kp+tf([<span class="number">2</span>*Kr*wc,<span class="number">0</span>],[<span class="number">1</span> <span class="number">2</span>*wc wo*wo]);bode(PRs1);<span class="built_in">hold</span> on;</span><br><span class="line">Kp=<span class="number">1</span>;Kr=<span class="number">1000</span>;wc=<span class="number">0.5</span>*<span class="number">2</span>*<span class="built_in">pi</span>;wo=<span class="number">100</span>*<span class="built_in">pi</span>;PRs1=Kp+tf([<span class="number">2</span>*Kr*wc,<span class="number">0</span>],[<span class="number">1</span> <span class="number">2</span>*wc wo*wo]);bode(PRs1);<span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;Kr=10&#x27;</span>,<span class="string">&#x27;Kr=100&#x27;</span>,<span class="string">&#x27;Kr=1000&#x27;</span>);title(<span class="string">&#x27;变Kr&#x27;</span>)</span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line">Kp=<span class="number">1</span>;Kr=<span class="number">100</span>;wc=<span class="number">0.1</span>*<span class="number">2</span>*<span class="built_in">pi</span>;wo=<span class="number">100</span>*<span class="built_in">pi</span>;PRs1=Kp+tf([<span class="number">2</span>*Kr*wc,<span class="number">0</span>],[<span class="number">1</span> <span class="number">2</span>*wc wo*wo]);bode(PRs1);<span class="built_in">hold</span> on;</span><br><span class="line">Kp=<span class="number">1</span>;Kr=<span class="number">100</span>;wc=<span class="number">0.5</span>*<span class="number">2</span>*<span class="built_in">pi</span>;wo=<span class="number">100</span>*<span class="built_in">pi</span>;PRs1=Kp+tf([<span class="number">2</span>*Kr*wc,<span class="number">0</span>],[<span class="number">1</span> <span class="number">2</span>*wc wo*wo]);bode(PRs1);<span class="built_in">hold</span> on;</span><br><span class="line">Kp=<span class="number">1</span>;Kr=<span class="number">100</span>;wc=<span class="number">1</span>*<span class="number">2</span>*<span class="built_in">pi</span>;wo=<span class="number">100</span>*<span class="built_in">pi</span>;PRs1=Kp+tf([<span class="number">2</span>*Kr*wc,<span class="number">0</span>],[<span class="number">1</span> <span class="number">2</span>*wc wo*wo]);bode(PRs1);<span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;wc=0.1&#x27;</span>,<span class="string">&#x27;wc=0.5&#x27;</span>,<span class="string">&#x27;wc=1.0&#x27;</span>);title(<span class="string">&#x27;变wc&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>由bode图可知，<strong>Kp越大，其他低频段和高频段的增益越大；Kr越大，谐振点的增益越大，但附近周围频带的增益也相应有所增大；wc越大，周围频带的增益也相应有所增大</strong>。</p>
+<p>而参数wc可以任意取一个较小的数，2 π × 0.1、2 π × 0.5、2 π × 1，因此真正需要整定的参数也就只有Kp和Kr了。</p>
+<br/>
+
+
+
+<h3 id="1-3-传递函数推导"><a href="#1-3-传递函数推导" class="headerlink" title="1.3    传递函数推导"></a>1.3    传递函数推导</h3><p>从Bode图中可以发现，比例谐振控制器与二阶欠阻尼谐振系统极为相似，典型二阶系统的传递函数为。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826171352.png"></p>
+<p>当ζ取不同值时，其Bode图为</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826171421.png"></p>
+<p>将Bode图中的两条幅频曲线相减，即可得到PR Controller，Bode图中相减即实际增益的相除，即传递函数相除。</p>
+<p>令 ζ1 ( 0.01 ) ) &lt; ζ2 ( 0.5 )，计算两个二阶系统传递函数相除</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826171524.png"></p>
+<p>对应Bode图为</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826171551.png"></p>
+<p>得到的传递函数和Bode图就是比例谐振控制器，对系数进行替换即可得到本文开头的比例谐振控制器传递函数。</p>
+<p>当串联使用时，一般可将比例Kp设置为1，通过调节谐振增益的幅值和频宽设计合适的谐振控制器，通过双线性Z变换得到离散的控制器参数。</p>
+<p>此外，当谐振频率变化时，比如开头提到的AC交流频率在45Hz~65Hz变化时，可以根据变化的频率，更新ωo，通过Z变换的系数关系式，实时刷新谐振控制器的离散控制系数。</p>
+<br/>
+
+
+
+<h3 id="1-4-单相离网逆变器"><a href="#1-4-单相离网逆变器" class="headerlink" title="1.4    单相离网逆变器"></a>1.4    单相离网逆变器</h3><p>离网逆变器是把DC逆变出来的AC直接使用，<strong>输出接负载，控制对象是输出电压</strong>，力争低THD，幅值可控。</p>
+<p>控制结构框图：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826145303.png"></p>
+<p>资源链接：</p>
+<p><a target="_blank" rel="noopener" href="https://download.csdn.net/download/xht2403267701/87762491">基于PR控制的单相离网逆变器</a><br><a target="_blank" rel="noopener" href="https://download.csdn.net/download/xht2403267701/88179596">DSP工程</a></p>
+<br/>
+
+
+
+<h3 id="1-5-单相并网逆变器"><a href="#1-5-单相并网逆变器" class="headerlink" title="1.5    单相并网逆变器"></a>1.5    单相并网逆变器</h3><p>并网逆变器是把DC逆变出来的AC电送入另一个交流系统，<strong>输出端接电网</strong>，控制对象是<strong>输出电流</strong>，力争低THD，幅值可控，且与电网电压同相位。</p>
+<p>控制结构框图：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826145655.png"></p>
+<p>资源链接：</p>
+<p><a target="_blank" rel="noopener" href="https://download.csdn.net/download/xht2403267701/87762490">基于PR控制的单相并网逆变器控制</a></p>
+<br/>
+
+
+
+<h3 id="1-6-PR控制器离散化"><a href="#1-6-PR控制器离散化" class="headerlink" title="1.6    PR控制器离散化"></a>1.6    PR控制器离散化</h3><p>目前而言，同一种控制方式有3种表达形式：</p>
+<ul>
+<li>时域，有连续时域和离散时域之分。</li>
+<li>复频域，又称s域。</li>
+<li>z域。</li>
+</ul>
+<p>在大学之前的学习一直都是时域下的，也是最容易理解的。大学期间接触到<strong>拉氏变换是由连续时域到复频域的变换，z变换是离散时域到z域的变换。</strong></p>
+<p>在连续时域下，描述不同时间点的方程称为<strong>微分方程</strong>。</p>
+<p>在离散时域下，描述不同时间点的方程称为<strong>差分方程</strong>。</p>
+<p>传递函数离散化后，函数中消掉了拉普拉斯算子“s”，同时出现了“z”。有一个公式需要认识。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240827090838.png"></p>
+<p>以上公式，转化为单片机或DSP可以执行的命令为：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240827090925.png"></p>
+<p>在前人研究基础上：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826150836.png"></p>
+<p>方法很多，选哪一个种呢？在TI写的数字锁相环算法库中有说明文档详细推导各个参数的计算，其中就涉及到连续传递函数离散化的问题，TI采用的Tustin。简单起见我们也选Tustin方法了。</p>
+<p>看起来比较简单的方法是Forward Euler、Backward Euler、Trapezoid(Tustin)这三种了。直接把公式代入，用z消掉s就好了。</p>
+<p>MATLAB也提供了传递函数离散化的内置函数c2d。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Ts=<span class="number">1</span>/<span class="number">25000</span>;</span><br><span class="line">Kp=<span class="number">1</span>;</span><br><span class="line">Kr=<span class="number">100</span>;</span><br><span class="line">wc=<span class="number">0.5</span>*<span class="number">2</span>*<span class="built_in">pi</span>;</span><br><span class="line">wo=<span class="number">100</span>*<span class="built_in">pi</span>;</span><br><span class="line">c=Kp+tf([<span class="number">2</span>*Kr*wc,<span class="number">0</span>],[<span class="number">1</span> <span class="number">2</span>*wc wo*wo]);</span><br><span class="line">d=c2d(c,Ts,<span class="string">&#x27;tustin&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>但是好像不能用MALTAB计算出准谐振一般表达式的离散化结果，索性直接带入化简得了。</p>
+<p>过程略，结果如下。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826151046.png"></p>
+<p>在当初学习的时候会思考离散化里面的T到底是什么。我的理解就是，<strong>相邻两次以离散化的方式实现连续传递函数的时间间隔</strong>。在DSP中的控制一般写在中断中，那么<strong>对应的T即中断时间间隔</strong>。而在Simulink中，Powergui和模型设置这两个地方都能设置步长，到底哪个才是真正的呢？目前没有想明白，若想要验证的话设置为相同的步长即可。</p>
+<p>当时学习的时候也有一个疑问，为什么在学习PID控制器的时候没有所谓的离散化步骤。怎么就直接把PID的C语言实现给写出来了呢？是因为PID的<strong>连续时域表达式</strong>简单，很容易就能推导出<strong>离散时域表达式</strong>，用的微积分的思想。而在学习PR控制器的时候，是先得到他的传递函数，即s域表达式，可以直接从s域到z域变换。</p>
+<p>那实现数字一阶滤波器的时候呢？也是先根据模拟RC电路推导传递函数，再变到连续时域的一阶微分方程，离散时域。那稍微复杂一点的二阶甚至高阶滤波器呢，就是直接从s域到z域到离散时域的。</p>
+<p>总之，当我们用数字方式实现控制时，根本目的是得到他的<strong>离散时域表达式</strong>。</p>
+<br/>
+
+
+
+<h3 id="1-7-离散化练习题"><a href="#1-7-离散化练习题" class="headerlink" title="1.7    离散化练习题"></a>1.7    离散化练习题</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240827001022.png"></p>
+<p>在Matlab中验证结果：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Kp=<span class="number">1</span>;Ki=<span class="number">2</span>;Kd=<span class="number">3</span>;Ts=<span class="number">1e-3</span>;</span><br><span class="line">PID=tf([Kd,Kp,Ki],[<span class="number">1</span>,<span class="number">0</span>])</span><br><span class="line">c2d(PID,<span class="number">1e-3</span>,<span class="string">&#x27;tustin&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>可得到：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240827001206.png"></p>
+<p>Sampling time: 0.001</p>
+<p>和计算结果一致。</p>
+<p>同时Matlab的c2d()函数总共支持五种离散方法。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">SYSD = C2D(SYSC,TS,METHOD) computes a discrete-time model SYSD with </span><br><span class="line">sampling time TS that approximates the continuous-time model SYSC.</span><br><span class="line">The string METHOD selects the discretization method among the following:</span><br><span class="line">   <span class="string">&#x27;zoh&#x27;</span>       Zero-order <span class="built_in">hold</span> on the inputs</span><br><span class="line">   <span class="string">&#x27;foh&#x27;</span>       Linear interpolation of inputs</span><br><span class="line">   <span class="string">&#x27;impulse&#x27;</span>   Impulse-invariant discretization</span><br><span class="line">   <span class="string">&#x27;tustin&#x27;</span>    Bilinear (Tustin) approximation.</span><br><span class="line">   <span class="string">&#x27;matched&#x27;</span>   Matched pole-zero method (<span class="keyword">for</span> SISO systems only).</span><br><span class="line">The default is <span class="string">&#x27;zoh&#x27;</span> when METHOD is omitted.</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用Matlab离散PR控制器</strong></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Kp=<span class="number">1</span>;</span><br><span class="line">Kr=<span class="number">10</span>;</span><br><span class="line">wc=<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">5</span>;</span><br><span class="line">wo=<span class="number">2</span>*<span class="built_in">pi</span>*<span class="number">50</span>;</span><br><span class="line">PRs=Kp+tf([<span class="number">2</span>*Kr*wc,<span class="number">0</span>],[<span class="number">1</span>,<span class="number">2</span>*wc,wo^<span class="number">2</span>])</span><br><span class="line">PRz = c2d(PRs,<span class="number">1e-3</span>,<span class="string">&#x27;tustin&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240827001409.png"></p>
+<p>可得到，离散化后，数字实现的C语言为：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240827001455.png"></p>
+<br/>
+
+
+
+<br/>
+
+
+
+<h3 id="1-8-逆变器仿真模型中使用PR闭环控制器"><a href="#1-8-逆变器仿真模型中使用PR闭环控制器" class="headerlink" title="1.8    逆变器仿真模型中使用PR闭环控制器"></a>1.8    逆变器仿真模型中使用PR闭环控制器</h3><p>Matlab/Simulink搭建了模型：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240827001702.png"></p>
+<p>电气主回路中参数：滤波电感Lf=47uH，滤波电容Cf=1uF，负载Lf1=30欧姆。</p>
+<p>控制回路：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240827001842.png"></p>
+<p>PR控制器实现框图：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240827002115.png"></p>
+<p>经过参数优化后，Kp=1000，Kr=100；wc=<code>2*pi*5</code>；wo=<code>2*pi*50</code>；</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240827002147.png"></p>
+<p>上图中，error = Vref - Vout/311。Vref为频率50Hz、幅值为1的正弦波。Vout是逆变器输出。可以看到闭环系统中误差可降到1mV *311=0.331V之内（1mV为error波形的幅值，311为电压标幺化基准值）。</p>
+<br/>
+
+
+
+<h3 id="1-9-DSP实现"><a href="#1-9-DSP实现" class="headerlink" title="1.9    DSP实现"></a>1.9    DSP实现</h3><p>有了Z域下的表达式，可以直接得到离散时域表达式，即差分方程。</p>
+<p>以二阶为例：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826152338.png"></p>
+<p>则离散时域表达式为：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826152443.png"></p>
+<p>因此可以根据前面推导的PR控制器在Z域下的通用表达式，写出它的通用离散时域表达式。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * myPR.c</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *  Created on: 2023年4月25日</span></span><br><span class="line"><span class="comment"> *      Author: EnglishName</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;myAPP/myPR/myPR.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">PR pr_v_ac = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">PR pr_i_ac = &#123; <span class="number">0</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">PR_init</span><span class="params">(PR *p,float32 Kp,float32 Kr,float32 Ts,float32 wc, float32 wo)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">float</span> temp = <span class="number">0</span>;</span><br><span class="line">    p-&gt;Ts=Ts;</span><br><span class="line">    p-&gt;Kp=Kp;</span><br><span class="line">    p-&gt;Kr=Kr;</span><br><span class="line">    p-&gt;wc=wc;</span><br><span class="line">    p-&gt;wo=wo;</span><br><span class="line">    temp = <span class="number">4</span> / p-&gt;Ts / p-&gt;Ts + <span class="number">4</span> * p-&gt;wc / p-&gt;Ts + p-&gt;wo * p-&gt;wo;</span><br><span class="line"></span><br><span class="line">    p-&gt;B0 = (<span class="number">4</span> * p-&gt;Kp / p-&gt;Ts / p-&gt;Ts + <span class="number">4</span> * p-&gt;wc * (p-&gt;Kp + p-&gt;Kr) / p-&gt;Ts</span><br><span class="line">            + p-&gt;Kp * p-&gt;wo * p-&gt;wo) / temp;</span><br><span class="line">    p-&gt;B1 = (<span class="number">-8</span> * p-&gt;Kp / p-&gt;Ts / p-&gt;Ts + <span class="number">2</span> * p-&gt;Kp * p-&gt;wo * p-&gt;wo) / temp;</span><br><span class="line">    p-&gt;B2 = (<span class="number">4</span> * p-&gt;Kp / p-&gt;Ts / p-&gt;Ts - <span class="number">4</span> * p-&gt;wc / p-&gt;Ts * (p-&gt;Kp + p-&gt;Kr)</span><br><span class="line">            + p-&gt;Kp * p-&gt;wo * p-&gt;wo) / temp;</span><br><span class="line">    p-&gt;A1 = (<span class="number">-8</span> / p-&gt;Ts / p-&gt;Ts + <span class="number">2</span> * p-&gt;wo * p-&gt;wo) / temp;</span><br><span class="line">    p-&gt;A2 = (<span class="number">4</span> / p-&gt;Ts / p-&gt;Ts - <span class="number">4</span> * p-&gt;wc / p-&gt;Ts + p-&gt;wo * p-&gt;wo) / temp;</span><br><span class="line">    <span class="comment">/*PRpr;</span></span><br><span class="line"><span class="comment">     * 差分方程</span></span><br><span class="line"><span class="comment">     * y[n]+A1[n-1]+A2[n-2]=B0x[n]+B1x[n-1]+B2[n-2]</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">PR_calc</span><span class="params">(PR *p)</span></span><br><span class="line">&#123;</span><br><span class="line">    p-&gt;vo = -p-&gt;A1 * p-&gt;vo_1 - p-&gt;A2 * p-&gt;vo_2 + p-&gt;B0 * p-&gt;vi + p-&gt;B1 * p-&gt;vi_1</span><br><span class="line">            + p-&gt;B2 * p-&gt;vi_2;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// update and store</span></span><br><span class="line">    p-&gt;vo_2=p-&gt;vo_1;</span><br><span class="line">    p-&gt;vo_1 = p-&gt;vo;</span><br><span class="line">    p-&gt;vi_2 = p-&gt;vi_1;</span><br><span class="line">    p-&gt;vi_1 = p-&gt;vi;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * myPR.h</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *  Created on: 2023年4月25日</span></span><br><span class="line"><span class="comment"> *      Author: EnglishName</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> MYAPP_MYPR_MYPR_H_</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MYAPP_MYPR_MYPR_H_</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;F28x_Project.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">float</span> Kp;</span><br><span class="line">    <span class="type">float</span> Kr;</span><br><span class="line">    <span class="type">float</span> wo;</span><br><span class="line">    <span class="type">float</span> wc;</span><br><span class="line">    <span class="type">float</span> Ts;</span><br><span class="line">    <span class="type">float</span> A0, A1, A2, B0, B1, B2;</span><br><span class="line">    <span class="type">float</span> vo, vo_1, vo_2;</span><br><span class="line">    <span class="type">float</span> vi, vi_1, vi_2;</span><br><span class="line">&#125; PR;</span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> PR pr_v_ac;</span><br><span class="line"><span class="keyword">extern</span> PR pr_i_ac;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">PR_init</span><span class="params">(PR *p, float32 Kp, float32 Kr, float32 Ts, float32 wc, float32 wo)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">PR_calc</span><span class="params">(PR *p)</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">/* MYAPP_MYPR_MYPR_H_ */</span></span></span><br></pre></td></tr></table></figure>
+
+<p>之前一直以为我把应用PR于单相逆变器的代码也上传了。代码可以移步这里<br><a target="_blank" rel="noopener" href="https://download.csdn.net/download/xht2403267701/88179590">单相逆变器，单台运行、并联运行以及并联并网</a></p>
+<br/>
+
+
+
+<h3 id="1-10-C语言的一种实现"><a href="#1-10-C语言的一种实现" class="headerlink" title="1.10    C语言的一种实现"></a>1.10    C语言的一种实现</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/************************************************************</span></span><br><span class="line"><span class="comment">**  控制系数初始化</span></span><br><span class="line"><span class="comment">准谐振控制 G(s)=(2*wi*Kr*s)/(s^2+2*wi*s+w0^2);</span></span><br><span class="line"><span class="comment">tustin离散化 G(z)= (4*Kr*Ts*wi*z^2 - 4*Kr*Ts*wi)/((Ts^2*w0^2 + 4*wi*Ts + 4)*z^2 + (2*Ts^2*w0^2 - 8)*z + Ts^2*w0^2 - 4*wi*Ts + 4)</span></span><br><span class="line"><span class="comment">系数:</span></span><br><span class="line"><span class="comment">b0 = (4*Kr*Ts*wi)/(Ts^2*w0^2 + 4*wi*Ts + 4);</span></span><br><span class="line"><span class="comment">b2 = -b0;</span></span><br><span class="line"><span class="comment">a1 = (2*Ts^2*w0^2 - 8)/(Ts^2*w0^2 + 4*wi*Ts + 4);</span></span><br><span class="line"><span class="comment">a2 = (Ts^2*w0^2 - 4*wi*Ts + 4)/(Ts^2*w0^2 + 4*wi*Ts + 4);</span></span><br><span class="line"><span class="comment">其中，wi=1.5*pi;</span></span><br><span class="line"><span class="comment">************************************************************/</span></span><br><span class="line">		EpsVoltCon_Reg.f32VoltCoff.a1 = <span class="number">-1.999439</span>;<span class="comment">//-1.9995648;</span></span><br><span class="line">		EpsVoltCon_Reg.f32VoltCoff.a2 = <span class="number">0.9996859</span>;<span class="comment">//0.9998115;</span></span><br><span class="line">		EpsVoltCon_Reg.f32VoltCoff.b0 = <span class="number">0.06020359</span>;<span class="comment">//0.04020359		// gain=256     wi = 1.5pi Ts= 1/20k</span></span><br><span class="line">		EpsVoltCon_Reg.f32VoltCoff.b1 = <span class="number">0</span>;</span><br><span class="line">		EpsVoltCon_Reg.f32VoltCoff.b2 = <span class="number">-0.06020359</span>;<span class="comment">//-0.04020359       //  改变Kr时改变b0和b2就可以，且正比关系；</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 计算R控制器 */</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CNTL_RC_F_C(v, c, x)			\</span></span><br><span class="line"><span class="meta">	v.errn2 = v.errn1;			\</span></span><br><span class="line"><span class="meta">	v.errn1 = v.err;			\</span></span><br><span class="line"><span class="meta">	v.err = x;					\</span></span><br><span class="line"><span class="meta">	\</span></span><br><span class="line"><span class="meta">	v.outn2 = v.outn1;		\</span></span><br><span class="line"><span class="meta">	v.outn1 = v.out;		\</span></span><br><span class="line"><span class="meta">	v.out = (c.b0 * v.err + c.b2 * v.errn2)		\</span></span><br><span class="line"><span class="meta">				- (c.a1 * v.outn1 + c.a2 * v.outn2);</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// PR控制</span></span><br><span class="line">CNTL_RC_F_C(EpsVoltCon_Reg.f32VoltCNTL, EpsVoltCon_Reg.f32VoltCoff, EpsVoltCon_Reg.f32VoltInstant_Ref - (ADValue.f32VINV));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CNTL_RC_F_C(EpsVoltCon_Reg.f32VoltCNTL, EpsVoltCon_Reg.f32VoltCoff, EpsVoltCon_Reg.f32VoltInstant_Ref - (ADValue.f32VINV));</span><br><span class="line"><span class="comment">//			EpsVoltCon_Reg.f32PIOut += (EpsVoltCon_Reg.kvp + EpsVoltCon_Reg.kvi) * EpsVoltCon_Reg.f32VoltCNTL.err</span></span><br><span class="line"><span class="comment">//																- EpsVoltCon_Reg.kvp * EpsVoltCon_Reg.f32VoltCNTL.errn1;</span></span><br><span class="line">EpsVoltCon_Reg.f32PIOut = (EpsVoltCon_Reg.kvp) * EpsVoltCon_Reg.f32VoltCNTL.err;</span><br><span class="line"></span><br><span class="line">EpsVoltCon_Reg.f32CurrRef = EpsVoltCon_Reg.f32PIOut + EpsVoltCon_Reg.f32VoltCNTL.out;</span><br></pre></td></tr></table></figure>
+
+<p>上述是直接根据离散化的方法来进行离散化，还有一种方法是可以将比例谐振控制器拆分成简单的积分组合，引进中间变量，以便于算法实现：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-08-26-%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/20240826165602.png"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://www.kazama.top">KAZAMA</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.kazama.top/2024/08/26/%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/">http://www.kazama.top/2024/08/26/%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.kazama.top" target="_blank">KAZAMAのBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/PR%E6%8E%A7%E5%88%B6%E5%99%A8/">PR控制器</a></div><div class="post_share"><div class="social-share" data-image="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/wechat.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/08/26/Z%E5%8F%98%E6%8D%A2%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E8%A7%A3%E6%9E%90/" title="Z变换相关知识解析"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列6" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Z变换相关知识解析</div></div></a></div><div class="next-post pull-right"><a href="/2024/08/23/C%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E9%80%86%E5%90%91%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/" title="C语言编译逆向相关知识"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列5" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">C语言编译逆向相关知识</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列3" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">KAZAMA</div><div class="author-info__description">技术记录,个人分享,学习备忘</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">393</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">35</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/KAZAMA-DREAM"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/KAZAMA-DREAM" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/wyy1778789301@163.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="toc-text">详解PR控制器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-PR%E6%8E%A7%E5%88%B6%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8PR%E6%8E%A7%E5%88%B6%E7%94%A8%E4%BA%8E%E5%8D%95%E7%9B%B8%E7%A6%BB-%E5%B9%B6%E7%BD%91%E9%80%86%E5%8F%98%E5%99%A8"><span class="toc-text">1    PR控制以及使用PR控制用于单相离&#x2F;并网逆变器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-0-%E5%89%8D%E8%A8%80"><span class="toc-text">1.0    前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86"><span class="toc-text">1.1    基本知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%AE%9E%E9%99%85%E4%BD%BF%E7%94%A8"><span class="toc-text">1.2    实际使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%8E%A8%E5%AF%BC"><span class="toc-text">1.3    传递函数推导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E5%8D%95%E7%9B%B8%E7%A6%BB%E7%BD%91%E9%80%86%E5%8F%98%E5%99%A8"><span class="toc-text">1.4    单相离网逆变器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-%E5%8D%95%E7%9B%B8%E5%B9%B6%E7%BD%91%E9%80%86%E5%8F%98%E5%99%A8"><span class="toc-text">1.5    单相并网逆变器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-PR%E6%8E%A7%E5%88%B6%E5%99%A8%E7%A6%BB%E6%95%A3%E5%8C%96"><span class="toc-text">1.6    PR控制器离散化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7-%E7%A6%BB%E6%95%A3%E5%8C%96%E7%BB%83%E4%B9%A0%E9%A2%98"><span class="toc-text">1.7    离散化练习题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-8-%E9%80%86%E5%8F%98%E5%99%A8%E4%BB%BF%E7%9C%9F%E6%A8%A1%E5%9E%8B%E4%B8%AD%E4%BD%BF%E7%94%A8PR%E9%97%AD%E7%8E%AF%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="toc-text">1.8    逆变器仿真模型中使用PR闭环控制器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-9-DSP%E5%AE%9E%E7%8E%B0"><span class="toc-text">1.9    DSP实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-10-C%E8%AF%AD%E8%A8%80%E7%9A%84%E4%B8%80%E7%A7%8D%E5%AE%9E%E7%8E%B0"><span class="toc-text">1.10    C语言的一种实现</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/08/26/Z%E5%8F%98%E6%8D%A2%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E8%A7%A3%E6%9E%90/" title="Z变换相关知识解析"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列6" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Z变换相关知识解析"/></a><div class="content"><a class="title" href="/2024/08/26/Z%E5%8F%98%E6%8D%A2%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E8%A7%A3%E6%9E%90/" title="Z变换相关知识解析">Z变换相关知识解析</a><time datetime="2024-08-26T12:17:07.000Z" title="发表于 2024-08-26 20:17:07">2024-08-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/08/26/%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/" title="详解PR控制器"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="详解PR控制器"/></a><div class="content"><a class="title" href="/2024/08/26/%E8%AF%A6%E8%A7%A3PR%E6%8E%A7%E5%88%B6%E5%99%A8/" title="详解PR控制器">详解PR控制器</a><time datetime="2024-08-26T12:17:07.000Z" title="发表于 2024-08-26 20:17:07">2024-08-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/08/23/C%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E9%80%86%E5%90%91%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/" title="C语言编译逆向相关知识"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列5" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C语言编译逆向相关知识"/></a><div class="content"><a class="title" href="/2024/08/23/C%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E9%80%86%E5%90%91%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/" title="C语言编译逆向相关知识">C语言编译逆向相关知识</a><time datetime="2024-08-23T12:17:07.000Z" title="发表于 2024-08-23 20:17:07">2024-08-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/08/22/MAX485%E8%8A%AF%E7%89%87%E4%BB%8B%E7%BB%8D/" title="MAX485芯片介绍"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列4" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MAX485芯片介绍"/></a><div class="content"><a class="title" href="/2024/08/22/MAX485%E8%8A%AF%E7%89%87%E4%BB%8B%E7%BB%8D/" title="MAX485芯片介绍">MAX485芯片介绍</a><time datetime="2024-08-22T12:17:07.000Z" title="发表于 2024-08-22 20:17:07">2024-08-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/08/21/Matlab%E7%9A%84Simulink%E6%A8%A1%E5%9E%8B%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90C%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%A0%81/" title="Matlab的Simulink模型自动生成C语言代码"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列3" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Matlab的Simulink模型自动生成C语言代码"/></a><div class="content"><a class="title" href="/2024/08/21/Matlab%E7%9A%84Simulink%E6%A8%A1%E5%9E%8B%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90C%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%A0%81/" title="Matlab的Simulink模型自动生成C语言代码">Matlab的Simulink模型自动生成C语言代码</a><time datetime="2024-08-21T12:17:07.000Z" title="发表于 2024-08-21 20:17:07">2024-08-21</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列7')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By KAZAMA</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
