@@ -1,0 +1,259 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>PCB设计入门基础 | KAZAMAのBlog</title><meta name="author" content="KAZAMA,wyy1778789301@163.com"><meta name="copyright" content="KAZAMA"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="本篇教你PCB设计入门基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PCB设计入门基础">
+<meta property="og:url" content="http://www.kazama.top/2024/10/15/PCB%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="KAZAMAのBlog">
+<meta property="og:description" content="本篇教你PCB设计入门基础">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列3">
+<meta property="article:published_time" content="2024-10-15T12:17:07.000Z">
+<meta property="article:modified_time" content="2024-09-26T12:17:07.000Z">
+<meta property="article:author" content="KAZAMA">
+<meta property="article:tag" content="DSP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列3"><link rel="shortcut icon" href="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列1"><link rel="canonical" href="http://www.kazama.top/2024/10/15/PCB%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'PCB设计入门基础',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-09-26 20:17:07'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列3" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">401</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">40</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/share/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列3')"><nav id="nav"><span id="blog-info"><a href="/" title="KAZAMAのBlog"><span class="site-name">KAZAMAのBlog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/share/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">PCB设计入门基础</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-10-15T12:17:07.000Z" title="发表于 2024-10-15 20:17:07">2024-10-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-09-26T12:17:07.000Z" title="更新于 2024-09-26 20:17:07">2024-09-26</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>11分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="PCB设计入门基础"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="PCB设计入门基础"><a href="#PCB设计入门基础" class="headerlink" title="PCB设计入门基础"></a>PCB设计入门基础</h1><h2 id="1-PCB的结构"><a href="#1-PCB的结构" class="headerlink" title="1    PCB的结构"></a>1    PCB的结构</h2><h3 id="1-1-铜层"><a href="#1-1-铜层" class="headerlink" title="1.1    铜层"></a>1.1    铜层</h3><p>PCB的基本结构是三明治的结构，它的上面和下面都是铜层。中间有一层叫FR-4，FR-4是1层不导电的物质叫做<code>（环氧）玻璃纤维</code>，是它把两层导电的板给隔开了。</p>
+<p>我们如果需要4层板，就把两个2层板压合在一起，中间加1层<code>半预制片</code>的东西，它也是绝缘的。所以简单来看6层板就是3个2层板，8层板就是4个2层板，所以电路板是以2的倍数往上增加层数的。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-10-15-PCB%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/1730441130567.jpg"></p>
+<br/>
+
+
+
+<h3 id="1-2-阻焊"><a href="#1-2-阻焊" class="headerlink" title="1.2    阻焊"></a>1.2    阻焊</h3><p>在铜板上面要覆上一层油漆，这个油漆叫做阻焊层。这个阻焊层的作用是保护我们的线路，把它的铜线保护住，使其不受空气氧化。如果阻焊层失效，可以看到电路板的这个铜和焊盘就发生了氧化，这样就无法进行焊接了。此外还能阻隔其他不需要焊锡的地方，只留下焊盘来，只留下焊盘是镂空的。剩下的地方都给盖上油，这样的话焊锡就上不去了，所以它叫阻焊层。起到一个保护电路板和隔离焊盘的作用。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-10-15-PCB%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/20241101141513.png"></p>
+<br/>
+
+
+
+<h3 id="1-3-丝印"><a href="#1-3-丝印" class="headerlink" title="1.3    丝印"></a>1.3    丝印</h3><p>在阻焊层上面还有一层叫做丝印层，丝印层就是印上了字，我们称之为位号，在贴片时候叫位号，比如这个 <code>C33</code>，C就是 <code>Capacitor</code>（电容），它就是一个编号为33号的电容。<code>R48</code>就是一个电阻，叫编号48号的电阻，集成芯片一般用<code>U</code>表示，接插件用 <code>J</code> 来表示，<code>L</code>表示电感。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="C:\Users\LEGION\AppData\Roaming\Typora\typora-user-images\image-20241101154217238.png" alt="image-20241101154217238"></p>
+<br/>
+
+
+
+<h3 id="1-4-本质"><a href="#1-4-本质" class="headerlink" title="1.4    本质"></a>1.4    本质</h3><p>这是一个电路板的顶层结构，它是一张画，它就是一个二进制的画，黑色地方是镂空的，红色地方就是不透光的。有了这张画之后，将其发给生产厂，生产厂就会做出个胶片来，这个文件叫做GERBER文件，GERBER叫做光绘文件，每一层都有一个GERBER文件之后，之后把它给生产厂，生产厂就会生产出一张胶片来。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-10-15-PCB%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/20241101154753.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-10-15-PCB%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/20241101155515.png"></p>
+<p>生产出胶片之后，它就要做电路板，最底下蓝色的圆片就代表电路板，这个电路板表面是铜层，它的上面没有阻焊，也没有丝印层，把它上面涂上一层光敏胶，我们上面有一个紫外的光源，紫外光源下面放上胶片，通过一个镜头之后把它成像，聚焦到光敏胶上，然后光敏胶就会变性（接受光照变性后的光敏胶不会再保护铜层），变性之后我们再用丙烯之类的有机溶剂，把这个电路板洗一下，所以镂空的即不需要的那部分铜就裸露出来了。（基板是绝缘的，涂上金属导电层，然后刻上电路，最后化学腐蚀掉多余的导电层）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-10-15-PCB%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/20241101155909.png"></p>
+<p>裸露出来之后，我们把它扔到三氯化铁里面，使用三氯化铁溶液来蚀刻铜表面，生成氯化铜和氯化亚铁，从而达到去除铜层的目的，这个过程叫做蚀刻。（和芯片制造流程类似，但和芯片不同的是PCB一般是模型从小放大或者1：1，芯片一般是从大缩放变小。）</p>
+<p>蚀刻之后的电路板，只是做完了其中的一层，除了这一层我们还要把它进行层压，就是不同的层压在一起之后进行钻孔，钻孔之后还要把孔壁内部镀上铜，就叫做沉铜，最后总的来说电路板已经基本上做好了。做好之后在上面刷绿油阻焊层之后，再刷上字，在电测，这个电路板基本上就可以出厂了。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-10-15-PCB%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/20241101161730.png"></p>
+<br/>
+
+
+
+<h3 id="1-5-基础工艺指标"><a href="#1-5-基础工艺指标" class="headerlink" title="1.5    基础工艺指标"></a>1.5    基础工艺指标</h3><p>我们的电路板在做的时候，这个孔是要通过钻头来打的，这个线是通过腐蚀来形成的，所以腐蚀也得有个精度，不能太小，太小的话线容易腐蚀不出来，容易有误差导致断掉，所以我们必须要知道一个电路板它的制作工艺的极限是多少。一般来讲是常规工艺（不需要加价的工艺），不是特殊工艺。</p>
+<p>层数越多，最小板厚就越大，外径不能太小，线与线的间距一般来讲和走线宽度是一样的，走线宽度最小是0.1的话，那么他的最小线距也是0.1，除了走线间距以外，还有一个是线到焊盘的间距，或者是线到过孔外径的间距（一般0.15mm），铜厚就是电路板的顶层和底层的铜皮厚度是多少，一般来讲，常规工艺是每单位面积1盎司铜，2盎司的一般我们是不需要的，在做电源的时候、过大电流的时候才需要2盎司的（在很多情况下，如果需要大电流的话也可以用1盎司铜，然后把阻焊开窗，开窗后往上过焊锡也是可以的）。还有就是字符的丝印高度，比如说这个C33，它只规定了这个字符的高是多少，一般的工厂给出的是1mm，但是我画的时候一般画0.8，随个人爱好进行定制，因为这个参数不影响最后电路板的电气特性，所以你写小一点工厂也不会说让你改。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-10-15-PCB%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/20241101162647.png"></p>
+<br/>
+
+
+
+<h2 id="2-PCB图中元素"><a href="#2-PCB图中元素" class="headerlink" title="2    PCB图中元素"></a>2    PCB图中元素</h2><h3 id="2-1-元件"><a href="#2-1-元件" class="headerlink" title="2.1    元件"></a>2.1    元件</h3><p>来看一下电路板有哪些元素，下面是一个FPGA的板子，他是个6层板。左边是它的二维视图，右边是它的三维视图。这个电路板中包含的元器件，中间的这个大片子是一颗FPGA，上下两边共有两个接插件，还有些电阻电容之类的。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-10-15-PCB%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/20241101191716.png"></p>
+<p>所以PCB中，首先必须得有元件，那么元件是怎么来的，元件是我们画出来的，也可能是你从网站上下载的。我们看一下画一个元件，需要具备哪些元素。</p>
+<p>首先，元件是放在元件库里的，叫做PCBLIB，PCB引脚库，每个元件都有自己的名字，一个元件要有自己的PAD（焊盘），这个PAD有自己的PAD编号叫做Pin Number，然后除了PAD以外，它还有一个丝印的外框（下图的黄色外框），丝印的外框是很重要的，如果不画有可能导致芯片与芯片之间在空间上会发生干涉，这样你就焊不上了，所以一定要把芯片的外框画出来，这样就不会在机械上产生干涉的问题。除了这两个要素之外，一个封装就可以确定了。我们还可以画一个3D的模型给他加载进去。所以PCB元件在PCBLIB里就是这样被画出来的。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-10-15-PCB%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/20241101192255.png"></p>
+<br/>
+
+
+
+<h3 id="2-2-布局布线"><a href="#2-2-布局布线" class="headerlink" title="2.2    布局布线"></a>2.2    布局布线</h3><p>我们可以看到PCB上还有布局和布线，布线就是一些焊盘之间的连线，布局就是器件之间的摆放关系。布局主要由两个因素确定，第一个是由前后板的连接关系确定的，第二个是由信号的走向确定的。</p>
+<p>我们这个例子是一个相机的FPGA板，那么它的背面有一个接插件，是蓝色的，表示它在底层，它在这个电路板的背面，此背面的接插口连接到一个图像传感器上，图像传感器是一个MIPI接口，它是一个差分的一个接口，走上蛇形线是为了长度相等，它作为输入接口来讲把这个信号送到FPGA芯片里进行数据采集，FPGA将处理之后的数据送到J2这个接插件上，J2这个接插件连接到下一块板子，下一块板子是图像处理的一个板子，所以它的整个布局就由前后板子固定住了，前后板子的实际关系也是一个数据流向的关系。除此之外，我们就要把它的程序存储器、晶体振荡器、JTAG口、各种各样的电源等布局好。</p>
+<p>板子上的连线就铜线，铜线要把应该连在一起的引脚给连在一起，连完线后PCB还需要覆铜、检查。铜线走线成弯弯曲曲是为了走线等长，走线等长只有在速度比较高的时候才需要考虑。我们说的MIPI线工作就是几个GHz的频率，如果走线长度不一样，数据到达终点的时间就不一样，就会产生误判，就会产生数据的错误，所以说速度越高，它们的走线长度应该相等。比方说MIPI有四个数据和一个时钟线，所以这五条差分线他们的长度必须要相等，那么到了并行线这块它只有148MHz的频率，所以它的等长要求是要比MIPI要小的，所以它绕的线相对少一些。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-10-15-PCB%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/20241101222941.png"></p>
+<br/>
+
+
+
+<h3 id="2-3-叠层设计"><a href="#2-3-叠层设计" class="headerlink" title="2.3    叠层设计"></a>2.3    叠层设计</h3><p>PCB还有一个要素叫做叠层设计，2层板是不需要叠层设计的，4层板需要叠层设计的也很少，一般到多层板的时候，到6层板的时候，每一层是干啥的，这时候就需要设计了。</p>
+<p>比如下图中一个典型的6层板的叠层设计，第1层是定义为Signal层，第2层定义为地层，第3层是Signal层，第4层是信号层，第5层是电源层，第6层也是Signal层。最佳信号层是SIN01和SIN03，次佳信号层是SIN04和SIN06。一般2层板是不需要叠层设计的。4层板比较简单，第1层是信号层，第2层是地层，第3层是电源层，第4层是信号层。在设计时，画的最多的板是4层板，一般2层板是不画的，因为2层板实际上画起来是要比4层板麻烦多的，6层板比4层板也是要麻烦的，所以电路板中最简单的就是4层板，但是刚开始学还是要从2层板开始画。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-10-15-PCB%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/20241102001915.png"></p>
+<br/>
+
+
+
+<h3 id="2-4-原理图"><a href="#2-4-原理图" class="headerlink" title="2.4    原理图"></a>2.4    原理图</h3><p>PCB的走线连接是用什么进行限定的呢？是由原理图限定的，整个PCB的元件也是由原理图限定的。</p>
+<p>如下图原理图中，J3是一个接插件，R23、R24是2个电阻，所以原理图中第1个要素就是元器件，第2个要素叫做连线，比如说R23和R24通过一个导线给他们连接在一起。第3个要素叫做网名（连线网络中的名称标识，比如说IO35_L16_N，这是FPGA的1个引脚），J3接插件中好多的线都连在FPGA上，如果说把接插件和FPGA画到1张图上，之后通过连线的方式把FPGA和接插件连接在一起的话就废废了，因为线都交织在一起，没有办法进行观测。因此我们就把要连接在一起的线起个相同的名字，根据相同的网名就可以知道它们是连在一起的。</p>
+<p>所以，元器件、网名、连线，这是原理图的3个必要要素。处理这3个要素外，剩下的要素基本上都是辅助的，比方说示意要素（下图中5对显眼的标记），表示这是1对差分线。比方说下图蓝色的注释（我们只知道FPGA引脚叫做IO35…，它的功能是什么？可以用蓝色注释写出，比如SEN_MD1_N代表MIPI的数据1线反向端、SEN_MD1_P代表MIPI的数据1线同向端，表示这对线还是个差分线）。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-10-15-PCB%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/20241102003815.png"></p>
+<br/>
+
+
+
+<h3 id="2-5-原理图元件库"><a href="#2-5-原理图元件库" class="headerlink" title="2.5    原理图元件库"></a>2.5    原理图元件库</h3><p>原理图上的元件是怎么来的？有个东西叫元件库SCHLIB（Schematic Lib），原理图最重要的就是它的PinNo，即引脚，和它的PCBLIB是严格对应的，所以在画图时要检查它们之间的对应关系，下图中PinNo中间的黄色框子只是1个指示性元素，它不体现在我们的PCB封装里，和PCB一点关系都没有。比如下图右边两个长相相似的元件中左边这个元件，该元件采用的封装叫做SOT23-3封装，SOT23-3封装一共有3个引脚，它是1个非常小的，比米粒大一点点的小封装，我们现在有一个瞬态抑制二极管，实际上它就是两个稳压管连在一起，它们的阳极连接到3脚，阴极是分开的，是用来保护电路的，尤其是带有接插件的热拔插的电路，它用来保护的，USB电路里能见到，JTAG上也能见到，还有HDMI口上也能见到这样的一个常用器件。右边那个元件是MOS管，这个MOS管也对应SOT23-3封装，但是它们的原理图完全不一样。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-10-15-PCB%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/20241102010052.png"></p>
+<br/>
+
+
+
+<h2 id="3-PCB设计基本流程"><a href="#3-PCB设计基本流程" class="headerlink" title="3    PCB设计基本流程"></a>3    PCB设计基本流程</h2><h3 id="3-1-总结"><a href="#3-1-总结" class="headerlink" title="3.1    总结"></a>3.1    总结</h3><p>首先要了解用户的需求，用户需求搞清楚之后我们需要确定系统的指标，系统的指标指导电路指标的确立，电路指标确立之后我们就要进行器件选型，有了器件选型之后我们就要建库，包括原理图库和PCB库，库建好后我们就要进行原理图的绘制，之后将原理图导入到PCB库中，一般来讲有的软件中间你还要导出一遍网名（网表），导出一遍网名（网表）之后，再和PCB库对应一下，我们就可以画PCB图了，画完PCB图之后就要送到加工厂去制造。送的方法有2种，如果你这个项目不保密而且你练手的话可以直接把PCBDOC或.brd或.pcbdoc这个文件直接给加工厂，加工厂会帮你导为Gerber。如果说你这个项目是一个成品的项目，并且有保密需求，那你就把PCB生成Gerber文件，变成一张一张的画，再把这个画给PCB制造厂，PCB制造厂有了这个画以后就可以制造PCB了，在PCB的制作过程中你可以进行器件购买，等到PCB制造完拿到手中就可以进行贴片，就是把器件焊到电路板，然后进行PCB的调试，最后检测调试结果是否满足指标，如果满足指标就可以交付了。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-10-15-PCB%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/20241102011838.png"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://www.kazama.top">KAZAMA</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.kazama.top/2024/10/15/PCB%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/">http://www.kazama.top/2024/10/15/PCB%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.kazama.top" target="_blank">KAZAMAのBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/DSP/">DSP</a></div><div class="post_share"><div class="social-share" data-image="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列3" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/wechat.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/11/16/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%A5%E6%98%BE%E7%A4%BA%E5%B1%8F%E4%B8%8D%E4%BA%AE%E9%97%AE%E9%A2%98/" title="服务器接显示屏不亮问题"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列4" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">服务器接显示屏不亮问题</div></div></a></div><div class="next-post pull-right"><a href="/2024/09/26/DSP28335%E5%8A%A0%E5%AF%86%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95%E5%8F%8A%E5%8A%A0%E5%AF%86%E5%90%8E%E4%BB%BF%E7%9C%9F%E5%99%A8%E8%BF%9E%E6%8E%A5%E4%B8%8D%E4%B8%8A%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" title="DSP28335加密的两种方法及加密后仿真器连接不上的解决办法"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列2" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">DSP28335加密的两种方法及加密后仿真器连接不上的解决办法</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/09/26/DSP28335%E5%8A%A0%E5%AF%86%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95%E5%8F%8A%E5%8A%A0%E5%AF%86%E5%90%8E%E4%BB%BF%E7%9C%9F%E5%99%A8%E8%BF%9E%E6%8E%A5%E4%B8%8D%E4%B8%8A%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" title="DSP28335加密的两种方法及加密后仿真器连接不上的解决办法"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列2" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-26</div><div class="title">DSP28335加密的两种方法及加密后仿真器连接不上的解决办法</div></div></a></div><div><a href="/2024/11/16/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%A5%E6%98%BE%E7%A4%BA%E5%B1%8F%E4%B8%8D%E4%BA%AE%E9%97%AE%E9%A2%98/" title="服务器接显示屏不亮问题"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列4" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-16</div><div class="title">服务器接显示屏不亮问题</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列3" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">KAZAMA</div><div class="author-info__description">技术记录,个人分享,学习备忘</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">401</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">40</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/KAZAMA-DREAM"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/KAZAMA-DREAM" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/wyy1778789301@163.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#PCB%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80"><span class="toc-text">PCB设计入门基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-PCB%E7%9A%84%E7%BB%93%E6%9E%84"><span class="toc-text">1    PCB的结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E9%93%9C%E5%B1%82"><span class="toc-text">1.1    铜层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E9%98%BB%E7%84%8A"><span class="toc-text">1.2    阻焊</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E4%B8%9D%E5%8D%B0"><span class="toc-text">1.3    丝印</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E6%9C%AC%E8%B4%A8"><span class="toc-text">1.4    本质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-%E5%9F%BA%E7%A1%80%E5%B7%A5%E8%89%BA%E6%8C%87%E6%A0%87"><span class="toc-text">1.5    基础工艺指标</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-PCB%E5%9B%BE%E4%B8%AD%E5%85%83%E7%B4%A0"><span class="toc-text">2    PCB图中元素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%85%83%E4%BB%B6"><span class="toc-text">2.1    元件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%B8%83%E5%B1%80%E5%B8%83%E7%BA%BF"><span class="toc-text">2.2    布局布线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%8F%A0%E5%B1%82%E8%AE%BE%E8%AE%A1"><span class="toc-text">2.3    叠层设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E5%8E%9F%E7%90%86%E5%9B%BE"><span class="toc-text">2.4    原理图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E5%8E%9F%E7%90%86%E5%9B%BE%E5%85%83%E4%BB%B6%E5%BA%93"><span class="toc-text">2.5    原理图元件库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-PCB%E8%AE%BE%E8%AE%A1%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B"><span class="toc-text">3    PCB设计基本流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%80%BB%E7%BB%93"><span class="toc-text">3.1    总结</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/11/16/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%A5%E6%98%BE%E7%A4%BA%E5%B1%8F%E4%B8%8D%E4%BA%AE%E9%97%AE%E9%A2%98/" title="服务器接显示屏不亮问题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列4" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="服务器接显示屏不亮问题"/></a><div class="content"><a class="title" href="/2024/11/16/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%A5%E6%98%BE%E7%A4%BA%E5%B1%8F%E4%B8%8D%E4%BA%AE%E9%97%AE%E9%A2%98/" title="服务器接显示屏不亮问题">服务器接显示屏不亮问题</a><time datetime="2024-11-16T12:17:07.000Z" title="发表于 2024-11-16 20:17:07">2024-11-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/15/PCB%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/" title="PCB设计入门基础"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列3" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="PCB设计入门基础"/></a><div class="content"><a class="title" href="/2024/10/15/PCB%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/" title="PCB设计入门基础">PCB设计入门基础</a><time datetime="2024-10-15T12:17:07.000Z" title="发表于 2024-10-15 20:17:07">2024-10-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/26/DSP28335%E5%8A%A0%E5%AF%86%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95%E5%8F%8A%E5%8A%A0%E5%AF%86%E5%90%8E%E4%BB%BF%E7%9C%9F%E5%99%A8%E8%BF%9E%E6%8E%A5%E4%B8%8D%E4%B8%8A%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" title="DSP28335加密的两种方法及加密后仿真器连接不上的解决办法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列2" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="DSP28335加密的两种方法及加密后仿真器连接不上的解决办法"/></a><div class="content"><a class="title" href="/2024/09/26/DSP28335%E5%8A%A0%E5%AF%86%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95%E5%8F%8A%E5%8A%A0%E5%AF%86%E5%90%8E%E4%BB%BF%E7%9C%9F%E5%99%A8%E8%BF%9E%E6%8E%A5%E4%B8%8D%E4%B8%8A%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" title="DSP28335加密的两种方法及加密后仿真器连接不上的解决办法">DSP28335加密的两种方法及加密后仿真器连接不上的解决办法</a><time datetime="2024-09-26T12:17:07.000Z" title="发表于 2024-09-26 20:17:07">2024-09-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/23/%E5%BC%80%E6%BC%8F%E8%BE%93%E5%87%BA%E4%BB%A5%E5%8F%8A%E6%8E%A8%E6%8C%BD%E8%BE%93%E5%87%BA%E8%AF%A6%E8%A7%A3/" title="开漏输出以及推挽输出详解"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列2" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="开漏输出以及推挽输出详解"/></a><div class="content"><a class="title" href="/2024/09/23/%E5%BC%80%E6%BC%8F%E8%BE%93%E5%87%BA%E4%BB%A5%E5%8F%8A%E6%8E%A8%E6%8C%BD%E8%BE%93%E5%87%BA%E8%AF%A6%E8%A7%A3/" title="开漏输出以及推挽输出详解">开漏输出以及推挽输出详解</a><time datetime="2024-09-23T12:17:07.000Z" title="发表于 2024-09-23 20:17:07">2024-09-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/14/%E6%97%A0%E6%BA%90%E6%99%B6%E6%8C%AFcrystal%E5%92%8C%E6%9C%89%E6%BA%90%E6%99%B6%E6%8C%AFoscillator%E7%9A%84%E5%8C%BA%E5%88%AB/" title="无源晶振crystal和有源晶振oscillator的区别"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列1" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无源晶振crystal和有源晶振oscillator的区别"/></a><div class="content"><a class="title" href="/2024/09/14/%E6%97%A0%E6%BA%90%E6%99%B6%E6%8C%AFcrystal%E5%92%8C%E6%9C%89%E6%BA%90%E6%99%B6%E6%8C%AFoscillator%E7%9A%84%E5%8C%BA%E5%88%AB/" title="无源晶振crystal和有源晶振oscillator的区别">无源晶振crystal和有源晶振oscillator的区别</a><time datetime="2024-09-14T12:17:07.000Z" title="发表于 2024-09-14 20:17:07">2024-09-14</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列3')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By KAZAMA</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
