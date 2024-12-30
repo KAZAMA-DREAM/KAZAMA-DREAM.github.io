@@ -1,0 +1,388 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>STM32CubeMX定时器的配置使用 | KAZAMAのBlog</title><meta name="author" content="KAZAMA,wyy1778789301@163.com"><meta name="copyright" content="KAZAMA"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="本篇教你STM32CubeMX定时器的配置使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STM32CubeMX定时器的配置使用">
+<meta property="og:url" content="http://www.kazama.top/2024/11/28/STM32CubeMX%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="KAZAMAのBlog">
+<meta property="og:description" content="本篇教你STM32CubeMX定时器的配置使用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列5">
+<meta property="article:published_time" content="2024-11-28T12:17:07.000Z">
+<meta property="article:modified_time" content="2024-11-28T12:17:07.000Z">
+<meta property="article:author" content="KAZAMA">
+<meta property="article:tag" content="STM32CubeMX">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列5"><link rel="shortcut icon" href="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列1"><link rel="canonical" href="http://www.kazama.top/2024/11/28/STM32CubeMX%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'STM32CubeMX定时器的配置使用',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-11-28 20:17:07'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列3" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">424</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/share/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列5')"><nav id="nav"><span id="blog-info"><a href="/" title="KAZAMAのBlog"><span class="site-name">KAZAMAのBlog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/share/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">STM32CubeMX定时器的配置使用</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-11-28T12:17:07.000Z" title="发表于 2024-11-28 20:17:07">2024-11-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-11-28T12:17:07.000Z" title="更新于 2024-11-28 20:17:07">2024-11-28</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>13分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="STM32CubeMX定时器的配置使用"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="STM32CubeMX定时器的配置使用"><a href="#STM32CubeMX定时器的配置使用" class="headerlink" title="STM32CubeMX定时器的配置使用"></a>STM32CubeMX定时器的配置使用</h1><h2 id="1-STM32CubeMX"><a href="#1-STM32CubeMX" class="headerlink" title="1    STM32CubeMX"></a>1    STM32CubeMX</h2><p>STM32CubeMX是ST官方出的一款针对ST的MCU/MPU跨平台的图形化工具，支持在Linux、MacOS、Window系统下开发，其对接的底层接口是HAL库，另外习惯于寄存器开发的同学们，也可以使用LL库。STM32CubeMX除了集成MCU/MPU的硬件抽象层，另外还集成了像RTOS，文件系统，USB，网络，显示，嵌入式AI等中间件，这样开发者就能够很轻松的完成MCU/MPU的底层驱动的配置，留出更多精力开发上层功能逻辑，能够更进一步提高了嵌入式开发效率。</p>
+<br/>
+
+
+
+<h2 id="2-定时器简介"><a href="#2-定时器简介" class="headerlink" title="2    定时器简介"></a>2    定时器简介</h2><h3 id="2-1-定时器初探"><a href="#2-1-定时器初探" class="headerlink" title="2.1    定时器初探"></a>2.1    定时器初探</h3><p>​        定时器，顾名思义，就是定时的功能，定时器在单片机中算是除GPIO外最基本的外设。在ST中，定时器分为几种，基础定时器，通用定时器，高级定时器和低功耗定时器。本文重点在于基础定时器的配置，其他类型的定时器在其他篇章中详细说明。<br>    基础定时器，就是只提供最基础的定时功能，下面我们就从ST这个基础定时器框图来讲解一下定时器原理。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-11-28-STM32CubeMX%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/20241203225708.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-11-28-STM32CubeMX%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/20241204201337.png"></p>
+<p>​        以定时1s为例，如果当前输入的时钟频率为1MHz，那怎么样才能得到1s的间隔呢？众所周知，1MHz，本身的含义就是每秒1000000次的频次，那么很容易就能想到，如果让定时器每个时钟周期计一个数，计到1000000次的时候就是1s的时间。于是第一个参数就出现了——自动重装载值（Auto Reload Value），这个参数的作用就是：当计数达到自动重装载值时，可以触发一个溢出中断标志，用户获取这个溢出中断标志就可以得到1s的时间。<br>    然而现实并没这么理想，这个自动重装载值只有16位，定时器的计数值也只有16位，也就是说计数最大只能到65535，根本到不了1000000，那应该怎么办呢？想一下，既然计数没办法达到这么大的数，那是不是可以让计数不要计那么快，比如让定时器以1kHz的频率计数，那只要计1000次就可以得到1s的时间。但定时器的输入是1MHz，怎么样才能让它变慢呢？这时候另一个参数就派上用场了——预分频系数（Prescaler Value）。1MHz进行2分频，就是500kHz，进行1000分频，就是1kHz。</p>
+<br/>
+
+
+
+<h3 id="2-2-不同芯片所对应的定时器"><a href="#2-2-不同芯片所对应的定时器" class="headerlink" title="2.2    不同芯片所对应的定时器"></a>2.2    不同芯片所对应的定时器</h3><p><strong>SMT32F1系列共有8个定时器：</strong></p>
+<ul>
+<li>基本定时器（TIM6、TIM7）</li>
+<li>通用定时器（TIM2、TIM3、TIM4、TIM5）</li>
+<li>高级定时器（TIM1、TIM8）</li>
+</ul>
+<p><strong>SMT32F4系列共有14个定时器：</strong></p>
+<ul>
+<li>基本定时器（TIM6、TIM7）</li>
+<li>通用定时器（TIM2、TIM3、TIM4、TIM5、TIM9~TIM14）</li>
+<li>高级定时器（TIM1、TIM8）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-11-28-STM32CubeMX%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/20241204200831.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-11-28-STM32CubeMX%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/20241204201005.png"></p>
+<p><strong>基本定时器功能（TIM6、TIM7）：</strong></p>
+<ul>
+<li>16位向上、向下、向上/下自动装载计数器</li>
+<li>16位可编程（可以实时修改）预分频器，计数器时钟频率的分频系数为1～65535之间的任意数值</li>
+<li>触发DAC的同步电路 注:此项是TIM6/7独有功能.</li>
+<li>位于APB1总线上</li>
+</ul>
+<p><strong>通用定时器(TIM2~TIM5)的主要功能:</strong></p>
+<ul>
+<li><p>16位向上、向下、向上/下自动装载计数器</p>
+</li>
+<li><p>16位可编程(可以实时修改)预分频器，计数器时钟频率的分频系数为1～65535之间的任意数值</p>
+</li>
+<li><p>4 个独立通道（TIMx_CH1~4）可以用作：</p>
+<p>  测量输入信号的脉冲长度( 输入捕获)<br>  输出比较<br>  单脉冲模式输出<br>  PWM输出(边缘或中间对齐模式) </p>
+</li>
+<li><p>支持针对定位的增量(正交)编码器和霍尔传感器电路 </p>
+</li>
+<li><p>如下事件发生时产生中断/DMA：<br>  更新：计数器向上溢出/向下溢出，计数器初始化(通过软件或者内部/外部触发)<br>  触发事件(计数器启动、停止、初始化或者由内部/外部触发计数)<br>  输入捕获<br>  输出比较 </p>
+</li>
+<li><p>位于APB1总线上</p>
+</li>
+</ul>
+<p><strong>高级定时器（TIM1，TIM8）的主要功能：</strong></p>
+<ul>
+<li>高级定时器具有基本，通用定时器的所有的功能，</li>
+<li>还具有控制交直流电动机所有的功能，</li>
+<li>输出6路互补带死区的信号，刹车功能等等</li>
+<li>位于APB2总线上</li>
+</ul>
+<p>总括：基本定时器就是单纯的定时计数器，通用定时器多了四个通道，相对应的增加了功能，高级定时器具有基本，通用定时器的所有的功能，并且添加了其他功能。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-11-28-STM32CubeMX%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/ac9d3d06363aa72732df906a64052611.png" alt="img"></p>
+<br/>
+
+
+
+<h3 id="2-3-定时器计数模式"><a href="#2-3-定时器计数模式" class="headerlink" title="2.3    定时器计数模式"></a>2.3    定时器计数模式</h3><p>通用定时器可以向上计数、向下计数、向上向下双向计数模式。</p>
+<p><strong>向上计数模式：</strong>计数器从0计数到自动加载值（TIMx_ARR），然后重新从0开始计数并且产生一个计数器溢出事件。</p>
+<p><strong>向下计数模式：</strong>计数器从自动装入的值（TIMx_ARR）开始向下计数到0，然后从自动装入的值重新开始，并产生一个计数器向下溢出事件。</p>
+<p><strong>中央对齐模式（向上/向下计数）：</strong>计数器从0开始计数到自动装入的值-1，产生一个计数器溢出事件，然后向下计数到1并且产生一个计数器溢出事件；然后再从0开始重新计数。</p>
+<p>简单地理解三种计数模式，可以通过下面的图形：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-11-28-STM32CubeMX%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/4844b1570a646dd67e2d69b821b3e523.png" alt="img"></p>
+<br/>
+
+
+
+<h3 id="2-4-计数时钟选择"><a href="#2-4-计数时钟选择" class="headerlink" title="2.4    计数时钟选择"></a>2.4    计数时钟选择</h3><p>计数器时钟可由下列时钟源提供：</p>
+<ul>
+<li><strong>内部时钟（TIMx_CLK）</strong> </li>
+<li><strong>外部时钟模式1：</strong>外部捕捉比较引脚（TIx）</li>
+<li><strong>外部时钟模式2：</strong>外部引脚输入（TIMx_ETR） 仅适用TIM2,3,4</li>
+<li><strong>内部触发输入（ITRx）：</strong>使用一个定时器作为另一个定时器的预分频器，如可以配置一个定时器Timer1而作为另一个定时器Timer2的预分频器。</li>
+</ul>
+<br/>
+
+
+
+<h3 id="2-5-定时器的主从模式"><a href="#2-5-定时器的主从模式" class="headerlink" title="2.5    定时器的主从模式"></a>2.5    定时器的主从模式</h3><p>定时器一般是通过软件设置而启动，STM32的每个定时器也可以通过外部信号触发而启动，还可以通过另外一个定时器的某一个条件被触发而启动。这里所谓某一个条件可以是定时到时间、定时器超时、比较成功等许多条件。</p>
+<p>这种通过一个定时器触发另一个定时器的工作方式称为定时器的同步，发出触发信号的定时器工作于主模式，接受触发信号而启动的定时器工作于从模式</p>
+<p>触发条件：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-11-28-STM32CubeMX%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/a57a57738b18157fadde4b9b987f217b.png" alt="img"></p>
+<p>定时器的四种主从机模式：</p>
+<ul>
+<li>外部触发模式1</li>
+<li>IRC重置模式</li>
+<li>门控模式</li>
+<li>触发模式</li>
+</ul>
+<p>这个我们用的很少，介绍下主要是为了下面的讲解  如果需要全面了解，请参考 《STM32中文参考手册》 275页 定时器主从模式。</p>
+<br/>
+
+
+
+<h3 id="2-6-定时器的定时周期"><a href="#2-6-定时器的定时周期" class="headerlink" title="2.6    定时器的定时周期"></a>2.6    定时器的定时周期</h3><p><code> T = (psc+1) * (arr+1) / Tclk</code></p>
+<ul>
+<li>psc 为定时器预分频系数</li>
+<li>arr 为自动重装载值</li>
+<li>Tclk 为系统时钟频率</li>
+</ul>
+<p>通过计算</p>
+<p><code>T = (psc+1) * (arr+1) / Tclk=（31999+1）(499+1) / 32us = 500ms</code></p>
+<br/>
+
+
+
+<h2 id="3-定时器配置"><a href="#3-定时器配置" class="headerlink" title="3    定时器配置"></a>3    定时器配置</h2><h3 id="3-1-基本配置"><a href="#3-1-基本配置" class="headerlink" title="3.1    基本配置"></a>3.1    基本配置</h3><p>以上面的定时1s钟为例，在CubeMX中应该如何设置。</p>
+<p>首先看配置界面，因为这里我们只需要一个定时知会的功能，并不需要使用到外部端口，所以我们可以直接在选项卡”Timers”中选择”TIM6”（TIM6就是基础定时器），勾选”Activated”启用定时器。<strong>One Pulse Mode为单次定时模式，勾选该模式则定时器只触发一次，默认定时器为连续触发</strong>，触发完一次后自动重载ARR中设置的值重新计数。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-11-28-STM32CubeMX%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/3e439058cd7778955b248b3970de02b5.gif" alt="在这里插入图片描述"></p>
+<p>接下来看一下基本的一些配置信息。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-11-28-STM32CubeMX%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/ca12e7a8544c1df8bcd4b75c19d1db38.png" alt="在这里插入图片描述"></p>
+<p><strong>单脉冲模式（One Pulse Mode）：</strong> 开启这个模式后，只要触发了一次溢出标志，就会自动把计数使能关掉，想再次触发需要手动开启计数使能。所以如果想要实现周期触发事件，就不用勾选这个选项。<br><strong>预分频系数（Prescaler）：</strong> 新手杀手之一，虽然这里写的是预分频系数，但实际设置的值是预分频系数-1，也就是需要10分频时，需要设置9。<br><strong>计数模式（Counter Mode）：</strong> 计数模式，也称计数方向，决定定时器是递增计数还是递减计数。如果只是用来定时，那递增或递减都没什么影响。<br><strong>计数周期（Counter Period）：</strong> 就是当计数值达到计数周期值时，会触发一个溢出标志，新手杀手之二，因为计数是从0开始计的，所以如果想要实现10次计数，这里只需要设置9即可。<br><strong>自动重装载（auto-reload preload）：</strong> 如果选择了自动重装载，那么在触发了一次溢出标志后，定时器会自动将计数清0并重新计数。如果不使能该参数，则在使用__HAL_TIM_SET_AUTORELOAD()函数动态修改基本定时器ARR参数值时，修改的值会立马生效；而如果使能该参数，则修改的值会在当前计数溢出之后下次得到修改。<br><strong>触发事件选择（Trigger Event Selection）：</strong> 可以选择通过UG标志、计数使能、溢出标志来触发输出。一般是用来设置用作其他外设的触发源的，比如将Trigger Event Selection选择为Update Event，然后在其他外设比如ADC中配置外部触发源时选择该定时器的触发事件（如果可以的话），这样在定时器产生Update Event时就可以启动外设，实现用定时器来控制外设启动的功能。</p>
+<p>为了实现1s的计时，我们得先知道当前定时器的时钟频率。先查看下时钟树，TIM6是挂在APB时钟总线上的，这里我们按单片机最高主频设置的，是48MHz。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-11-28-STM32CubeMX%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/f7f7e687f9e4f5b8daf0c6c77be6e1a9.png" alt="在这里插入图片描述"></p>
+<p>为了方便计算，这里我们预分频系数可以填47999，也就是48000分频。计数周期就可以填999，也就是计数1000次。另外再使能自动重装载，这样就可以得到一个1s的周期计数。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-11-28-STM32CubeMX%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/37262f8f6b6248165f9068845ce1f03e.png" alt="在这里插入图片描述"></p>
+<p>为了让计数周期到时可以立即通知到我们去执行一些操作，这里还需要打开中断服务函数。在”NVIC Setting”选项卡中，勾选”TIM6”的中断使能。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-11-28-STM32CubeMX%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/768a7672d99727a186d25e17b0c6bbad.gif" alt="在这里插入图片描述"></p>
+<p>做完以上配置，选择好使用的库就可以生成工程代码了。</p>
+<blockquote>
+<p><strong>稍微复杂的配置</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-11-28-STM32CubeMX%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/4748ae9afe8de74ed9f3782ca98be57a.png" alt="img"></p>
+<p>1、选择TIM2</p>
+<p>2、定时器时钟选择内部时钟</p>
+<p>​    Clock Source(时钟来源)  </p>
+<ul>
+<li>选项1 ：Internal Clock 内部时钟</li>
+<li>选项2 ： ETR2 外部触发输入(ETR)(仅适用TIM2,3,4)</li>
+</ul>
+<p><strong>TRGO Parameters</strong>  触发输出 (TRGO)        不使能  与本节无关，之后做详细介绍 </p>
+<p>TRGO：  定时器的触发信号输出 在定时器的定时时间到达的时候输出一个信号(如：定时器更新产生TRGO信号来触发ADC的同步转换，) </p>
+</blockquote>
+<blockquote>
+<p><strong>外设中断配置：</strong></p>
+<p><strong>基本定时器的触发有三种模式 ① 轮询方式、② 中断方式和③ DMA方式，这里只介绍前两种方式</strong></p>
+<p>① 对于轮询方式，当前设置已经足够，只需要在生成的程序中使用HAL_TIM_Base_Start(&amp;htim6)启动基本定时器，然后不断轮询计数值或UEV事件标志来判断是否发生了计数溢出</p>
+<p>② 中断方式是基本定时器最常用的方式，在Pinout ＆ Configuration页面左侧功能分类栏目中点开NVIC栏目，然后选择合适的中断优先级并勾选基本定时器6和7的中断使能</p>
+<p><strong>常用函数：</strong></p>
+<p>以轮询工作方式启动定时器<br>HAL_StatusTypeDef HAL_TIM_Base_Start(TIM_HandleTypeDef *htim)</p>
+<p>停止轮询工作方式的定时器<br>HAL_StatusTypeDef HAL_TIM_Base_Stop(TIM_HandleTypeDef *htim)</p>
+<p>以中断工作方式启动定时器<br>HAL_StatusTypeDef HAL_TIM_Base_Start_IT(TIM_HandleTypeDef *htim)</p>
+<p>停止中断工作方式的定时器<br>HAL_StatusTypeDef HAL_TIM_Base_Stop_IT(TIM_HandleTypeDef *htim)</p>
+<p>定时器周期回调子函数<br>void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)</p>
+<p>以DMA模式开启定时器</p>
+<p>HAL_TIM_Base_Start_DMA()</p>
+<p>关闭DMA模式的定时器</p>
+<p>HAL_TIM_Base_Stop_DMA()</p>
+</blockquote>
+<br/>
+
+
+
+<h3 id="3-2-LL库代码实现"><a href="#3-2-LL库代码实现" class="headerlink" title="3.2    LL库代码实现"></a>3.2    LL库代码实现</h3><p>在生成的工程中添加如下代码，在触发中断时，对一个bool变量进行翻转。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/***************************main.c******************************/</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">/* USER CODE BEGIN 1 */</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* USER CODE END 1 */</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* MCU Configuration--------------------------------------------------------*/</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Reset of all peripherals, Initializes the Flash interface and the Systick. */</span></span><br><span class="line">  HAL_Init();</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* USER CODE BEGIN Init */</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* USER CODE END Init */</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Configure the system clock */</span></span><br><span class="line">  SystemClock_Config();</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* USER CODE BEGIN SysInit */</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* USER CODE END SysInit */</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Initialize all configured peripherals */</span></span><br><span class="line">  MX_GPIO_Init();</span><br><span class="line">  MX_TIM6_Init();</span><br><span class="line">  <span class="comment">/* USER CODE BEGIN 2 */</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">/* 使能更新中断 */</span></span><br><span class="line">  LL_TIM_EnableIT_UPDATE(TIM6);</span><br><span class="line">  <span class="comment">/* 使能计数 */</span></span><br><span class="line">  LL_TIM_EnableCounter(TIM6);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">/* USER CODE END 2 */</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Infinite loop */</span></span><br><span class="line">  <span class="comment">/* USER CODE BEGIN WHILE */</span></span><br><span class="line">  <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">/* USER CODE END WHILE */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* USER CODE BEGIN 3 */</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">/* USER CODE END 3 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/***********************************************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/***************************stm32f0xx_it.c******************************/</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">TIM6_DAC_IRQHandler</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">/* USER CODE BEGIN TIM6_DAC_IRQn 0 */</span></span><br><span class="line">  <span class="comment">/* 进中断后判断如果使能了更新中断，且更新中断标志为1，则翻转数据，并清除标志 */</span></span><br><span class="line">  <span class="keyword">if</span> ( (LL_TIM_IsActiveFlag_UPDATE(TIM6)) &amp;&amp; (LL_TIM_IsEnabledIT_UPDATE(TIM6)) )</span><br><span class="line">  &#123;</span><br><span class="line">      LL_TIM_ClearFlag_UPDATE(TIM6);</span><br><span class="line">      TestTimer = (++TestTimer) % <span class="number">2</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">/* USER CODE END TIM6_DAC_IRQn 0 */</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* USER CODE BEGIN TIM6_DAC_IRQn 1 */</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* USER CODE END TIM6_DAC_IRQn 1 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*******************************************************************/</span></span><br></pre></td></tr></table></figure>
+
+
+
+<br/>
+
+
+
+<h3 id="3-3-HAL库代码实现"><a href="#3-3-HAL库代码实现" class="headerlink" title="3.3    HAL库代码实现"></a>3.3    HAL库代码实现</h3><p>下述代码是如果TIM6中断，则调用 HAL_TIM_IRQHandler(&amp;htim6);</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/***************************stm32f0xx_it.c******************************/</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">TIM6_IRQHandler</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">/* USER CODE BEGIN TIM2_IRQn 0 */</span></span><br><span class="line"> </span><br><span class="line">  <span class="comment">/* USER CODE END TIM2_IRQn 0 */</span></span><br><span class="line">  HAL_TIM_IRQHandler(&amp;htim6);</span><br><span class="line">  <span class="comment">/* USER CODE BEGIN TIM2_IRQn 1 */</span></span><br><span class="line"> </span><br><span class="line">  <span class="comment">/* USER CODE END TIM2_IRQn 1 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>进入HAL_TIM_IRQHandler(&amp;htim6)函数，这里面的代码很长，就是不同的中断类型，进入不同的中断回调函数，这里找到 HAL_TIM_PeriodElapsedCallback(htim)。进入这个回调函数，我们看到是个虚函数，需要我们重写，在这个函数里面，就是我们需要实现的功能，但在这之前，需要在main函数里使能中断 HAL_TIM_Base_Start_IT(&amp;htim6)。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* USER CODE BEGIN 0 */</span></span><br><span class="line"><span class="type">uint8_t</span> TestTimer = <span class="number">0</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">HAL_TIM_PeriodElapsedCallback</span><span class="params">(TIM_HandleTypeDef *htim)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(htim-&gt;Instance == TIM6) &#123;</span><br><span class="line">         <span class="comment">/* Prevent unused argument(s) compilation warning */</span></span><br><span class="line">  		UNUSED(htim);</span><br><span class="line">  		TestTimer = (++TestTimer) % <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* NOTE : This function should not be modified, when the callback is needed,</span></span><br><span class="line"><span class="comment">            the HAL_TIM_PeriodElapsedCallback could be implemented in the user file</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* USER CODE END 0 */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief  The application entry point.</span></span><br><span class="line"><span class="comment">  * @retval int</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">/* USER CODE BEGIN 1 */</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* USER CODE END 1 */</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* MCU Configuration--------------------------------------------------------*/</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Reset of all peripherals, Initializes the Flash interface and the Systick. */</span></span><br><span class="line">  HAL_Init();</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* USER CODE BEGIN Init */</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* USER CODE END Init */</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Configure the system clock */</span></span><br><span class="line">  SystemClock_Config();</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* USER CODE BEGIN SysInit */</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* USER CODE END SysInit */</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Initialize all configured peripherals */</span></span><br><span class="line">  MX_GPIO_Init();</span><br><span class="line">  MX_TIM6_Init();</span><br><span class="line">  <span class="comment">/* USER CODE BEGIN 2 */</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">/* 使能更新中断 */</span></span><br><span class="line">  HAL_TIM_Base_Start_IT(&amp;htim6);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* USER CODE END 2 */</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Infinite loop */</span></span><br><span class="line">  <span class="comment">/* USER CODE BEGIN WHILE */</span></span><br><span class="line">  <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">/* USER CODE END WHILE */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* USER CODE BEGIN 3 */</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">/* USER CODE END 3 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>总结，对于定时器的定时中断，相对比较简单，绝大多数功能图形化配置已经为我们配置好了，我们做的只需两步：</p>
+<ul>
+<li><p>在main函数中，开启TIM6中断，HAL_TIM_Base_Start_IT(&amp;htim6);</p>
+</li>
+<li><p>重写 HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) 函数，然后在里面实现我们需要的功能</p>
+</li>
+</ul>
+<br/>
+
+
+
+<h3 id="3-4-外设初始化调用流程"><a href="#3-4-外设初始化调用流程" class="headerlink" title="3.4    外设初始化调用流程"></a>3.4    外设初始化调用流程</h3><p>在工程代码主函数main()中调用MX_TIM6_Init()函数对基本定时器TIM6参数进行了配置</p>
+<p>在该MX_TIM6_Init()函数中调用了HAL_TIM_Base_Init()对定时器进行了初始化</p>
+<p>然后在HAL_TIM_Base_Init()函数中调用了HAL_TIM_Base_MspInit()函数对TIM6时钟和中断设置/使能</p>
+<p>TIM7初始化流程类似，具体定时器TIM6初始化流程如下图所示</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-11-28-STM32CubeMX%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/20241204202622.png"></p>
+<br/>
+
+
+
+<h3 id="3-5-外设中断调用流程"><a href="#3-5-外设中断调用流程" class="headerlink" title="3.5    外设中断调用流程"></a>3.5    外设中断调用流程</h3><p>激活了基本定时器并启动TIM6/7全局中断之后，会在stm32f4xx_it.c中新增TIM6/7的中断服务函数TIM6_DAC_IRQHandler()和TIM7_IRQHandler()</p>
+<p>该函数均调用HAL库的定时器中断统一处理函数HAL_TIM_IRQHandler()，该函数通过一系列的判断最终得出基本定时器目的为周期回调 <em>（注释4）</em>，<strong>因此最终调用周期回调函数HAL_TIM_PeriodElapsedCallback()，该函数为虚函数</strong></p>
+<p>TIM7中断调用流程类似，具体定时器TIM6中断调用流程如下图所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-11-28-STM32CubeMX%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/20241204202814.png"></p>
+<p>重新在tim.c中实现周期回调函数HAL_TIM_PeriodElapsedCallback()，当定时器TIM6溢出则翻转GREEN_LED引脚状态，当定时器TIM7溢出则翻转RED_LED引脚状态，具体代码如下图所示</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-11-28-STM32CubeMX%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/20241204202943.png"></p>
+<br/>
+
+
+
+<h3 id="3-40-效果演示"><a href="#3-40-效果演示" class="headerlink" title="3.40    效果演示"></a>3.40    效果演示</h3><p>烧录软件进行调试，可以看到该变量1s翻转一次电平。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/KAZAMA-DREAM/myproductpic/KAZAMABLOG/2024-11-28-STM32CubeMX%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/ce76612d2542db59840bc655c4ab27c2.gif" alt="在这里插入图片描述"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://www.kazama.top">KAZAMA</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.kazama.top/2024/11/28/STM32CubeMX%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/">http://www.kazama.top/2024/11/28/STM32CubeMX%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.kazama.top" target="_blank">KAZAMAのBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/STM32CubeMX/">STM32CubeMX</a></div><div class="post_share"><div class="social-share" data-image="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列5" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/wechat.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/11/29/STM32CubeMX%E4%B8%ADEXTI(%E5%A4%96%E9%83%A8%E4%B8%AD%E6%96%AD)%E6%8E%A5%E5%8F%A3%E4%BD%BF%E7%94%A8/" title="STM32CubeMX中EXTI(外部中断)接口使用"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列6" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">STM32CubeMX中EXTI(外部中断)接口使用</div></div></a></div><div class="next-post pull-right"><a href="/2024/11/27/%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E7%94%B5%E8%84%91%E7%9A%84DNS%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%A5%E5%8F%8A%E5%B8%B8%E7%94%A8%E7%9A%84DNS%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="如何设置电脑的DNS服务器以及常用的DNS服务器"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列4" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">如何设置电脑的DNS服务器以及常用的DNS服务器</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/11/29/STM32CubeMX%E4%B8%ADEXTI(%E5%A4%96%E9%83%A8%E4%B8%AD%E6%96%AD)%E6%8E%A5%E5%8F%A3%E4%BD%BF%E7%94%A8/" title="STM32CubeMX中EXTI(外部中断)接口使用"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列6" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-29</div><div class="title">STM32CubeMX中EXTI(外部中断)接口使用</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列3" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">KAZAMA</div><div class="author-info__description">技术记录,个人分享,学习备忘</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">424</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/KAZAMA-DREAM"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/KAZAMA-DREAM" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/wyy1778789301@163.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#STM32CubeMX%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8"><span class="toc-text">STM32CubeMX定时器的配置使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-STM32CubeMX"><span class="toc-text">1    STM32CubeMX</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%9A%E6%97%B6%E5%99%A8%E7%AE%80%E4%BB%8B"><span class="toc-text">2    定时器简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%AE%9A%E6%97%B6%E5%99%A8%E5%88%9D%E6%8E%A2"><span class="toc-text">2.1    定时器初探</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E4%B8%8D%E5%90%8C%E8%8A%AF%E7%89%87%E6%89%80%E5%AF%B9%E5%BA%94%E7%9A%84%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-text">2.2    不同芯片所对应的定时器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%AE%9A%E6%97%B6%E5%99%A8%E8%AE%A1%E6%95%B0%E6%A8%A1%E5%BC%8F"><span class="toc-text">2.3    定时器计数模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E8%AE%A1%E6%95%B0%E6%97%B6%E9%92%9F%E9%80%89%E6%8B%A9"><span class="toc-text">2.4    计数时钟选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E4%B8%BB%E4%BB%8E%E6%A8%A1%E5%BC%8F"><span class="toc-text">2.5    定时器的主从模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E5%AE%9A%E6%97%B6%E5%91%A8%E6%9C%9F"><span class="toc-text">2.6    定时器的定时周期</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%AE%9A%E6%97%B6%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="toc-text">3    定时器配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="toc-text">3.1    基本配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-LL%E5%BA%93%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">3.2    LL库代码实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-HAL%E5%BA%93%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">3.3    HAL库代码实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E5%A4%96%E8%AE%BE%E5%88%9D%E5%A7%8B%E5%8C%96%E8%B0%83%E7%94%A8%E6%B5%81%E7%A8%8B"><span class="toc-text">3.4    外设初始化调用流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-%E5%A4%96%E8%AE%BE%E4%B8%AD%E6%96%AD%E8%B0%83%E7%94%A8%E6%B5%81%E7%A8%8B"><span class="toc-text">3.5    外设中断调用流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-40-%E6%95%88%E6%9E%9C%E6%BC%94%E7%A4%BA"><span class="toc-text">3.40    效果演示</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/12/09/%E5%A6%82%E4%BD%95%E5%AF%B9stm32%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%BF%9B%E8%A1%8C%E5%8A%A0%E5%AF%86/" title="如何对stm32的程序进行加密"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列6" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="如何对stm32的程序进行加密"/></a><div class="content"><a class="title" href="/2024/12/09/%E5%A6%82%E4%BD%95%E5%AF%B9stm32%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%BF%9B%E8%A1%8C%E5%8A%A0%E5%AF%86/" title="如何对stm32的程序进行加密">如何对stm32的程序进行加密</a><time datetime="2024-12-09T12:17:07.000Z" title="发表于 2024-12-09 20:17:07">2024-12-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/08/%E5%91%8A%E5%88%AB%E5%8E%9F%E5%A7%8BUI%E6%A0%B7%E5%BC%8F%EF%BC%8C%E6%8B%A5%E6%8A%B1Fluent%20Design%E9%A3%8E%E6%A0%BCPyQt%20%20PySide%E7%BB%84%E4%BB%B6%E5%BA%93/" title="告别原始UI样式，拥抱Fluent Design风格PyQt / PySide组件库"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列5" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="告别原始UI样式，拥抱Fluent Design风格PyQt / PySide组件库"/></a><div class="content"><a class="title" href="/2024/12/08/%E5%91%8A%E5%88%AB%E5%8E%9F%E5%A7%8BUI%E6%A0%B7%E5%BC%8F%EF%BC%8C%E6%8B%A5%E6%8A%B1Fluent%20Design%E9%A3%8E%E6%A0%BCPyQt%20%20PySide%E7%BB%84%E4%BB%B6%E5%BA%93/" title="告别原始UI样式，拥抱Fluent Design风格PyQt / PySide组件库">告别原始UI样式，拥抱Fluent Design风格PyQt / PySide组件库</a><time datetime="2024-12-08T12:17:07.000Z" title="发表于 2024-12-08 20:17:07">2024-12-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/07/Python%E8%AE%BE%E8%AE%A1%E5%8F%AF%E8%A7%86%E5%8C%96%E5%BA%93/" title="Python设计可视化库"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列4" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python设计可视化库"/></a><div class="content"><a class="title" href="/2024/12/07/Python%E8%AE%BE%E8%AE%A1%E5%8F%AF%E8%A7%86%E5%8C%96%E5%BA%93/" title="Python设计可视化库">Python设计可视化库</a><time datetime="2024-12-07T12:17:07.000Z" title="发表于 2024-12-07 20:17:07">2024-12-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/06/Keil%E7%94%9F%E6%88%90%E7%9A%84Map%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90%E5%8F%8A%E5%AD%98%E5%82%A8%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5%E5%88%86%E6%9E%90/" title="Keil生成的Map文件分析及存储使用情况分析"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列3" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Keil生成的Map文件分析及存储使用情况分析"/></a><div class="content"><a class="title" href="/2024/12/06/Keil%E7%94%9F%E6%88%90%E7%9A%84Map%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90%E5%8F%8A%E5%AD%98%E5%82%A8%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5%E5%88%86%E6%9E%90/" title="Keil生成的Map文件分析及存储使用情况分析">Keil生成的Map文件分析及存储使用情况分析</a><time datetime="2024-12-06T12:17:07.000Z" title="发表于 2024-12-06 20:17:07">2024-12-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/05/STM32F103%20USB%E5%AE%9E%E7%8E%B0%E8%99%9A%E6%8B%9F%E4%B8%B2%E5%8F%A3/" title="STM32F103 USB实现虚拟串口"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列2" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="STM32F103 USB实现虚拟串口"/></a><div class="content"><a class="title" href="/2024/12/05/STM32F103%20USB%E5%AE%9E%E7%8E%B0%E8%99%9A%E6%8B%9F%E4%B8%B2%E5%8F%A3/" title="STM32F103 USB实现虚拟串口">STM32F103 USB实现虚拟串口</a><time datetime="2024-12-05T12:17:07.000Z" title="发表于 2024-12-05 20:17:07">2024-12-05</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://api.r10086.com/樱道随机图片api接口.php?图片系列=风景系列5')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By KAZAMA</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
